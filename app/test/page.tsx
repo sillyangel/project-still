@@ -1,11 +1,11 @@
 'use client';
 
 import Image from 'next/image';
-import { ScrollArea, ScrollBar } from '../components/ui/scroll-area';
-import { Separator } from '../components/ui/separator';
-import { Tabs, TabsContent } from '../components/ui/tabs';
-import { AlbumArtwork } from './components/album-artwork';
-import { listenNowAlbums, madeForYouAlbums } from './data/albums';
+import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area';
+import { Separator } from '@/components/ui/separator';
+import { Tabs, TabsContent } from '@/components/ui/tabs';
+import { AlbumArtwork } from '@/app/components/album-artwork';
+import { listenNowAlbums, madeForYouAlbums } from '@/app/data/albums';
 import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 
@@ -40,7 +40,7 @@ export default function MusicPage() {
               <p className="text-sm text-muted-foreground">
                 Top picks for you. Updated daily.
               </p>
-                <Button variant="outline" onClick={() => router.push('/test')}>Test</Button>
+                <Button variant="outline" onClick={() => router.push('/test/page')}>Test</Button>
             </div>
           </div>
           <Separator className="my-4" />

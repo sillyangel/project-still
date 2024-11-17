@@ -1,7 +1,10 @@
+<<<<<<< Updated upstream
 import React from 'react'
 import { Menu } from "@/app/components/menu"
 import { Sidebar } from "@/app/components/sidebar"
 import { playlists } from "@/app/data/playlists"
+=======
+>>>>>>> Stashed changes
 import localFont from "next/font/local";
 import "./globals.css";
 
@@ -16,11 +19,19 @@ const geistMono = localFont({
   weight: "100 900",
 });
 
+<<<<<<< Updated upstream
 interface LayoutProps {
   children: React.ReactNode
 }
 
 export function Layout({ children }: LayoutProps) {
+=======
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
+>>>>>>> Stashed changes
   return (
     <html lang="en">
       <body  className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
