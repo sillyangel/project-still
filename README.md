@@ -5,7 +5,7 @@ Next.js project based on [shadcn/ui](https://github.com/shadcn-ui/ui)'s music te
 is this a redesign of my offbrand spotify project right now is it not that functional, and this is very new to me due to the fact this is typescript based.
 
 ### Preview
-![Preview](image.png)
+![Preview](preview.png)
 ## Getting Started
 
 Install the required packages
