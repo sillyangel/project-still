@@ -64,6 +64,9 @@ node_modules/
 
 # dotenv environment variables file
 .env
+*.tsbuildinfo
+next-env.d.ts
 
-# dataconnect generated files
-.dataconnect
+# database
+still-database/
+

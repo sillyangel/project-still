@@ -19,7 +19,7 @@ import {
     return (
       <Menubar className="rounded-none border-b border-none px-2 lg:px-4">
         <MenubarMenu>
-          <MenubarTrigger className="font-bold">Offbrand Spotify Development Version</MenubarTrigger>
+          <MenubarTrigger className="font-bold">Offbrand Spotify (hawk tuah version)</MenubarTrigger>
           <MenubarContent>
             <MenubarItem>About Music</MenubarItem>
             <MenubarSeparator />

@@ -7,6 +7,16 @@ const nextConfig = {
         hostname: 'a5.mzstatic.com',
         pathname: '/**',
       },
+      {
+        protocol: 'https',
+        hostname: 'offbrandspotifydb.web.app',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'offbrandspotifydb.web.app',
+        pathname: '/**',
+      },
     ],
   },
 };

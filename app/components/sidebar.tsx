@@ -1,7 +1,10 @@
+'use client';
+
 import { cn } from "@/lib/utils"
+import { usePathname } from 'next/navigation'
 import { Button } from "../../components/ui/button"
 import { ScrollArea } from "../../components/ui/scroll-area"
-
+import  Link from "next/link"
 import { Playlist } from "../data/playlists"
 
 interface SidebarProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -9,6 +12,7 @@ interface SidebarProps extends React.HTMLAttributes<HTMLDivElement> {
 }
 
 export function Sidebar({ className, playlists }: SidebarProps) {
+  const isRoot = usePathname() === "/";
   return (
     <div className={cn("pb-12", className)}>
       <div className="space-y-4 py-4">
@@ -17,7 +21,7 @@ export function Sidebar({ className, playlists }: SidebarProps) {
             Discover
           </h2>
           <div className="space-y-1">
-            <Button variant="secondary" className="w-full justify-start">
+            <Button variant={isRoot ? "secondary" : "ghost"} className="w-full justify-start">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
@@ -31,7 +35,7 @@ export function Sidebar({ className, playlists }: SidebarProps) {
                 <circle cx="12" cy="12" r="10" />
                 <polygon points="10 8 16 12 10 16 10 8" />
               </svg>
-              Listen Now
+              <Link href="/">Listen Now</Link>
             </Button>
             <Button variant="ghost" className="w-full justify-start">
               <svg

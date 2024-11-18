@@ -2,6 +2,7 @@
 
 import Image from "next/image"
 import { PlusCircledIcon } from "@radix-ui/react-icons"
+import { useRouter } from 'next/navigation';
 
 import { cn } from "@/lib/utils"
 import {
@@ -33,11 +34,17 @@ export function AlbumArtwork({
   className,
   ...props
 }: AlbumArtworkProps) {
+  const router = useRouter();
+
+  const handleClick = () => {
+    router.push(`/album/${album.id}`);
+  };
+
   return (
     <div
       className={cn("space-y-3", className)}
       {...props}
-      onClick={() => console.log(`Album clicked: ${album.name}`)}
+      onClick={handleClick}
     >
       <ContextMenu>
         <ContextMenuTrigger>
