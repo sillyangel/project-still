@@ -1,19 +1,18 @@
-import { useRouter } from 'next/router';
+'use client';
+
+import { useParams } from 'next/navigation';
 import Image from 'next/image';
-import { Layout } from '@/app/layout';
 import { listenNowAlbums } from '@/app/data/albums';
 
 export default function AlbumPage() {
-  const router = useRouter();
-  const { id } = router.query;
+  const { id } = useParams() as { id: string };
   const album = listenNowAlbums.find((album) => album.id === id);
 
   if (!album) {
-    return <Layout><p>Album not found</p></Layout>;
+    return <p>Album not found</p>;
   }
 
   return (
-    <Layout>
       <div className="space-y-4">
         <h1 className="text-2xl font-semibold tracking-tight">{album.name}</h1>
         <div className="flex items-start gap-6">
@@ -30,6 +29,5 @@ export default function AlbumPage() {
           </div>
         </div>
       </div>
-    </Layout>
   );
 }
