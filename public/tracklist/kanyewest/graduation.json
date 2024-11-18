@@ -1,0 +1,68 @@
+[
+    {
+      "name": "Good Morning",
+      "artists": ["Kanye West", "Kid Cudi"],
+      "length": "3:20",
+      "explicit": false
+    },
+    {
+      "name": "Champion",
+      "artists": ["Kanye West"],
+      "length": "3:58",
+      "explicit": false
+    },
+    {
+      "name": "Stronger",
+      "artists": ["Kanye West", "Daft Punk"],
+      "length": "5:33",
+      "explicit": false
+    },
+    {
+      "name": "I Wonder",
+      "artists": ["Kanye West", "Young Jeezy"],
+      "length": "3:33",
+      "explicit": false
+    },
+    {
+      "name": "Heard 'Em Say",
+      "artists": ["Kanye West", "Adam Levine"],
+      "length": "4:23",
+      "explicit": false
+    },
+    {
+      "name": "Can We Talk",
+      "artists": ["Kanye West", "T.I."],
+      "length": "4:40",
+      "explicit": false
+    },
+    {
+      "name": "Barry Bonds",
+      "artists": ["Kanye West"],
+      "length": "3:22",
+      "explicit": false
+    },
+    {
+      "name": "Everything I Am",
+      "artists": ["Kanye West", "Jay-Z"],
+      "length": "4:40",
+      "explicit": false
+    },
+    {
+      "name": "Diamonds from Sierra Leone",
+      "artists": ["Kanye West", "Jay-Z"],
+      "length": "4:28",
+      "explicit": false
+    },
+    {
+      "name": "Drunk and Hot Girls",
+      "artists": ["Kanye West", "Mos Def", "Consequence"],
+      "length": "4:34",
+      "explicit": true
+    },
+    {
+      "name": "Good Night",
+      "artists": ["Kanye West"],
+      "length": "1:30",
+      "explicit": false
+    }
+]
