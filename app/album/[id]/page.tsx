@@ -1,8 +1,7 @@
 'use client';
-
+import { useEffect, useState } from 'react';
 import { useParams } from 'next/navigation';
 import Image from 'next/image';
-import { useEffect, useState } from 'react';
 import { listenNowAlbums } from '@/app/data/albums';
 import { Play } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -14,19 +13,40 @@ interface Track {
   explicit: boolean;
 }
 
+interface Album {
+  id: string;
+  name: string;
+  artist: string;
+  cover: string;
+  tracklist: string;
+}
+
 export default function AlbumPage() {
-  const { id } = useParams() as { id: string };
-  const album = listenNowAlbums.find((album) => album.id === id);
+  const { id } = useParams();
+  const [album, setAlbum] = useState<Album | null>(null);
   const [tracklist, setTracklist] = useState<Track[]>([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    if (album) {
-      fetch(album.tracklist)
-        .then((response) => response.json())
-        .then((data) => setTracklist(data))
-        .catch((error) => console.error('Error fetching tracklist:', error));
-    }
-  }, [album]);
+    const fetchAlbum = async () => {
+      setLoading(true);
+      const album = listenNowAlbums.find((album) => album.id === id) || null;
+      setAlbum(album);
+
+      if (album) {
+        const response = await fetch(album.tracklist);
+        const tracklist = await response.json();
+        setTracklist(tracklist);
+      }
+      setLoading(false);
+    };
+
+    fetchAlbum();
+  }, [id]);
+
+  if (loading) {
+    return <p>Loading...</p>;
+  }
 
   if (!album) {
     return <p>Album not found</p>;
@@ -54,16 +74,18 @@ export default function AlbumPage() {
         <h2 className="text-xl font-semibold">Tracklist</h2>
         {tracklist.map((track, index) => (
           <div key={index} className="border-b border-gray-300 py-2 flex justify-between items-center">
-            <div>
-              <p className="font-semibold">{track.name}</p>
+              <div>
+              <p className="font-semibold flex items-center">
+                {track.name}
+                {track.explicit && (
+                  <span className="inline-block bg-gray-300 text-gray-700 text-xs font-semibold px-2 py-1 rounded ml-2">
+                    E
+                  </span>
+                )}
+              </p>
               <p className="text-sm">{track.artists.join(', ')}</p>
             </div>
             <div className="flex items-center space-x-2">
-              {track.explicit && (
-                <span className="inline-block bg-gray-300 text-gray-700 text-xs font-semibold px-2 py-1 rounded">
-                  E
-                </span>
-              )}
               <p className="text-sm">{track.length}</p>
             </div>
           </div>
