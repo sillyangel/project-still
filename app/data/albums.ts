@@ -1,20 +1,23 @@
 export interface Album {
   id: string;
   name: string;
+  tracklist: string;
   artist: string;
   cover: string;
 }
 
-export const listenNowAlbums: Album[] = [
+const allAlbums: Album[] = [
   {
     id: "1",
+    tracklist: "https://offbrandspotifydb.web.app/tracklist/kanyewest/graduation.json",
     name: "Graduation",
     artist: "Kanye West",
-    cover:
+    cover: 
       "https://a5.mzstatic.com/us/r1000/0/Music116/v4/2f/db/2c/2fdb2c9d-171c-c6dc-57ee-4bae2b4bb11a/07UMGIM12671.rgb.jpg",
   },
   {
     id: "2",
+    tracklist: "",
     name: "Utopia",
     artist: "Travis Scott",
     cover:
@@ -22,6 +25,7 @@ export const listenNowAlbums: Album[] = [
   },
   {
     id: "3",
+    tracklist: "",
     name: "Because the Internet",
     artist: "Childish Gambino",
     cover:
@@ -29,16 +33,15 @@ export const listenNowAlbums: Album[] = [
   },
   {
     id: "4",
+    tracklist: "",
     name: "Wolf",
     artist: "Tyler The, Creator",
     cover:
       "https://a5.mzstatic.com/us/r1000/0/Music116/v4/41/36/cb/4136cbae-f6aa-b1fc-5452-6f5e153f28a4/886443853874.jpg",
   },
-];
-
-export const madeForYouAlbums: Album[] = [
   {
     id: "5",
+    tracklist: "",
     name: "Rodeo",
     artist: "Travis Scott",
     cover:
@@ -46,6 +49,7 @@ export const madeForYouAlbums: Album[] = [
   },
   {
     id: "6",
+    tracklist: "",
     name: "Chromakopia",
     artist: "Tyler The, Creator",
     cover:
@@ -53,6 +57,7 @@ export const madeForYouAlbums: Album[] = [
   },
   {
     id: "7",
+    tracklist: "",
     name: "Damn",
     artist: "Kendrick Lamar",
     cover:
@@ -60,6 +65,7 @@ export const madeForYouAlbums: Album[] = [
   },
   {
     id: "8",
+    tracklist: "",
     name: "Bando Stone and The New World",
     artist: "Childish Gambino",
     cover:
@@ -67,6 +73,7 @@ export const madeForYouAlbums: Album[] = [
   },
   {
     id: "9",
+    tracklist: "",
     name: "My Dark Twisted Fantasy",
     artist: "Kanye West",
     cover:
@@ -74,9 +81,21 @@ export const madeForYouAlbums: Album[] = [
   },
   {
     id: "10",
+    tracklist: "",
     name: "Apollo XXI",
     artist: "Steve Lacy",
     cover:
       "https://a5.mzstatic.com/us/r1000/0/Music114/v4/a4/2d/93/a42d9329-4df4-2825-208e-855aab7413e3/5056167115243_1.jpg",
   },
 ];
+
+function getRandomAlbums(albums: Album[], count: number): Album[] {
+  const shuffled = [...albums].sort(() => 0.5 - Math.random());
+  return shuffled.slice(0, count);
+}
+
+const listenNowAlbums: Album[] = getRandomAlbums(allAlbums, 5);
+const remainingAlbums = allAlbums.filter(album => !listenNowAlbums.includes(album));
+const madeForYouAlbums: Album[] = getRandomAlbums(remainingAlbums, 5);
+
+export { listenNowAlbums, madeForYouAlbums };

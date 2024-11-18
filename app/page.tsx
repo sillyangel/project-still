@@ -6,12 +6,8 @@ import { Separator } from '../components/ui/separator';
 import { Tabs, TabsContent } from '../components/ui/tabs';
 import { AlbumArtwork } from './components/album-artwork';
 import { listenNowAlbums, madeForYouAlbums } from './data/albums';
-import { useRouter } from 'next/navigation';
-import { Button } from '@/components/ui/button';
-
 
 export default function MusicPage() {
-  const router = useRouter();
   return (
     <>
       <div className="md:hidden">
@@ -40,7 +36,6 @@ export default function MusicPage() {
               <p className="text-sm text-muted-foreground">
                 Top picks for you. Updated daily.
               </p>
-                <Button variant="outline" onClick={() => router.push('/test')}>Test</Button>
             </div>
           </div>
           <Separator className="my-4" />
