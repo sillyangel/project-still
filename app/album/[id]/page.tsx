@@ -72,6 +72,7 @@ export default function AlbumPage() {
       </div>
       <div className="space-y-2">
         <h2 className="text-xl font-semibold">Tracklist</h2>
+        <div className="border-b border-gray-400 py-0 flex justify-between items-center"></div>
         {tracklist.map((track, index) => (
           <div key={index} className="border-b border-gray-300 py-2 flex justify-between items-center">
               <div>
