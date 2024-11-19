@@ -126,6 +126,41 @@ const allAlbums: Album[] = [
     name: "Yeezus",
     artist: "Kanye West",
     cover: "https://offbrandspotifydb.web.app/AlbumArtwork/KanyeWest/YEEZUS.jpg",
+  },
+  {
+    id: "18",
+    tracklist: "https://offbrandspotifydb.web.app/tracklist/childishgambino/atavista.json",
+    name: "Atavista",
+    artist: "Childish Gambino",
+    cover: "https://offbrandspotifydb.web.app/AlbumArtwork/ChildishGambino/ATAVISTA.jpg",
+  },
+  {
+    id: "19",
+    tracklist: "https://offbrandspotifydb.web.app/tracklist/childishgambino/awakenmylove.json",
+    name: "Awaken, My Love!",
+    artist: "Childish Gambino",
+    cover: "https://offbrandspotifydb.web.app/AlbumArtwork/ChildishGambino/AWAKENMYLOVE.jpg",
+  },
+  {
+    id: "20",
+    tracklist: "https://offbrandspotifydb.web.app/tracklist/childishgambino/bandostoneandthenewworld.json",
+    name: "Bando Stone, and the New World",
+    artist: "Childish Gambino",
+    cover: "https://offbrandspotifydb.web.app/AlbumArtwork/ChildishGambino/BANDOSTONEANDTHENEWWORLD.jpg",
+  },
+  {
+    id: "21",
+    tracklist: "https://offbrandspotifydb.web.app/tracklist/childishgambino/becauseoftheinternet.json",
+    name: "Because The Internet",
+    artist: "Childish Gambino",
+    cover: "https://offbrandspotifydb.web.app/AlbumArtwork/ChildishGambino/BECAUSETHEINTERNET.jpg",
+  },
+  {
+    id: "22",
+    tracklist: "https://offbrandspotifydb.web.app/tracklist/childishgambino/camp.json",
+    name: "Camp",
+    artist: "Childish Gambino",
+    cover: "https://offbrandspotifydb.web.app/AlbumArtwork/ChildishGambino/CAMP.jpg",
   }
 ];
 
