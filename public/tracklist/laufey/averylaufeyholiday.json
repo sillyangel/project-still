@@ -1,0 +1,43 @@
+[
+    {
+        "name": "Santa Baby",
+        "artists": [
+            "Laufey"
+        ],
+        "length": "3:02",
+        "explicit": false
+    },
+    {
+        "name": "Winter Wonderland",
+        "artists": [
+            "Laufey"
+        ],
+        "length": "2:12",
+        "explicit": false
+    },
+    {
+        "name": "Christmas Dreaming",
+        "artists": [
+            "Laufey"
+        ],
+        "length": "2:33",
+        "explicit": false
+    },
+    {
+        "name": "The Christmas Waltz",
+        "artists": [
+            "Laufey"
+        ],
+        "length": "2:47",
+        "explicit": false
+    },
+    {
+        "name": "Love to Keep Me Warm",
+        "artists": [
+            "Laufey",
+            "dodie"
+        ],
+        "length": "2:38",
+        "explicit": false
+    }
+]

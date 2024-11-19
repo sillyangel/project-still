@@ -1,0 +1,175 @@
+[
+    {
+        "name": "Intro",
+        "artists": [
+            "Kanye West"
+        ],
+        "length": "0:19",
+        "explicit": true
+    },
+    {
+        "name": "We Don't Care",
+        "artists": [
+            "Kanye West"
+        ],
+        "length": "3:59",
+        "explicit": true
+    },
+    {
+        "name": "Graduation Day",
+        "artists": [
+            "Kanye West"
+        ],
+        "length": "1:21",
+        "explicit": true
+    },
+    {
+        "name": "All Falls Down",
+        "artists": [
+            "Kanye West",
+            "Syleena Johnson"
+        ],
+        "length": "3:43",
+        "explicit": true
+    },
+    {
+        "name": "I'll Fly Away",
+        "artists": [
+            "Kanye West"
+        ],
+        "length": "1:09",
+        "explicit": true
+    },
+    {
+        "name": "Spaceship",
+        "artists": [
+            "Kanye West",
+            "GLC",
+            "Consequence"
+        ],
+        "length": "5:24",
+        "explicit": true
+    },
+    {
+        "name": "Jesus Walks",
+        "artists": [
+            "Kanye West"
+        ],
+        "length": "3:13",
+        "explicit": true
+    },
+    {
+        "name": "Never Let Me Down",
+        "artists": [
+            "Kanye West",
+            "JAY-Z",
+            "J. Ivy"
+        ],
+        "length": "5:24",
+        "explicit": true
+    },
+    {
+        "name": "Get Em High",
+        "artists": [
+            "Kanye West",
+            "Talib Kweli",
+            "Common"
+        ],
+        "length": "4:49",
+        "explicit": true
+    },
+    {
+        "name": "Workout Plan",
+        "artists": [
+            "Kanye West"
+        ],
+        "length": "0:46",
+        "explicit": true
+    },
+    {
+        "name": "The New Workout Plan",
+        "artists": [
+            "Kanye West"
+        ],
+        "length": "5:22",
+        "explicit": true
+    },
+    {
+        "name": "Slow Jamz",
+        "artists": [
+            "Twista",
+            "Kanye West",
+            "Jamie Foxx"
+        ],
+        "length": "5:16",
+        "explicit": true
+    },
+    {
+        "name": "Breathe In Breathe Out",
+        "artists": [
+            "Kanye West",
+            "Ludacris"
+        ],
+        "length": "4:06",
+        "explicit": true
+    },
+    {
+        "name": "School Spirit Skit 1",
+        "artists": [
+            "Kanye West"
+        ],
+        "length": "1:18",
+        "explicit": true
+    },
+    {
+        "name": "School Spirit",
+        "artists": [
+            "Kanye West"
+        ],
+        "length": "3:02",
+        "explicit": false
+    },
+    {
+        "name": "School Spirit Skit 2",
+        "artists": [
+            "Kanye West"
+        ],
+        "length": "0:43",
+        "explicit": true
+    },
+    {
+        "name": "Lil Jimmy Skit",
+        "artists": [
+            "Kanye West"
+        ],
+        "length": "0:53",
+        "explicit": true
+    },
+    {
+        "name": "Two Words",
+        "artists": [
+            "Kanye West",
+            "Mos Def",
+            "Freeway",
+            "The Boys Choir Of Harlem"
+        ],
+        "length": "4:26",
+        "explicit": true
+    },
+    {
+        "name": "Through The Wire",
+        "artists": [
+            "Kanye West"
+        ],
+        "length": "3:41",
+        "explicit": true
+    },
+    {
+        "name": "Family Business",
+        "artists": [
+            "Kanye West"
+        ],
+        "length": "4:38",
+        "explicit": true
+    }
+]

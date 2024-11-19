@@ -1,0 +1,165 @@
+[
+    {
+        "name": "SOS",
+        "artists": [
+            "SZA"
+        ],
+        "length": "1:57",
+        "explicit": true
+    },
+    {
+        "name": "Kill Bill",
+        "artists": [
+            "SZA"
+        ],
+        "length": "2:33",
+        "explicit": false
+    },
+    {
+        "name": "Seek & Destroy",
+        "artists": [
+            "SZA"
+        ],
+        "length": "3:23",
+        "explicit": true
+    },
+    {
+        "name": "Low",
+        "artists": [
+            "SZA"
+        ],
+        "length": "3:01",
+        "explicit": true
+    },
+    {
+        "name": "Love Language",
+        "artists": [
+            "SZA"
+        ],
+        "length": "3:03",
+        "explicit": true
+    },
+    {
+        "name": "Blind",
+        "artists": [
+            "SZA"
+        ],
+        "length": "2:30",
+        "explicit": true
+    },
+    {
+        "name": "Used (feat. Don Toliver)",
+        "artists": [
+            "SZA",
+            "Don Toliver"
+        ],
+        "length": "2:26",
+        "explicit": false
+    },
+    {
+        "name": "Snooze",
+        "artists": [
+            "SZA"
+        ],
+        "length": "3:21",
+        "explicit": true
+    },
+    {
+        "name": "Notice Me",
+        "artists": [
+            "SZA"
+        ],
+        "length": "2:40",
+        "explicit": true
+    },
+    {
+        "name": "Gone Girl",
+        "artists": [
+            "SZA"
+        ],
+        "length": "4:04",
+        "explicit": true
+    },
+    {
+        "name": "Smoking on my Ex Pack",
+        "artists": [
+            "SZA"
+        ],
+        "length": "1:23",
+        "explicit": true
+    },
+    {
+        "name": "Ghost in the Machine (feat. Phoebe Bridgers)",
+        "artists": [
+            "SZA",
+            "Phoebe Bridgers"
+        ],
+        "length": "3:38",
+        "explicit": true
+    },
+    {
+        "name": "F2F",
+        "artists": [
+            "SZA"
+        ],
+        "length": "3:05",
+        "explicit": true
+    },
+    {
+        "name": "Nobody Gets Me",
+        "artists": [
+            "SZA"
+        ],
+        "length": "3:00",
+        "explicit": true
+    },
+    {
+        "name": "Conceited",
+        "artists": [
+            "SZA"
+        ],
+        "length": "2:31",
+        "explicit": true
+    },
+    {
+        "name": "Special",
+        "artists": [
+            "SZA"
+        ],
+        "length": "2:38",
+        "explicit": true
+    },
+    {
+        "name": "Too Late",
+        "artists": [
+            "SZA"
+        ],
+        "length": "2:44",
+        "explicit": false
+    },
+    {
+        "name": "Far",
+        "artists": [
+            "SZA"
+        ],
+        "length": "3:00",
+        "explicit": true
+    },
+    {
+        "name": "Shirt",
+        "artists": [
+            "SZA"
+        ],
+        "length": "3:01",
+        "explicit": true
+    },
+    {
+        "name": "Open Arms (feat. Travis Scott)",
+        "artists": [
+            "SZA",
+            "Travis Scott"
+        ],
+        "length": "3:59",
+        "explicit": false
+    }
+]

@@ -1,0 +1,125 @@
+[
+    {
+        "name": "Foreword (feat. Rex Orange County)",
+        "artists": [
+            "Tyler, The Creator",
+            "Rex Orange County"
+        ],
+        "length": "3:14",
+        "explicit": true
+    },
+    {
+        "name": "Where This Flower Blooms (feat. Frank Ocean)",
+        "artists": [
+            "Tyler, The Creator",
+            "Frank Ocean"
+        ],
+        "length": "3:14",
+        "explicit": true
+    },
+    {
+        "name": "Sometimes...",
+        "artists": [
+            "Tyler, The Creator"
+        ],
+        "length": "0:36",
+        "explicit": true
+    },
+    {
+        "name": "See You Again (feat. Kali Uchis)",
+        "artists": [
+            "Tyler, The Creator",
+            "Kali Uchis"
+        ],
+        "length": "3:00",
+        "explicit": true
+    },
+    {
+        "name": "Who Dat Boy (feat. A$AP Rocky)",
+        "artists": [
+            "Tyler, The Creator",
+            "A$AP Rocky"
+        ],
+        "length": "3:25",
+        "explicit": true
+    },
+    {
+        "name": "Pothole (feat. Jaden Smith)",
+        "artists": [
+            "Tyler, The Creator",
+            "Jaden"
+        ],
+        "length": "3:57",
+        "explicit": true
+    },
+    {
+        "name": "Garden Shed (feat. Estelle)",
+        "artists": [
+            "Tyler, The Creator",
+            "Estelle"
+        ],
+        "length": "3:43",
+        "explicit": true
+    },
+    {
+        "name": "Boredom (feat. Rex Orange County & Anna of the North)",
+        "artists": [
+            "Tyler, The Creator",
+            "Rex Orange County",
+            "Anna of the North"
+        ],
+        "length": "5:20",
+        "explicit": true
+    },
+    {
+        "name": "I Ain't Got Time!",
+        "artists": [
+            "Tyler, The Creator"
+        ],
+        "length": "3:26",
+        "explicit": true
+    },
+    {
+        "name": "911 / Mr. Lonely (feat. Frank Ocean & Steve Lacy)",
+        "artists": [
+            "Tyler, The Creator",
+            "Frank Ocean",
+            "Steve Lacy"
+        ],
+        "length": "4:15",
+        "explicit": true
+    },
+    {
+        "name": "Droppin' Seeds (feat. Lil' Wayne)",
+        "artists": [
+            "Tyler, The Creator",
+            "Lil Wayne"
+        ],
+        "length": "1:00",
+        "explicit": true
+    },
+    {
+        "name": "November",
+        "artists": [
+            "Tyler, The Creator"
+        ],
+        "length": "3:45",
+        "explicit": true
+    },
+    {
+        "name": "Glitter",
+        "artists": [
+            "Tyler, The Creator"
+        ],
+        "length": "3:44",
+        "explicit": true
+    },
+    {
+        "name": "Enjoy Right Now, Today",
+        "artists": [
+            "Tyler, The Creator"
+        ],
+        "length": "3:55",
+        "explicit": false
+    }
+]

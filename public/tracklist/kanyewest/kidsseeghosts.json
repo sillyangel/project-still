@@ -1,0 +1,62 @@
+[
+    {
+        "name": "Feel The Love",
+        "artists": [
+            "KIDS SEE GHOSTS",
+            "Pusha T"
+        ],
+        "length": "2:45",
+        "explicit": true
+    },
+    {
+        "name": "Fire",
+        "artists": [
+            "KIDS SEE GHOSTS"
+        ],
+        "length": "2:20",
+        "explicit": true
+    },
+    {
+        "name": "4th Dimension",
+        "artists": [
+            "KIDS SEE GHOSTS",
+            "Louis Prima"
+        ],
+        "length": "2:33",
+        "explicit": true
+    },
+    {
+        "name": "Freeee (Ghost Town Pt. 2)",
+        "artists": [
+            "KIDS SEE GHOSTS",
+            "Ty Dolla $ign"
+        ],
+        "length": "3:26",
+        "explicit": true
+    },
+    {
+        "name": "Reborn",
+        "artists": [
+            "KIDS SEE GHOSTS"
+        ],
+        "length": "5:24",
+        "explicit": true
+    },
+    {
+        "name": "Kids See Ghosts",
+        "artists": [
+            "KIDS SEE GHOSTS",
+            "Yasiin Bey"
+        ],
+        "length": "4:05",
+        "explicit": true
+    },
+    {
+        "name": "Cudi Montage",
+        "artists": [
+            "KIDS SEE GHOSTS"
+        ],
+        "length": "3:17",
+        "explicit": true
+    }
+]

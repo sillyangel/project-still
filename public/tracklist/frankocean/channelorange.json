@@ -1,0 +1,141 @@
+[
+    {
+        "name": "Start",
+        "artists": [
+            "Frank Ocean"
+        ],
+        "length": "0:45",
+        "explicit": false
+    },
+    {
+        "name": "Thinkin Bout You",
+        "artists": [
+            "Frank Ocean"
+        ],
+        "length": "3:20",
+        "explicit": false
+    },
+    {
+        "name": "Fertilizer",
+        "artists": [
+            "Frank Ocean"
+        ],
+        "length": "0:39",
+        "explicit": true
+    },
+    {
+        "name": "Sierra Leone",
+        "artists": [
+            "Frank Ocean"
+        ],
+        "length": "2:28",
+        "explicit": true
+    },
+    {
+        "name": "Sweet Life",
+        "artists": [
+            "Frank Ocean"
+        ],
+        "length": "4:22",
+        "explicit": true
+    },
+    {
+        "name": "Not Just Money",
+        "artists": [
+            "Frank Ocean"
+        ],
+        "length": "0:59",
+        "explicit": false
+    },
+    {
+        "name": "Super Rich Kids",
+        "artists": [
+            "Frank Ocean",
+            "Earl Sweatshirt"
+        ],
+        "length": "5:04",
+        "explicit": true
+    },
+    {
+        "name": "Pilot Jones",
+        "artists": [
+            "Frank Ocean"
+        ],
+        "length": "3:04",
+        "explicit": false
+    },
+    {
+        "name": "Crack Rock",
+        "artists": [
+            "Frank Ocean"
+        ],
+        "length": "3:44",
+        "explicit": true
+    },
+    {
+        "name": "Pyramids",
+        "artists": [
+            "Frank Ocean"
+        ],
+        "length": "9:52",
+        "explicit": true
+    },
+    {
+        "name": "Lost",
+        "artists": [
+            "Frank Ocean"
+        ],
+        "length": "3:54",
+        "explicit": true
+    },
+    {
+        "name": "White",
+        "artists": [
+            "Frank Ocean",
+            "John Mayer"
+        ],
+        "length": "1:16",
+        "explicit": false
+    },
+    {
+        "name": "Monks",
+        "artists": [
+            "Frank Ocean"
+        ],
+        "length": "3:20",
+        "explicit": true
+    },
+    {
+        "name": "Bad Religion",
+        "artists": [
+            "Frank Ocean"
+        ],
+        "length": "2:55",
+        "explicit": false
+    },
+    {
+        "name": "Pink Matter",
+        "artists": [
+            "Frank Ocean",
+            "Andre 3000"
+        ],
+        "length": "4:28",
+        "explicit": true
+    },
+    {
+        "name": "Forrest Gump",
+        "artists": [
+            "Frank Ocean"
+        ],
+        "length": "3:14",
+        "explicit": false
+    },
+    {
+        "name": "End",
+        "artists": [
+            "Frank Ocean"
+        ],
+        "length": "2:14",
+        "explicit": false
+    }
+]

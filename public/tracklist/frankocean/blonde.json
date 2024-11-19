@@ -1,0 +1,104 @@
+[
+    {
+      "name": "Nike",
+      "artists": ["Frank Ocean"],
+      "length": "5:14",
+      "explicit": true
+    },
+    {
+        "name": "Ivy",
+        "artists": ["Frank Ocean"],
+        "length": "4:09",
+        "explicit": true
+    },
+    {
+        "name": "Pink + White",
+        "artists": ["Frank Ocean"],
+        "length": "3:04",
+        "explicit": false
+    },
+    {
+        "name": "Be Yourself",
+        "artists": ["Frank Ocean"],
+        "length": "1:26",
+        "explicit": false
+    },
+    {
+        "name": "Solo",
+        "artists": ["Frank Ocean"],
+        "length": "4:17",
+        "explicit": true
+    },
+    {
+        "name": "Skyline To",
+        "artists": ["Frank Ocean"],
+        "length": "3:04",
+        "explicit": true
+    },
+    {
+        "name": "Self Control",
+        "artists": ["Frank Ocean"],
+        "length": "4:09",
+        "explicit": false
+    },
+    {
+        "name": "Good Guy",
+        "artists": ["Frank Ocean"],
+        "length": "1:06",
+        "explicit": false
+    },
+    {
+        "name": "Nights",
+        "artists": ["Frank Ocean"],
+        "length": "5:07",
+        "explicit": true
+    },
+    {
+        "name" : "Solo (Reprise)",
+        "artists": ["Frank Ocean"],
+        "length": "1:18",
+        "explicit": false
+    },
+    {
+        "name": "Pretty Sweet",
+        "artists": ["Frank Ocean"],
+        "length": "2:38",
+        "explicit": true
+    },
+    {
+        "name": "Facebook Story",
+        "artists": ["Frank Ocean"],
+        "length": "1:08",
+        "explicit": false
+    },
+    {
+        "name": "Close to You",
+        "artists": ["Frank Ocean"],
+        "length": "1:25",
+        "explicit": false
+    },
+    {
+        "name": "White Ferrari",
+        "artists": ["Frank Ocean"],
+        "length": "4:08",
+        "explicit": false
+    },
+    {
+        "name": "Seigfried",
+        "artists": ["Frank Ocean"],
+        "length": "5:34",
+        "explicit": false
+    },
+    {
+        "name": "Godspeed",
+        "artists": ["Frank Ocean"],
+        "length": "2:57",
+        "explicit": false
+    },
+    {
+        "name": "Futura Free",
+        "artists": ["Frank Ocean"],
+        "length": "9:24",
+        "explicit": true
+    }
+]
