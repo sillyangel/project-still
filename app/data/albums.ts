@@ -23,7 +23,7 @@ const allAlbums: Album[] = [
   },
   {
     id: "3",
-    tracklist: "https://offbrandspotifydb.web.app/tracklist/billieeilish/whenwefallasleepwheredowego.json",
+    tracklist: "https://offbrandspotifydb.web.app/tracklist/billieeilish/whenweallfallasleepwheredowego.json",
     name: "When We All Fall Asleep, Where Do We Go?",
     artist: "Billie Eilish",
     cover: "https://offbrandspotifydb.web.app/AlbumArtwork/BillieEilish/WWAFAWDWG.jpg",
@@ -73,7 +73,7 @@ const allAlbums: Album[] = [
   },
   {
     id: "10",
-    tracklist: "https://offbrandspotifydb.web.app/tracklist/kanyewest/kidsseeghost.json",
+    tracklist: "https://offbrandspotifydb.web.app/tracklist/kanyewest/kidsseeghosts.json",
     name: "Kids See Ghosts",
     artist: "Kanye West",
     cover: "https://offbrandspotifydb.web.app/AlbumArtwork/KanyeWest/KIDSSEEGHOSTS.jpg",
@@ -138,4 +138,4 @@ const listenNowAlbums: Album[] = getRandomAlbums(allAlbums, 5);
 const remainingAlbums = allAlbums.filter(album => !listenNowAlbums.includes(album));
 const madeForYouAlbums: Album[] = getRandomAlbums(remainingAlbums, 50);
 
-export { listenNowAlbums, madeForYouAlbums };
+export { listenNowAlbums, madeForYouAlbums, allAlbums };
