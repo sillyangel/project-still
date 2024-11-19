@@ -150,7 +150,7 @@ const allAlbums: Album[] = [
   },
   {
     id: "21",
-    tracklist: "https://offbrandspotifydb.web.app/tracklist/childishgambino/becauseoftheinternet.json",
+    tracklist: "https://offbrandspotifydb.web.app/tracklist/childishgambino/becausetheinternet.json",
     name: "Because The Internet",
     artist: "Childish Gambino",
     cover: "https://offbrandspotifydb.web.app/AlbumArtwork/ChildishGambino/BECAUSETHEINTERNET.jpg",
