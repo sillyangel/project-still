@@ -23,16 +23,18 @@ interface LayoutProps {
 export function Layout({ children }: LayoutProps) {
   return (
     <html lang="en">
-      <body  className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         <div className="md:hidden">
           <p>Please view on desktop</p>
         </div>
         <div className="hidden md:block">
-          <Menu />
+          <div className="sticky top-0 z-10 bg-background">
+            <Menu />
+          </div>
           <div className="border-t">
             <div className="bg-background">
               <div className="grid lg:grid-cols-5">
-                <Sidebar playlists={playlists} className="hidden lg:block" />
+                <Sidebar playlists={playlists} className="hidden lg:block sticky top-0 h-screen" />
                 <div className="col-span-3 lg:col-span-4 lg:border-l">
                   <div className="h-full px-4 py-6 lg:px-8">
                     {children}
@@ -44,7 +46,7 @@ export function Layout({ children }: LayoutProps) {
         </div>
       </body>
     </html>
-  )
+  );
 }
 
-export default Layout
+export default Layout;

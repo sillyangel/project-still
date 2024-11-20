@@ -27,6 +27,8 @@ export default function AlbumPage() {
   const [tracklist, setTracklist] = useState<Track[]>([]);
   const [loading, setLoading] = useState(true);
 
+  
+
   useEffect(() => {
     const fetchAlbum = async () => {
       setLoading(true);
@@ -62,7 +64,9 @@ export default function AlbumPage() {
   if (!album) {
     return <p>Album not found</p>;
   }
-
+  const handlePlayClick = () => {
+    alert(`Playing album: ${album.name} by ${album.artist}`);
+  };
   return (
     <div className="space-y-4">
       <div className="flex items-start gap-6">
@@ -76,7 +80,7 @@ export default function AlbumPage() {
         <div className="space-y-2">
           <h1 className="text-2xl font-semibold tracking-tight">{album.name}</h1>
           <p className="text-xl">{album.artist}</p>
-            <Button>
+            <Button onClick={handlePlayClick}>
               <Play /> Play Album
             </Button>
         </div>
