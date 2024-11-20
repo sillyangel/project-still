@@ -6,7 +6,9 @@ import { allArtists } from '@/app/data/artists';
 import { AlbumArtwork } from '@/app/components/album-artwork';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
+import { Separator } from '@/components/ui/separator';
 import { Heart } from 'lucide-react';
+import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area';
 
 interface Artist {
   name: string;
@@ -75,7 +77,14 @@ export default function ArtistPage() {
         </div>
       )}
       <hr className="my-4 border-gray-300" />
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+      <div className="space-y-1">
+              <h2 className="text-2xl font-semibold tracking-tight">
+                Discography
+              </h2>
+            </div>
+      <Separator className="my-4" />
+      <ScrollArea>
+      <div className="flex space-x-4 pb-4">
         {artistAlbums.map((album) => (
           <div key={album.id} className="space-y-2">
             <AlbumArtwork
@@ -88,7 +97,9 @@ export default function ArtistPage() {
             />
           </div>
         ))}
-      </div>
+        </div>
+        <ScrollBar orientation="horizontal" />
+      </ScrollArea>
     </div>
   );
 }
