@@ -84,19 +84,19 @@ export default function ArtistPage() {
             </div>
       <Separator className="my-4" />
       <ScrollArea>
-      <div className="flex space-x-4 pb-4">
-        {artistAlbums.map((album) => (
-          <div key={album.id} className="space-y-2">
-            <AlbumArtwork
-              key={album.id}
-              album={album}
-              className="w-[200px]"
-              aspectRatio="square"
-              width={200}
-              height={200}
-            />
-          </div>
-        ))}
+        <div className="flex space-x-4 pb-4">
+          {artistAlbums.map((album) => (
+            <div key={album.id} className="space-y-2">
+              <AlbumArtwork
+                key={album.id}
+                album={album}
+                className="w-[200px]"
+                aspectRatio="square"
+                width={200}
+                height={200}
+              />
+            </div>
+          ))}
         </div>
         <ScrollBar orientation="horizontal" />
       </ScrollArea>
