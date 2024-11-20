@@ -2,7 +2,7 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'next/navigation';
 import Image from 'next/image';
-import { listenNowAlbums } from '@/app/data/albums';
+import { allAlbums } from '@/app/data/albums';
 import { Play } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
@@ -30,13 +30,24 @@ export default function AlbumPage() {
   useEffect(() => {
     const fetchAlbum = async () => {
       setLoading(true);
-      const album = listenNowAlbums.find((album) => album.id === id) || null;
+      console.log(`Fetching album with id: ${id}`);
+      const album = allAlbums.find((album) => album.id === id) || null;
       setAlbum(album);
 
       if (album) {
-        const response = await fetch(album.tracklist);
-        const tracklist = await response.json();
-        setTracklist(tracklist);
+        console.log(`Album found: ${album.name}`);
+        try {
+          const response = await fetch(album.tracklist);
+          if (!response.ok) {
+            throw new Error('Network response was not ok');
+          }
+          const tracklist = await response.json();
+          setTracklist(tracklist);
+        } catch (error) {
+          console.error('Failed to fetch tracklist:', error);
+        }
+      } else {
+        console.log('Album not found');
       }
       setLoading(false);
     };
