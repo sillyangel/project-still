@@ -5,7 +5,8 @@ import { allAlbums, Album } from '@/app/data/albums';
 import { allArtists } from '@/app/data/artists';
 import { AlbumArtwork } from '@/app/components/album-artwork';
 import Image from 'next/image';
-
+import { Button } from '@/components/ui/button';
+import { Heart } from 'lucide-react';
 interface Artist {
   name: string;
   pictureurl: string;
@@ -53,15 +54,23 @@ export default function ArtistPage() {
   return (
     <div className="space-y-4">
       {artistProfile && (
-        <div className="flex items-center space-x-4">
-          <Image 
-            src={artistProfile.pictureurl} 
-            alt={artistName} 
-            width={100} 
-            height={100}
-            className="rounded-full"
-          />
-          <h1 className="text-2xl font-semibold tracking-tight">{artistName}</h1>
+        <div className="flex items-center justify-between space-x-4">
+          <div className="flex items-center space-x-4">
+            <Image 
+              src={artistProfile.pictureurl} 
+              alt={artistName} 
+              width={100} 
+              height={100}
+              className="rounded-full"
+            />
+            <h1 className="text-2xl font-semibold tracking-tight">{artistName}</h1>
+          </div>
+          <div className="ml-auto">
+            <Button>
+              <Heart />
+              Follow
+            </Button>
+          </div>
         </div>
       )}
       <hr className="my-4 border-gray-300" />
