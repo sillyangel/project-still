@@ -273,6 +273,55 @@ const allAlbums: Album[] = [
     name: "The Lo-Fis",
     artist: "Steve Lacy",
     cover: "https://offbrandspotifydb.web.app/AlbumArtwork/SteveLacy/LOFIS.jpg",
+  },
+  {
+    id: "39",
+    tracklist: "https://offbrandspotifydb.web.app/tracklist/travisscott/daysbeforerodeo.json",
+    name: "Days Before Rodeo",
+    artist: "Travis Scott",
+    cover: "https://offbrandspotifydb.web.app/AlbumArtwork/TravisScott/DAYSBEFORERODEO.jpg",
+  },
+  {
+    id: "40",
+    tracklist: "https://offbrandspotifydb.web.app/tracklist/travisscott/rodeo.json",
+    name: "Rodeo",
+    artist: "Travis Scott",
+    cover: "https://offbrandspotifydb.web.app/AlbumArtwork/TravisScott/RODEO.jpg",
+  },
+  {
+    id: "41",
+    tracklist: "https://offbrandspotifydb.web.app/tracklist/travisscott/birdsinthetrapsingmcknight.json",
+    name: "Birds in the Trap Sing McKnight",
+    artist: "Travis Scott",
+    cover: "https://offbrandspotifydb.web.app/AlbumArtwork/TravisScott/BIRDS INTHETRAPSINGMCKNIGHT.jpg",
+  },
+  {
+    id: "42",
+    tracklist: "https://offbrandspotifydb.web.app/tracklist/travisscott/hunchojackjackhuncho.json",
+    name: "Huncho Jack, Jack Huncho",
+    artist: "Travis Scott",
+    cover: "https://offbrandspotifydb.web.app/AlbumArtwork/TravisScott/HUNCHOJACKJACKHUNCHO.jpg",
+  },
+  {
+    id: "43",
+    tracklist: "https://offbrandspotifydb.web.app/tracklist/travisscott/astroworld.json",
+    name: "Astroworld",
+    artist: "Travis Scott",
+    cover: "https://offbrandspotifydb.web.app/AlbumArtwork/TravisScott/ASTROWORLD.jpg",
+  },
+  {
+    id: "44",
+    tracklist: "https://offbrandspotifydb.web.app/tracklist/travisscott/jackboys.json",
+    name: "Jackboys",
+    artist: "Travis Scott",
+    cover: "https://offbrandspotifydb.web.app/AlbumArtwork/TravisScott/JACKBOYS.jpg",
+  },
+  {
+    id: "45",
+    tracklist: "https://offbrandspotifydb.web.app/tracklist/travisscott/utopia.json",
+    name: "Utopia",
+    artist: "Travis Scott",
+    cover: "https://offbrandspotifydb.web.app/AlbumArtwork/TravisScott/UTOPIA.jpg",
   }
 ];
 
