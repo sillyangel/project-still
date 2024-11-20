@@ -13,6 +13,8 @@ interface SidebarProps extends React.HTMLAttributes<HTMLDivElement> {
 
 export function Sidebar({ className, playlists }: SidebarProps) {
   const isRoot = usePathname() === "/";
+  const isBrowse = usePathname() === "/browse";
+
   return (
     <div className={cn("pb-12", className)}>
       <div className="space-y-4 py-4">
@@ -21,6 +23,7 @@ export function Sidebar({ className, playlists }: SidebarProps) {
             Discover
           </h2>
           <div className="space-y-1">
+          <Link href="/">
             <Button variant={isRoot ? "secondary" : "ghost"} className="w-full justify-start">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -35,9 +38,11 @@ export function Sidebar({ className, playlists }: SidebarProps) {
                 <circle cx="12" cy="12" r="10" />
                 <polygon points="10 8 16 12 10 16 10 8" />
               </svg>
-              <Link href="/">Listen Now</Link>
+              Listen Now
             </Button>
-            <Button variant="ghost" className="w-full justify-start">
+            </Link>
+            <Link href="/browse">
+            <Button variant={isBrowse ? "secondary" : "ghost"} className="w-full justify-start">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
@@ -55,6 +60,7 @@ export function Sidebar({ className, playlists }: SidebarProps) {
               </svg>
               Browse
             </Button>
+            </Link>
           </div>
         </div>
         <div className="px-3 py-2">

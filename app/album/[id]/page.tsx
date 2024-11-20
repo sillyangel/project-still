@@ -2,9 +2,10 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'next/navigation';
 import Image from 'next/image';
-import { listenNowAlbums } from '@/app/data/albums';
+import { allAlbums } from '@/app/data/albums';
 import { Play } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import Link from 'next/link';
 
 interface Track {
   name: string;
@@ -27,16 +28,29 @@ export default function AlbumPage() {
   const [tracklist, setTracklist] = useState<Track[]>([]);
   const [loading, setLoading] = useState(true);
 
+  
+
   useEffect(() => {
     const fetchAlbum = async () => {
       setLoading(true);
-      const album = listenNowAlbums.find((album) => album.id === id) || null;
+      console.log(`Fetching album with id: ${id}`);
+      const album = allAlbums.find((album) => album.id === id) || null;
       setAlbum(album);
 
       if (album) {
-        const response = await fetch(album.tracklist);
-        const tracklist = await response.json();
-        setTracklist(tracklist);
+        console.log(`Album found: ${album.name}`);
+        try {
+          const response = await fetch(album.tracklist);
+          if (!response.ok) {
+            throw new Error('Network response was not ok');
+          }
+          const tracklist = await response.json();
+          setTracklist(tracklist);
+        } catch (error) {
+          console.error('Failed to fetch tracklist:', error);
+        }
+      } else {
+        console.log('Album not found');
       }
       setLoading(false);
     };
@@ -51,7 +65,10 @@ export default function AlbumPage() {
   if (!album) {
     return <p>Album not found</p>;
   }
-
+  const handlePlayClick = () => {
+    alert(`Playing album: ${album.name} by ${album.artist}`);
+  };
+  const normalizedArtistName = album.artist.toLowerCase().replace(/\s+/g, '');
   return (
     <div className="space-y-4">
       <div className="flex items-start gap-6">
@@ -64,8 +81,8 @@ export default function AlbumPage() {
         />
         <div className="space-y-2">
           <h1 className="text-2xl font-semibold tracking-tight">{album.name}</h1>
-          <p className="text-xl">{album.artist}</p>
-            <Button>
+          <Link href={`/artist/${normalizedArtistName}`}><p className="text-xl">{album.artist}</p></Link>
+            <Button onClick={handlePlayClick}>
               <Play /> Play Album
             </Button>
         </div>

@@ -1,9 +1,10 @@
+'use client';
+
 import {
     Menubar,
     MenubarCheckboxItem,
     MenubarContent,
     MenubarItem,
-    MenubarLabel,
     MenubarMenu,
     MenubarRadioGroup,
     MenubarRadioItem,
@@ -14,12 +15,25 @@ import {
     MenubarSubTrigger,
     MenubarTrigger,
   } from "../../components/ui/menubar"
-  
+import { useState } from "react"
+
+
   export function Menu() {
+    const [isFullScreen, setIsFullScreen] = useState(false)
+
+    const handleFullScreen = () => {
+      if (!isFullScreen) {
+        document.documentElement.requestFullscreen()
+      } else {
+        document.exitFullscreen()
+      }
+      setIsFullScreen(!isFullScreen)
+    }
+
     return (
       <Menubar className="rounded-none border-b border-none px-2 lg:px-4">
         <MenubarMenu>
-          <MenubarTrigger className="font-bold">Offbrand Spotify (hawk tuah version)</MenubarTrigger>
+          <MenubarTrigger className="font-bold">Offbrand Spotify (v0.1.8)</MenubarTrigger>
           <MenubarContent>
             <MenubarItem>About Music</MenubarItem>
             <MenubarSeparator />
@@ -166,31 +180,25 @@ import {
         <MenubarMenu>
           <MenubarTrigger>View</MenubarTrigger>
           <MenubarContent>
-            <MenubarCheckboxItem>Show Playing Next</MenubarCheckboxItem>
-            <MenubarCheckboxItem checked>Show Lyrics</MenubarCheckboxItem>
+            <MenubarCheckboxItem disabled>Show Playing Next</MenubarCheckboxItem>
+            <MenubarCheckboxItem disabled>Show Lyrics</MenubarCheckboxItem>
             <MenubarSeparator />
             <MenubarItem inset disabled>
               Show Status Bar
             </MenubarItem>
             <MenubarSeparator />
             <MenubarItem inset>Hide Sidebar</MenubarItem>
-            <MenubarItem disabled inset>
-              Enter Full Screen
-            </MenubarItem>
+            <MenubarItem inset onClick={handleFullScreen}>
+            {isFullScreen ? "Exit Full Screen" : "Enter Full Screen"}
+          </MenubarItem>
           </MenubarContent>
         </MenubarMenu>
         <MenubarMenu>
           <MenubarTrigger className="hidden md:block">Account</MenubarTrigger>
           <MenubarContent forceMount>
-            <MenubarLabel inset>Switch Account</MenubarLabel>
-            <MenubarSeparator />
-            <MenubarRadioGroup value="benoit">
-              <MenubarRadioItem value="andy">Andy</MenubarRadioItem>
-              <MenubarRadioItem value="benoit">Benoit</MenubarRadioItem>
-              <MenubarRadioItem value="Luis">Luis</MenubarRadioItem>
+            <MenubarRadioGroup value="angel">
+              <MenubarRadioItem value="angel">Angel</MenubarRadioItem>
             </MenubarRadioGroup>
-            <MenubarSeparator />
-            <MenubarItem inset>Manage Family...</MenubarItem>
             <MenubarSeparator />
             <MenubarItem inset>Add Account...</MenubarItem>
           </MenubarContent>
