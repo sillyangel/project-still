@@ -5,6 +5,7 @@ import Image from 'next/image';
 import { allAlbums } from '@/app/data/albums';
 import { Play } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import Link from 'next/link';
 
 interface Track {
   name: string;
@@ -67,6 +68,7 @@ export default function AlbumPage() {
   const handlePlayClick = () => {
     alert(`Playing album: ${album.name} by ${album.artist}`);
   };
+  const normalizedArtistName = album.artist.toLowerCase().replace(/\s+/g, '');
   return (
     <div className="space-y-4">
       <div className="flex items-start gap-6">
@@ -79,7 +81,7 @@ export default function AlbumPage() {
         />
         <div className="space-y-2">
           <h1 className="text-2xl font-semibold tracking-tight">{album.name}</h1>
-          <p className="text-xl">{album.artist}</p>
+          <Link href={`/artist/${normalizedArtistName}`}><p className="text-xl">{album.artist}</p></Link>
             <Button onClick={handlePlayClick}>
               <Play /> Play Album
             </Button>

@@ -2,7 +2,14 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'next/navigation';
 import { allAlbums, Album } from '@/app/data/albums';
+import { allArtists } from '@/app/data/artists';
 import { AlbumArtwork } from '@/app/components/album-artwork';
+import Image from 'next/image';
+
+interface Artist {
+  name: string;
+  pictureurl: string;
+}
 
 export default function ArtistPage() {
   const { artist } = useParams();
@@ -10,18 +17,29 @@ export default function ArtistPage() {
 
   const [artistAlbums, setArtistAlbums] = useState<Album[]>([]);
   const [loading, setLoading] = useState(true);
+  const [artistName, setArtistName] = useState('');
+  const [artistProfile, setArtistProfile] = useState<Artist | null>(null);
 
   useEffect(() => {
-    const fetchArtistAlbums = () => {
+    const fetchArtistData = () => {
       setLoading(true);
       const albums = allAlbums.filter((album) => 
         album.artist.toLowerCase().replace(/\s+/g, '') === normalizedArtist
       );
       setArtistAlbums(albums);
+      if (albums.length > 0) {
+        setArtistName(albums[0].artist);
+      }
+
+      const artistData = allArtists.find((artist) => 
+        artist.name.toLowerCase().replace(/\s+/g, '') === normalizedArtist
+      );
+      setArtistProfile(artistData || null);
+
       setLoading(false);
     };
 
-    fetchArtistAlbums();
+    fetchArtistData();
   }, [normalizedArtist]);
 
   if (loading) {
@@ -34,7 +52,19 @@ export default function ArtistPage() {
 
   return (
     <div className="space-y-4">
-      <h1 className="text-2xl font-semibold tracking-tight">{artistName}</h1>
+      {artistProfile && (
+        <div className="flex items-center space-x-4">
+          <Image 
+            src={artistProfile.pictureurl} 
+            alt={artistName} 
+            width={100} 
+            height={100}
+            className="rounded-full"
+          />
+          <h1 className="text-2xl font-semibold tracking-tight">{artistName}</h1>
+        </div>
+      )}
+      <hr className="my-4 border-gray-300" />
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
         {artistAlbums.map((album) => (
           <div key={album.id} className="space-y-2">
