@@ -6,19 +6,19 @@ export interface Artist {
 const allArtists: Artist[] = [
     {
         name: "Frank Ocean",
-        pictureurl: ""
+        pictureurl: "https://offbrandspotifydb.web.app/artistprofile/frankocean.jpg"
     },
     {
         name: "Billie Eilish",
-        pictureurl: ""
+        pictureurl: "https://offbrandspotifydb.web.app/artistprofile/billieeilish.jpg"
     },
     {
         name: "Kanye West",
-        pictureurl: ""
+        pictureurl: "https://offbrandspotifydb.web.app/artistprofile/kanyewest.jpg"
     },
     {
         name: "Childish Gambino",
-        pictureurl: ""
+        pictureurl: "https://offbrandspotifydb.web.app/artistprofile/childishgambino.jpg"
     }
 ];
 
