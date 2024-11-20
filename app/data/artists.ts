@@ -19,6 +19,14 @@ const allArtists: Artist[] = [
     {
         name: "Childish Gambino",
         pictureurl: "https://offbrandspotifydb.web.app/artistprofile/childishgambino.jpg"
+    },
+    {
+        name: "Don Toliver",
+        pictureurl: "https://offbrandspotifydb.web.app/artistprofile/dontoliver.jpg"
+    },
+    {
+        name: "Tyler, The Creator",
+        pictureurl: "https://offbrandspotifydb.web.app/artistprofile/tylerthecreator.jpg"
     }
 ];
 

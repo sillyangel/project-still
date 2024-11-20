@@ -17,8 +17,8 @@ interface Artist {
 
 export default function ArtistPage() {
   const { artist } = useParams();
-  const normalizedArtist = Array.isArray(artist) ? artist[0].toLowerCase().replace(/\s+/g, '') : artist.toLowerCase().replace(/\s+/g, '');
-
+  const normalizedArtist = Array.isArray(artist) ? artist[0].toLowerCase().replace(/[\s,]+/g, '') : artist.toLowerCase().replace(/[\s,]+/g, '');
+  
   const [artistAlbums, setArtistAlbums] = useState<Album[]>([]);
   const [loading, setLoading] = useState(true);
   const [artistName, setArtistName] = useState('');
@@ -28,7 +28,7 @@ export default function ArtistPage() {
     const fetchArtistData = () => {
       setLoading(true);
       const albums = allAlbums.filter((album) => 
-        album.artist.toLowerCase().replace(/\s+/g, '') === normalizedArtist
+        album.artist.toLowerCase().replace(/[\s,]+/g, '') === normalizedArtist
       );
       setArtistAlbums(albums);
       if (albums.length > 0) {
@@ -36,7 +36,7 @@ export default function ArtistPage() {
       }
 
       const artistData = allArtists.find((artist) => 
-        artist.name.toLowerCase().replace(/\s+/g, '') === normalizedArtist
+        artist.name.toLowerCase().replace(/[\s,]+/g, '') === normalizedArtist
       );
       setArtistProfile(artistData || null);
 
