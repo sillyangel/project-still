@@ -245,6 +245,34 @@ const allAlbums: Album[] = [
     name: "Chromakopia",
     artist: "Tyler, The Creator",
     cover: "https://offbrandspotifydb.web.app/AlbumArtwork/TylerTheCreator/CHROMAKOPIA.jpg",
+  },
+  {
+    id: "35",
+    tracklist: "https://offbrandspotifydb.web.app/tracklist/stevelacy/apolloxxi.json",
+    name: "Apollo XXI",
+    artist: "Steve Lacy",
+    cover: "https://offbrandspotifydb.web.app/AlbumArtwork/SteveLacy/APOLLOXXI.jpg",
+  },
+  {
+    id: "36",
+    tracklist: "https://offbrandspotifydb.web.app/tracklist/stevelacy/geminirights.json",
+    name: "Gemini Rights",
+    artist: "Steve Lacy",
+    cover: "https://offbrandspotifydb.web.app/AlbumArtwork/SteveLacy/GEMINIRIGHTS.jpg",
+  },
+  {
+    id: "37",
+    tracklist: "https://offbrandspotifydb.web.app/tracklist/stevelacy/stevelacysdemo.json",
+    name: "Steve Lacy's Demo",
+    artist: "Steve Lacy",
+    cover: "https://offbrandspotifydb.web.app/AlbumArtwork/SteveLacy/STEVELACYDEMO.jpg",
+  },
+  {
+    id: "38",
+    tracklist: "https://offbrandspotifydb.web.app/tracklist/stevelacy/thelofis.json",
+    name: "The Lo-Fis",
+    artist: "Steve Lacy",
+    cover: "https://offbrandspotifydb.web.app/AlbumArtwork/SteveLacy/LOFIS.jpg",
   }
 ];
 

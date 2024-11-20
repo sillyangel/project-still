@@ -27,6 +27,10 @@ const allArtists: Artist[] = [
     {
         name: "Tyler, The Creator",
         pictureurl: "https://offbrandspotifydb.web.app/artistprofile/tylerthecreator.jpg"
+    },
+    {
+        name: "Steve Lacy",
+        pictureurl: "https://offbrandspotifydb.web.app/artistprofile/stevelacy.jpg"
     }
 ];
 
