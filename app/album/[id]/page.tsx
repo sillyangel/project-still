@@ -70,6 +70,7 @@ export default function AlbumPage() {
   };
   const normalizedArtistName = album.artist.toLowerCase().replace(/\s+/g, '');
   return (
+    <div className="h-full px-4 py-6 lg:px-8">
     <div className="space-y-4">
       <div className="flex items-start gap-6">
         <Image 
@@ -109,6 +110,7 @@ export default function AlbumPage() {
           </div>
         ))}
       </div>
+    </div>
     </div>
   );
 }

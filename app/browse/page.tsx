@@ -10,6 +10,7 @@ import { allAlbums } from '@/app/data/albums';
 
 export default function MusicPage() {
   return (
+    <div className="h-full px-4 py-6 lg:px-8">
     <>
       <div className="md:hidden">
         <Image
@@ -62,5 +63,6 @@ export default function MusicPage() {
         </TabsContent>
       </Tabs>
     </>
+    </div>
   );
 }
