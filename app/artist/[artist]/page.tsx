@@ -16,7 +16,7 @@ interface Artist {
 
 export default function ArtistPage() {
   const { artist } = useParams();
-  const normalizedArtist = Array.isArray(artist) ? artist[0].toLowerCase().replace(/[\s,]+/g, '') : artist.toLowerCase().replace(/[\s,]+/g, '');
+  const normalizedArtist = artist ? (Array.isArray(artist) ? artist[0].toLowerCase().replace(/[\s,]+/g, '') : artist.toLowerCase().replace(/[\s,]+/g, '')) : '';
   
   const [artistAlbums, setArtistAlbums] = useState<Album[]>([]);
   const [loading, setLoading] = useState(true);
