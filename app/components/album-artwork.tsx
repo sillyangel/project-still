@@ -18,6 +18,7 @@ import {
 
 import { Album } from "../data/albums"
 import { playlists } from "../data/playlists"
+import Link from "next/link";
 
 interface AlbumArtworkProps extends React.HTMLAttributes<HTMLDivElement> {
   album: Album
@@ -39,17 +40,18 @@ export function AlbumArtwork({
   const handleClick = () => {
     router.push(`/album/${album.id}`);
   };
-
+  const normalizedArtistName = album.artist.toLowerCase().replace(/[\s,]+/g, '');
   return (
-    <div className={cn("space-y-3", className)} {...props} onClick={handleClick}>
+    <div className={cn("space-y-3", className)} {...props}>
       <ContextMenu>
         <ContextMenuTrigger>
-          <div className="overflow-hidden rounded-md">
+          <div onClick={handleClick} className="overflow-hidden rounded-md">
             <Image
               src={album.cover}
               alt={album.name}
               width={width}
               height={height}
+              
               className={cn(
                 "h-auto w-auto object-cover transition-all hover:scale-105",
                 aspectRatio === "portrait" ? "aspect-[3/4]" : "aspect-square"
@@ -95,9 +97,9 @@ export function AlbumArtwork({
           <ContextMenuItem>Share</ContextMenuItem>
         </ContextMenuContent>
       </ContextMenu>
-      <div className="space-y-1 text-sm">
-        <h3 className="font-medium leading-none">{album.name}</h3>
-        <p className="text-xs text-muted-foreground">{album.artist}</p>
+      <div className="space-y-1 text-sm" >
+        <h3 className="font-medium leading-none" onClick={handleClick}>{album.name}</h3>
+        <p className="text-xs text-muted-foreground underline"><Link href={`/artist/${normalizedArtistName}`}>{album.artist}</Link></p>
       </div>
     </div>
   )

@@ -82,7 +82,7 @@ export default function AlbumPage() {
         />
         <div className="space-y-2">
           <h1 className="text-3xl font-semibold tracking-tight">{album.name}</h1>
-          <Link href={`/artist/${normalizedArtistName}`}><p className="text-xl text-blue-500 mt-0 mb-4">{album.artist}</p></Link>
+          <Link href={`/artist/${normalizedArtistName}`}><p className="text-xl text-blue-500 mt-0 mb-4 underline">{album.artist}</p></Link>
             <Button onClick={handlePlayClick} className="mt-56">
               <Play /> Play Album
             </Button>
@@ -92,8 +92,10 @@ export default function AlbumPage() {
         <h2 className="text-xl font-semibold">Tracklist</h2>
         <div className="border-b border-gray-400 py-0 flex justify-between items-center"></div>
         {tracklist.map((track, index) => (
-          <div key={index} className="border-b border-gray-300 py-2 flex justify-between items-center">
-              <div>
+          <div key={index} className="border-b py-2 flex justify-between items-center">
+            <div className="flex items-center">
+              <div className="mr-2">{index + 1}</div>
+            <div>
               <p className="font-semibold flex items-center">
                 {track.name}
                 {track.explicit && (
@@ -104,6 +106,7 @@ export default function AlbumPage() {
               </p>
               <p className="text-sm">{track.artists.join(', ')}</p>
             </div>
+          </div>
             <div className="flex items-center space-x-2">
               <p className="text-sm">{track.length}</p>
             </div>
