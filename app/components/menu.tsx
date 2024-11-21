@@ -1,13 +1,11 @@
 'use client';
-
+import { useRouter } from 'next/navigation';
 import {
     Menubar,
     MenubarCheckboxItem,
     MenubarContent,
     MenubarItem,
     MenubarMenu,
-    MenubarRadioGroup,
-    MenubarRadioItem,
     MenubarSeparator,
     MenubarShortcut,
     MenubarSub,
@@ -15,11 +13,27 @@ import {
     MenubarSubTrigger,
     MenubarTrigger,
   } from "../../components/ui/menubar"
-import { useState } from "react"
+import { useState, useEffect } from "react"
+import { auth } from "@/app/firebase/config"
+import { onAuthStateChanged } from "firebase/auth"
+import { signOut } from "firebase/auth";
 
-
-  export function Menu() {
+export function Menu() {
     const [isFullScreen, setIsFullScreen] = useState(false)
+    const [userEmail, setUserEmail] = useState("not signed in")
+
+    useEffect(() => {
+        const unsubscribe = onAuthStateChanged(auth, (user) => {
+            if (user) {
+                setUserEmail(user.email || "not signed in")
+            } else {
+                setUserEmail("not signed in")
+            }
+        })
+
+        return () => unsubscribe()
+    }, [])
+    const router = useRouter();
 
     const handleFullScreen = () => {
       if (!isFullScreen) {
@@ -33,7 +47,7 @@ import { useState } from "react"
     return (
       <Menubar className="rounded-none border-b border-none px-2 lg:px-4">
         <MenubarMenu>
-          <MenubarTrigger className="font-bold">Offbrand Spotify (Development Version)</MenubarTrigger>
+          <MenubarTrigger className="font-bold">offbrand spotify</MenubarTrigger>
           <MenubarContent>
             <MenubarItem>About Music</MenubarItem>
             <MenubarSeparator />
@@ -171,7 +185,7 @@ import { useState } from "react"
                   viewBox="0 0 24 24"
                 >
                   <circle cx="12" cy="12" r="10" />
-                  <path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
+                  <path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10z" />
                 </svg>
               </MenubarShortcut>
             </MenubarItem>
@@ -196,11 +210,17 @@ import { useState } from "react"
         <MenubarMenu>
           <MenubarTrigger className="hidden md:block">Account</MenubarTrigger>
           <MenubarContent forceMount>
-            <MenubarRadioGroup value="angel">
-              <MenubarRadioItem value="angel">Angel</MenubarRadioItem>
-            </MenubarRadioGroup>
-            <MenubarSeparator />
-            <MenubarItem inset>Add Account...</MenubarItem>
+            {userEmail === "not signed in" ? (
+              <MenubarItem onClick={async () => router.push('/login')}>Login into Account</MenubarItem>
+            ) : (
+              <>
+                <MenubarItem>{userEmail}</MenubarItem>
+                <MenubarSeparator />
+              </>
+            )}
+            {userEmail !== "not signed in" && (
+              <MenubarItem onClick={async () => await signOut(auth)}>Sign Out</MenubarItem>
+            )}
           </MenubarContent>
         </MenubarMenu>
       </Menubar>
