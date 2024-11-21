@@ -1,6 +1,5 @@
 'use client';
 
-import Image from 'next/image';
 import { ScrollArea, ScrollBar } from '../components/ui/scroll-area';
 import { Separator } from '../components/ui/separator';
 import { Tabs, TabsContent } from '../components/ui/tabs';
@@ -11,22 +10,6 @@ export default function MusicPage() {
   return (
     <div className="h-full px-4 py-6 lg:px-8">
     <>
-      <div className="md:hidden">
-        <Image
-          src="/examples/music-light.png"
-          width={1280}
-          height={1114}
-          alt="Music"
-          className="block dark:hidden"
-        />
-        <Image
-          src="/examples/music-dark.png"
-          width={1280}
-          height={1114}
-          alt="Music"
-          className="hidden dark:block"
-        />
-      </div>
       <Tabs defaultValue="music" className="h-full space-y-6">
         <TabsContent value="music" className="border-none p-0 outline-none">
           <div className="flex items-center justify-between">

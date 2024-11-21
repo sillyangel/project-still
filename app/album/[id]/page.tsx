@@ -68,7 +68,7 @@ export default function AlbumPage() {
   const handlePlayClick = () => {
     alert(`Playing album: ${album.name} by ${album.artist}`);
   };
-  const normalizedArtistName = album.artist.toLowerCase().replace(/\s+/g, '');
+  const normalizedArtistName = album.artist.toLowerCase().replace(/[\s,]+/g, '');
   return (
     <div className="h-full px-4 py-6 lg:px-8">
     <div className="space-y-4">

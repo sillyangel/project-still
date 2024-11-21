@@ -1,35 +1,49 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 'use client';
 
-import Image from 'next/image';
 import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area';
 import { Separator } from '@/components/ui/separator';
 import { Tabs, TabsContent } from '@/components/ui/tabs';
 import { AlbumArtwork } from '@/app/components/album-artwork';
 import { allAlbums } from '@/app/data/albums';
+import { ArtistIcon } from '@/app/components/artist-icon';
+import { allArtists } from '@/app/data/artists';
 
 export default function MusicPage() {
   return (
     <div className="h-full px-4 py-6 lg:px-8">
     <>
-      <div className="md:hidden">
-        <Image
-          src="/examples/music-light.png"
-          width={1280}
-          height={1114}
-          alt="Music"
-          className="block dark:hidden"
-        />
-        <Image
-          src="/examples/music-dark.png"
-          width={1280}
-          height={1114}
-          alt="Music"
-          className="hidden dark:block"
-        />
-      </div>
       <Tabs defaultValue="music" className="h-full flex flex-col space-y-6">
         <TabsContent value="music" className="border-none p-0 outline-none flex flex-col flex-grow">
+        <div className="flex items-center justify-between">
+            <div className="space-y-1">
+              <h2 className="text-2xl font-semibold tracking-tight">
+                Artists
+              </h2>
+            </div>
+          </div>
+          <Separator className="my-4" />
+          <div className="relative flex-grow">
+            <ScrollArea className="h-full">
+            <div className="relative">
+            <ScrollArea>
+            <div className="flex space-x-4 pb-4">
+            {allArtists.map((artist) => (
+                  <ArtistIcon
+                    key={artist.name}
+                    artist={artist}
+                    className="w-[150px]"
+                    width={150}
+                    height={150}
+                  />
+                ))}
+              </div>
+              <ScrollBar orientation="horizontal" />
+            </ScrollArea>
+          </div>
+              <ScrollBar orientation="horizontal" />
+            </ScrollArea>
+          </div>
           <div className="flex items-center justify-between">
             <div className="space-y-1">
               <h2 className="text-2xl font-semibold tracking-tight">
@@ -49,10 +63,10 @@ export default function MusicPage() {
                     <AlbumArtwork
                       key={album.id}
                       album={album}
-                      className="w-[200px]"
+                      className="w-[230px]"
                       aspectRatio="square"
-                      width={200}
-                      height={200}
+                      width={230}
+                      height={230}
                     />
                   ))}
                 </div>

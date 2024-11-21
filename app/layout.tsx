@@ -1,4 +1,7 @@
-import React from 'react'
+'use client';
+
+import React, { useEffect } from 'react'
+import { usePathname } from 'next/navigation'
 import { Menu } from "@/app/components/menu"
 import { Sidebar } from "@/app/components/sidebar"
 import { playlists } from "@/app/data/playlists"
@@ -21,12 +24,33 @@ interface LayoutProps {
 }
 
 export function Layout({ children }: LayoutProps) {
+  const pathname = usePathname();
+
+  useEffect(() => {
+    let title = 'Offbrand Spotify';
+
+    if (pathname === '/browse') {
+      title += ' | Browse';
+    } else if (pathname === '/') {
+      title += ' | Home';
+    } else if (pathname.startsWith('/album')) {
+      title += ' | Album';
+    } else if (pathname.startsWith('/artist')) {
+      title += ' | Artist';
+    }
+
+    document.title = title;
+  }, [pathname]);
+
   return (
     <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-        <div className="md:hidden">
+      <head>
+        <title>Offbrand Spotify</title>
+      </head>
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiase dark`}>
+        {/* <div className="md:hidden">
           <p>Please view on desktop</p>
-        </div>
+        </div> */}
         <div className="hidden md:block">
           <div className="sticky top-0 z-10 bg-background">
             <Menu />

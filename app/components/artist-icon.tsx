@@ -16,43 +16,42 @@ import {
   ContextMenuTrigger,
 } from "../../components/ui/context-menu"
 
-import { Album } from "../data/albums"
+import { Artist } from "../data/artists"
 import { playlists } from "../data/playlists"
 
-interface AlbumArtworkProps extends React.HTMLAttributes<HTMLDivElement> {
-  album: Album
-  aspectRatio?: "portrait" | "square"
+interface ArtistIconProps extends React.HTMLAttributes<HTMLDivElement> {
+  artist: Artist
+  rounded?: boolean
   width?: number
   height?: number
 }
 
-export function AlbumArtwork({
-  album,
-  aspectRatio = "portrait",
+export function ArtistIcon({
+  artist,
+  rounded = true,
   width,
   height,
   className,
   ...props
-}: AlbumArtworkProps) {
+}: ArtistIconProps) {
   const router = useRouter();
-
+  const namenormalized = artist.name.toLowerCase().replace(/[\s,]+/g, '');
   const handleClick = () => {
-    router.push(`/album/${album.id}`);
+    router.push(`/artist/${namenormalized}`);
   };
 
   return (
     <div className={cn("space-y-3", className)} {...props} onClick={handleClick}>
       <ContextMenu>
         <ContextMenuTrigger>
-          <div className="overflow-hidden rounded-md">
+          <div className={cn("overflow-hidden", rounded ? "rounded-full" : "rounded-md")}>
             <Image
-              src={album.cover}
-              alt={album.name}
+              src={artist.pictureurl}
+              alt={artist.name}
               width={width}
               height={height}
               className={cn(
-                "h-auto w-auto object-cover transition-all hover:scale-105",
-                aspectRatio === "portrait" ? "aspect-[3/4]" : "aspect-square"
+                "h-auto w-auto object-cover transition-all hover:scale-105"
               )}
             />
           </div>
@@ -96,8 +95,8 @@ export function AlbumArtwork({
         </ContextMenuContent>
       </ContextMenu>
       <div className="space-y-1 text-sm">
-        <h3 className="font-medium leading-none">{album.name}</h3>
-        <p className="text-xs text-muted-foreground">{album.artist}</p>
+        <h3 className="font-medium leading-none">{artist.name}</h3>
+        <p className="text-xs text-muted-foreground">Artist</p>
       </div>
     </div>
   )
