@@ -1,12 +1,17 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 'use client';
+
 import { useRouter } from 'next/navigation';
 import {
     Menubar,
     MenubarCheckboxItem,
     MenubarContent,
+    MenubarLabel,
     MenubarItem,
     MenubarMenu,
     MenubarSeparator,
+    MenubarRadioGroup,
+    MenubarRadioItem,
     MenubarShortcut,
     MenubarSub,
     MenubarSubContent,
@@ -216,7 +221,10 @@ export function Menu() {
               <MenubarItem onClick={async () => router.push('/login')}>Login into Account</MenubarItem>
             ) : (
               <>
-                <MenubarItem>{displayName}</MenubarItem>
+                  <MenubarLabel>{displayName}</MenubarLabel>
+                <MenubarRadioGroup >
+                  <MenubarRadioItem value="user">{userEmail}</MenubarRadioItem>
+                </MenubarRadioGroup>
                 <MenubarSeparator />
               </>
             )}
