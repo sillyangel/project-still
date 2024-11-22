@@ -12,7 +12,7 @@ import {
     MenubarSubContent,
     MenubarSubTrigger,
     MenubarTrigger,
-  } from "../../components/ui/menubar"
+  } from "@/components/ui/menubar"
 import { useState, useEffect } from "react"
 import { auth } from "@/app/firebase/config"
 import { onAuthStateChanged } from "firebase/auth"
@@ -20,12 +20,14 @@ import { signOut } from "firebase/auth";
 
 export function Menu() {
     const [isFullScreen, setIsFullScreen] = useState(false)
+    const [displayName, setDisplayName] = useState("not signed in")
     const [userEmail, setUserEmail] = useState("not signed in")
 
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (user) => {
             if (user) {
                 setUserEmail(user.email || "not signed in")
+                setDisplayName(user.displayName ?? user.email ?? "not signed in")
             } else {
                 setUserEmail("not signed in")
             }
@@ -214,7 +216,7 @@ export function Menu() {
               <MenubarItem onClick={async () => router.push('/login')}>Login into Account</MenubarItem>
             ) : (
               <>
-                <MenubarItem>{userEmail}</MenubarItem>
+                <MenubarItem>{displayName}</MenubarItem>
                 <MenubarSeparator />
               </>
             )}
