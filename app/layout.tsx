@@ -1,6 +1,8 @@
 'use client';
 
-import React, { useEffect } from 'react';
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+import { SpeedInsights } from "@vercel/speed-insights/next"
+import React from 'react';
 import { usePathname } from 'next/navigation';
 import Head from 'next/head';
 import { Menu } from "@/app/components/menu";
