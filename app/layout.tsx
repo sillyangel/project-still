@@ -7,6 +7,7 @@ import { usePathname } from 'next/navigation';
 import Head from 'next/head';
 import { Menu } from "@/app/components/menu";
 import { Sidebar } from "@/app/components/sidebar";
+import { Analytics } from "@vercel/analytics/react"
 import { playlists } from "@/app/data/playlists";
 import localFont from "next/font/local";
 import "./globals.css";
@@ -47,6 +48,8 @@ export function Layout({ children }: LayoutProps) {
         <title>{title}</title>
       </Head>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiase dark`}>
+        <SpeedInsights />
+        <Analytics />
         {/* <div className="md:hidden">
           <p>Please view on desktop</p>
         </div> */}
