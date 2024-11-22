@@ -219,7 +219,10 @@ export function Menu() {
               </>
             )}
             {userEmail !== "not signed in" && (
-              <MenubarItem onClick={async () => await signOut(auth)}>Sign Out</MenubarItem>
+              <>
+                <MenubarItem onClick={async () => router.push('/account')}>Account Settings</MenubarItem>
+                <MenubarItem onClick={async () => await signOut(auth)}>Sign Out</MenubarItem>
+              </>
             )}
           </MenubarContent>
         </MenubarMenu>

@@ -1,33 +1,38 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+
+
 'use client';
 
 import { Separator } from '@/components/ui/separator';
-import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth';
-import { auth } from '@/app/firebase/config';
+import { auth, handleresetpassword } from '@/app/firebase/config';
 import { Tabs } from '@/components/ui/tabs';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from "@/components/ui/input";
+import { useToast } from "@/hooks/use-toast";
+
 
 export default function MusicPage() {
   const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [createUserWithEmailAndPassword] = useCreateUserWithEmailAndPassword(auth);
   const router = useRouter();
-
-  const handleSignIn = async () => {
-    try {
-      const res = await createUserWithEmailAndPassword(email, password);
-      console.log({ res });
-      sessionStorage.setItem('user', 'true');
-      setEmail('');
-      setPassword('');
-      router.push('/');
-    } catch (e) {
-      console.error(e);
-    }
+  const { toast } = useToast();
+  const showErrorToast = (arg: string) => {
+    toast({
+      variant: "destructive",
+      title: "Uh oh! Something went wrong.",
+      description: arg,
+      className: "w-96",
+    })
   };
-
+  const handleResetPassword = async () => {
+        try {
+           handleresetpassword(email);
+          router.push('/');
+        } catch (e) {
+          showErrorToast((e as Error).message);
+        };
+    }
   return (
     <div className="h-full px-4 py-6 lg:px-9 flex items-center justify-center">
       <>
@@ -36,11 +41,10 @@ export default function MusicPage() {
             <Tabs defaultValue="music" className="space-y-6">
               <div className="space-y-1 text-left">
                 <h2 className="text-2xl font-semibold tracking-tight">
-                  Sign Up
+                  Rest Password
                 </h2>
               </div>
-              <Separator className="my-4" />
-              <div className="relative">
+              <div className="mt-0 mb-0">
                 <Input
                   type="email"
                   placeholder="Email"
@@ -48,18 +52,11 @@ export default function MusicPage() {
                   onChange={(e) => setEmail(e.target.value)}
                   className="w-full p-3 mb-4 text-white placeholder-gray-500"
                 />
-                <Input
-                  type="password"
-                  placeholder="Password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  className="w-full p-3 mb-4 text-white placeholder-gray-500"
-                />
                 <Button
-                  onClick={handleSignIn}
+                  onClick={handleResetPassword}
                   className="w-full"
                 >
-                  Sign Up
+                  Send Reset Email
                 </Button>
               </div>
             </Tabs>

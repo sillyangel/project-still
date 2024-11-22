@@ -52,9 +52,11 @@ export default function MusicPage() {
                 <h2 className="text-2xl font-semibold tracking-tight">
                   Login
                 </h2>
-                <Link href='/signup' className="text-gray-500">
-                 or <p className="text-blue-500">Signup</p> for an account
-                 </Link>
+                <div className="flex items-center space-x-2">
+                    <Link href='/signup' className='text-blue-500'>Signup</Link>
+                    <p className="text-gray-500 text-sm">or</p>
+                    <Link href='/resetpassword' className='text-blue-500'>Reset Password</Link>
+                </div>
               </div>
               <Separator className="my-4" />
               <div className="relative">

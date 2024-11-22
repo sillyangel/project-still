@@ -1,10 +1,11 @@
 'use client';
 
-import React, { useEffect } from 'react'
-import { usePathname } from 'next/navigation'
-import { Menu } from "@/app/components/menu"
-import { Sidebar } from "@/app/components/sidebar"
-import { playlists } from "@/app/data/playlists"
+import React, { useEffect } from 'react';
+import { usePathname } from 'next/navigation';
+import Head from 'next/head';
+import { Menu } from "@/app/components/menu";
+import { Sidebar } from "@/app/components/sidebar";
+import { playlists } from "@/app/data/playlists";
 import localFont from "next/font/local";
 import "./globals.css";
 
@@ -20,33 +21,29 @@ const geistMono = localFont({
 });
 
 interface LayoutProps {
-  children: React.ReactNode
+  children: React.ReactNode;
 }
 
 export function Layout({ children }: LayoutProps) {
   const pathname = usePathname();
 
-  useEffect(() => {
-    let title = 'Offbrand Spotify';
+  let title = 'Offbrand Spotify';
 
-    if (pathname === '/browse') {
-      title += ' | Browse';
-    } else if (pathname === '/') {
-      title += ' | Home';
-    } else if (pathname.startsWith('/album')) {
-      title += ' | Album';
-    } else if (pathname.startsWith('/artist')) {
-      title += ' | Artist';
-    }
-
-    document.title = title;
-  }, [pathname]);
+  if (pathname === '/browse') {
+    title += ' | Browse';
+  } else if (pathname === '/') {
+    title += ' | Home';
+  } else if (pathname.startsWith('/album')) {
+    title += ' | Album';
+  } else if (pathname.startsWith('/artist')) {
+    title += ' | Artist';
+  }
 
   return (
     <html lang="en">
-      <head>
-        <title>Offbrand Spotify</title>
-      </head>
+      <Head>
+        <title>{title}</title>
+      </Head>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiase dark`}>
         {/* <div className="md:hidden">
           <p>Please view on desktop</p>

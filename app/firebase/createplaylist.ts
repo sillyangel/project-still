@@ -1,36 +1,6 @@
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-app.js";
 import { getRedirectResult, signInWithPopup, GithubAuthProvider, getAuth, sendPasswordResetEmail, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut, updateProfile } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-auth.js";
 import { doc, deleteDoc, getFirestore, collection, addDoc, query, where, getDocs, getDoc, setDoc, documentId } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-firestore.js";
-
-
-
-
-const auth = getAuth();
-const db = getFirestore(app);
-
-// subscript of https://github.com/sillyangel/playmusic/commit/ddeab620d5b6c76034edf26605caad56d7d07ef6#diff-515e869d34abbd1ae3372e11ec6c3b8d9647826ec16f9a18a3e2180fb33a055b
-
-
-
-
-
-
 }
-function handleresetpassword(event) {
-  event.preventDefault();
-  const email = ResetEmail.value; // Assuming you have an element with id "emailforreset"
-  
-  sendPasswordResetEmail(auth, email)
-    .then(() => {
-      alert("Password reset email sent. Check your inbox.");
-    })
-    .catch((error) => {
-      alert("Error sending password reset email: " + error.message);
-    });
-}
-
-
-
 // create playlist in firesotre
 async function createPlaylistInFirestore() {
   const nameofplaylist = prompt("Name of new playlist?");
@@ -66,17 +36,7 @@ async function createPlaylistInFirestore() {
     }
   }
 }
-
-
-
-
-
- // Check for user authentication when the page is loaded
- 
- // Firebase initialization code (already defined)
- 
  // Check for user authentication when the page is loadedMake sure 'app' is properly initialized
-
  auth.onAuthStateChanged(async (user) => {
    if (user) {
      // User is authenticated
@@ -156,28 +116,3 @@ async function playlistRead(user) {
   }};
 
 
-
-// Profile Functions
-async function updateProfileWithFormData() {
-  const displayNameV = document.getElementById("displayname").value;
-  const photoURLV = document.getElementById("PhotoUrl").value;
-
-  let profileData = {};
-
-  if (displayNameV) {
-    profileData.displayName = displayNameV;
-  }
-
-  if (photoURLV) {
-    profileData.photoURL = photoURLV;
-  }
-
-  updateProfile(auth.currentUser, profileData)
-    .then(() => {
-      alert("Updated Profile Details");
-    })
-    .catch((error) => {
-      alert("a error happened when updatingProfile out ", error.message);
-    });
-}
-savebutton.onclick = updateProfileWithFormData;
