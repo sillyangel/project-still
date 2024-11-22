@@ -222,9 +222,7 @@ export function Menu() {
             ) : (
               <>
                   <MenubarLabel>{displayName}</MenubarLabel>
-                <MenubarRadioGroup >
-                  <MenubarRadioItem value="user">{userEmail}</MenubarRadioItem>
-                </MenubarRadioGroup>
+                  <MenubarItem >{userEmail}</MenubarItem>
                 <MenubarSeparator />
               </>
             )}
