@@ -20,11 +20,13 @@ export default function MusicPage() {
               <h2 className="text-2xl font-semibold tracking-tight">
                 Artists
               </h2>
+              <p className="text-sm text-muted-foreground">
+                the people who make the music
+              </p>
             </div>
           </div>
           <Separator className="my-4" />
           <div className="relative flex-grow">
-            <ScrollArea className="h-full">
             <div className="relative">
             <ScrollArea>
             <div className="flex space-x-4 pb-4">
@@ -41,8 +43,6 @@ export default function MusicPage() {
               <ScrollBar orientation="horizontal" />
             </ScrollArea>
           </div>
-              <ScrollBar orientation="horizontal" />
-            </ScrollArea>
           </div>
           <div className="flex items-center justify-between">
             <div className="space-y-1">

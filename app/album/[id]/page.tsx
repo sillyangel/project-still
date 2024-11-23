@@ -6,7 +6,7 @@ import { allAlbums } from '@/app/data/albums';
 import { Play } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
-
+import { PlusIcon } from "@radix-ui/react-icons"
 interface Track {
   name: string;
   artists: string[];
@@ -92,25 +92,28 @@ export default function AlbumPage() {
         <h2 className="text-xl font-semibold">Tracklist</h2>
         <div className="border-b border-gray-400 py-0 flex justify-between items-center"></div>
         {tracklist.map((track, index) => (
-          <div key={index} className="border-b py-2 flex justify-between items-center">
-            <div className="flex items-center">
-              <div className="mr-2">{index + 1}</div>
-            <div>
-              <p className="font-semibold flex items-center">
-                {track.name}
-                {track.explicit && (
-                  <span className="inline-block bg-gray-300 text-gray-700 text-xs font-semibold px-2 py-1 rounded ml-2">
-                    E
-                  </span>
-                )}
-              </p>
-              <p className="text-sm">{track.artists.join(', ')}</p>
+            <div key={index} className="py-2 flex justify-between items-center hover:bg-hover rounded-lg" onClick={() => alert(`Selected Track, ${index +1} ${track.name}`)}>
+              <div className="flex items-center">
+                <div className="mr-2 w-6 text-right">{index + 1}</div> {/* Fixed width for track numbers */}
+                <div>
+                  <p className="font-semibold text-lg flex items-center">
+                    {track.name}
+                  </p>
+                  <p className="text-sm font-normal flex items-center">
+                    {track.explicit && (
+                      <span className="inline-block bg-gray-300 text-gray-700 text-xs font-thin px-1.5 py-0.5 rounded-sm mr-1.5">
+                        E
+                      </span>
+                    )}
+                    {track.artists.join(', ')}
+                  </p>
+                </div>
+              </div>
+              <div className="flex items-center space-x-2">
+                <PlusIcon className='mr-4'/>
+                <p className="text-sm">{track.length}</p>
+              </div>
             </div>
-          </div>
-            <div className="flex items-center space-x-2">
-              <p className="text-sm">{track.length}</p>
-            </div>
-          </div>
         ))}
       </div>
     </div>

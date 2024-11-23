@@ -1,5 +1,6 @@
 import { initializeApp, getApps, getApp } from "firebase/app";
 import { getAuth, sendPasswordResetEmail } from 'firebase/auth'
+import { getFirestore } from 'firebase/firestore'
 
 const firebaseConfig = {
     apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
@@ -13,6 +14,7 @@ const firebaseConfig = {
 const app = !getApps().length ? initializeApp(firebaseConfig) : getApp()
 
 const auth = getAuth(app)
+const db = getFirestore(app)
 
 const handleresetpassword = (email: string) => {
     sendPasswordResetEmail(auth, email)
@@ -25,4 +27,4 @@ const handleresetpassword = (email: string) => {
 }
 
 
-export {app, auth, handleresetpassword}
+export {app, auth, handleresetpassword, db}

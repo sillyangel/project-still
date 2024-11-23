@@ -50,13 +50,16 @@ export function Menu() {
       }
       setIsFullScreen(!isFullScreen)
     }
+    const handleExitPage = () => {
+      router.push('/')
+    }
 
     return (
       <Menubar className="rounded-none border-b border-none px-2 lg:px-4">
         <MenubarMenu>
           <MenubarTrigger className="font-bold">offbrand spotify</MenubarTrigger>
           <MenubarContent>
-            <MenubarItem>About Music</MenubarItem>
+            <MenubarItem onClick={() => router.push('/about')}>About Music</MenubarItem>
             <MenubarSeparator />
             <MenubarItem>
               Preferences... <MenubarShortcut>⌘,</MenubarShortcut>
