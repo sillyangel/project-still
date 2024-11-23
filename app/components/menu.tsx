@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-
 import { useRouter } from 'next/navigation';
 import {
     Menubar,
@@ -9,8 +7,6 @@ import {
     MenubarItem,
     MenubarMenu,
     MenubarSeparator,
-    MenubarRadioGroup,
-    MenubarRadioItem,
     MenubarShortcut,
     MenubarSub,
     MenubarSubContent,
@@ -22,7 +18,12 @@ import { auth } from "@/app/firebase/config"
 import { onAuthStateChanged } from "firebase/auth"
 import { signOut } from "firebase/auth";
 
-export function Menu() {
+interface MenuProps {
+  toggleSidebar: () => void;
+  isSidebarVisible: boolean;
+}
+
+export function Menu({ toggleSidebar, isSidebarVisible }: MenuProps) {
     const [isFullScreen, setIsFullScreen] = useState(false)
     const [displayName, setDisplayName] = useState("not signed in")
     const [userEmail, setUserEmail] = useState("not signed in")
@@ -47,14 +48,18 @@ export function Menu() {
                 event.preventDefault();
                 router.push('/settings');
             }
+            if ((event.metaKey || event.ctrlKey) && event.key === 's') {
+                event.preventDefault();
+                toggleSidebar();
+            }
         };
-        
+      
         window.addEventListener('keydown', handleKeyDown);
 
         return () => {
             window.removeEventListener('keydown', handleKeyDown);
         };
-    }, [router]);
+    }, [router, toggleSidebar]);
 
     const handleFullScreen = () => {
       if (!isFullScreen) {
@@ -63,9 +68,6 @@ export function Menu() {
         document.exitFullscreen()
       }
       setIsFullScreen(!isFullScreen)
-    }
-    const handleExitPage = () => {
-      router.push('/')
     }
 
     return (
@@ -225,7 +227,10 @@ export function Menu() {
               Show Status Bar
             </MenubarItem>
             <MenubarSeparator />
-            <MenubarItem inset>Hide Sidebar</MenubarItem>
+            <MenubarItem inset onClick={toggleSidebar}>
+              {isSidebarVisible ? "Hide Sidebar" : "Show Sidebar"}
+              <MenubarShortcut>⌘S</MenubarShortcut>
+            </MenubarItem>
             <MenubarItem inset onClick={handleFullScreen}>
             {isFullScreen ? "Exit Full Screen" : "Enter Full Screen"}
           </MenubarItem>

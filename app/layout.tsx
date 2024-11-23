@@ -2,7 +2,7 @@
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { SpeedInsights } from "@vercel/speed-insights/next"
-import React from 'react';
+import React, { useState } from 'react';
 import { usePathname } from 'next/navigation';
 import Head from 'next/head';
 import { Menu } from "@/app/components/menu";
@@ -29,6 +29,11 @@ interface LayoutProps {
 
 export function Layout({ children }: LayoutProps) {
   const pathname = usePathname();
+  const [isSidebarVisible, setIsSidebarVisible] = useState(true);
+
+  const toggleSidebar = () => {
+    setIsSidebarVisible(!isSidebarVisible);
+  };
 
   let title = 'Offbrand Spotify';
 
@@ -55,13 +60,15 @@ export function Layout({ children }: LayoutProps) {
         </div> */}
         <div className="hidden md:block">
           <div className="sticky top-0 z-10 bg-background">
-            <Menu />
+            <Menu toggleSidebar={toggleSidebar} isSidebarVisible={isSidebarVisible} />
           </div>
           <div className="border-t">
             <div className="bg-background">
-              <div className="grid lg:grid-cols-5">
-                <Sidebar playlists={playlists} className="hidden lg:block sticky top-0 h-screen" />
-                <div className="col-span-3 lg:col-span-4 lg:border-l">
+              <div className={isSidebarVisible ? "grid lg:grid-cols-5" : ""}>
+                {isSidebarVisible && (
+                  <Sidebar playlists={playlists} className="hidden lg:block sticky top-0 h-screen" />
+                )}
+                <div className={`col-span-3 lg:col-span-4 ${isSidebarVisible ? 'lg:border-l' : ''}`}>
                   {children}
                 </div>
               </div>
