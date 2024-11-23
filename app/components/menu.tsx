@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-'use client';
 
 import { useRouter } from 'next/navigation';
 import {
@@ -27,6 +26,7 @@ export function Menu() {
     const [isFullScreen, setIsFullScreen] = useState(false)
     const [displayName, setDisplayName] = useState("not signed in")
     const [userEmail, setUserEmail] = useState("not signed in")
+    const router = useRouter();
 
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -40,7 +40,21 @@ export function Menu() {
 
         return () => unsubscribe()
     }, [])
-    const router = useRouter();
+
+    useEffect(() => {
+        const handleKeyDown = (event: KeyboardEvent) => {
+            if ((event.metaKey || event.ctrlKey) && event.key === ',') {
+                event.preventDefault();
+                router.push('/settings');
+            }
+        };
+        
+        window.addEventListener('keydown', handleKeyDown);
+
+        return () => {
+            window.removeEventListener('keydown', handleKeyDown);
+        };
+    }, [router]);
 
     const handleFullScreen = () => {
       if (!isFullScreen) {
