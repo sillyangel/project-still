@@ -84,7 +84,7 @@ export default function AlbumPage() {
           <h1 className="text-3xl font-semibold tracking-tight">{album.name}</h1>
           <Link href={`/artist/${normalizedArtistName}`}><p className="text-xl text-blue-500 mt-0 mb-4 underline">{album.artist}</p></Link>
             <Button onClick={handlePlayClick} className="mt-56">
-              <Play /> Play Album
+              <Play />
             </Button>
         </div>
       </div>
