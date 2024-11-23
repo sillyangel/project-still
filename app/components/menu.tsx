@@ -1,3 +1,5 @@
+'use client';
+import { useCallback } from "react";
 import { useRouter } from 'next/navigation';
 import {
     Menubar,
@@ -42,6 +44,15 @@ export function Menu({ toggleSidebar, isSidebarVisible }: MenuProps) {
         return () => unsubscribe()
     }, [])
 
+    const handleFullScreen = useCallback(() => {
+      if (!isFullScreen) {
+        document.documentElement.requestFullscreen()
+      } else {
+        document.exitFullscreen()
+      }
+      setIsFullScreen(!isFullScreen)
+    }, [isFullScreen])
+
     useEffect(() => {
         const handleKeyDown = (event: KeyboardEvent) => {
             if ((event.metaKey || event.ctrlKey) && event.key === ',') {
@@ -52,6 +63,10 @@ export function Menu({ toggleSidebar, isSidebarVisible }: MenuProps) {
                 event.preventDefault();
                 toggleSidebar();
             }
+            if ((event.metaKey || event.ctrlKey) && event.key === 'f') {
+              event.preventDefault();
+              handleFullScreen();
+            }
         };
       
         window.addEventListener('keydown', handleKeyDown);
@@ -59,16 +74,7 @@ export function Menu({ toggleSidebar, isSidebarVisible }: MenuProps) {
         return () => {
             window.removeEventListener('keydown', handleKeyDown);
         };
-    }, [router, toggleSidebar]);
-
-    const handleFullScreen = () => {
-      if (!isFullScreen) {
-        document.documentElement.requestFullscreen()
-      } else {
-        document.exitFullscreen()
-      }
-      setIsFullScreen(!isFullScreen)
-    }
+    }, [router, toggleSidebar, handleFullScreen]);
 
     return (
       <Menubar className="rounded-none border-b border-none px-2 lg:px-4">
