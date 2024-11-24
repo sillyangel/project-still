@@ -9,7 +9,7 @@ import Link from 'next/link';
 import { PlusIcon } from "@radix-ui/react-icons";
 import { db, auth } from '@/app/firebase/config';
 import { doc, setDoc, getDoc } from 'firebase/firestore';
-import { AudioPlayer } from '@/app/components/AudioPlayer';
+import { useAudioPlayer } from '@/app/components/AudioPlayerContext'
 
 interface Track {
   name: string;
@@ -17,6 +17,7 @@ interface Track {
   length: string;
   explicit: boolean;
 }
+// trackurl is /album/artists/albums/[index]. + name + ".mp3"/
 
 interface Album {
   id: string;
@@ -33,6 +34,7 @@ export default function AlbumPage() {
   const [loading, setLoading] = useState(true);
   const [isFollowing, setIsFollowing] = useState(false);
   const user = auth.currentUser;
+  const { playTrack } = useAudioPlayer();
 
   useEffect(() => {
     const fetchAlbum = async () => {
@@ -101,7 +103,11 @@ export default function AlbumPage() {
   }
 
   const handlePlayClick = () => {
-    alert(`Playing album: ${album.name} by ${album.artist}`);
+    playTrack({
+      name: 'bruh',
+      artists: ['Unknown Artist'],
+      url: '/buh.mp3',
+    })
   };
 
   const normalizedArtistName = album.artist.toLowerCase().replace(/[\s,]+/g, '');

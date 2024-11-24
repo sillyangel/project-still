@@ -11,6 +11,8 @@ import { Analytics } from "@vercel/analytics/react"
 import { playlists } from "@/app/data/playlists";
 import localFont from "next/font/local";
 import "./globals.css";
+import { AudioPlayerProvider } from "./components/AudioPlayerContext";
+import { AudioPlayer } from "./components/AudioPlayer";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -53,6 +55,7 @@ export function Layout({ children }: LayoutProps) {
         <title>{title}</title>
       </Head>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiase dark`}>
+        <AudioPlayerProvider>
         <SpeedInsights />
         <Analytics />
         {/* <div className="md:hidden">
@@ -75,6 +78,8 @@ export function Layout({ children }: LayoutProps) {
             </div>
           </div>
         </div>
+        <AudioPlayer />
+        </AudioPlayerProvider>
       </body>
     </html>
   );

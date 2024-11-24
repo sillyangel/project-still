@@ -1,32 +1,27 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
+import { useAudioPlayer } from '@/app/components/AudioPlayerContext';
 
-interface AudioPlayerProps {
-  src: string;
-  trackName: string;
-}
-
-export const AudioPlayer: React.FC<AudioPlayerProps> = ({ src, trackName }) => {
+export const AudioPlayer: React.FC = () => {
+  const { currentTrack } = useAudioPlayer();
   const audioRef = useRef<HTMLAudioElement>(null);
-  const [isPlaying, setIsPlaying] = useState(false);
 
-  const togglePlayPause = () => {
-    if (audioRef.current) {
-      if (isPlaying) {
-        audioRef.current.pause();
-      } else {
-        audioRef.current.play();
-      }
-      setIsPlaying(!isPlaying);
+  useEffect(() => {
+    if (currentTrack && audioRef.current) {
+      audioRef.current.src = currentTrack.url;
+      audioRef.current.play();
     }
-  };
+  }, [currentTrack]);
 
   return (
-    <div className="audio-player">
-      <p>Now Playing: {trackName}</p>
-      <audio ref={audioRef} src={src} />
-      <button onClick={togglePlayPause}>
-        {isPlaying ? 'Pause' : 'Play'}
-      </button>
+    <div className="fixed bottom-0 w-full bg-gray-800 text-white p-4">
+      {currentTrack ? (
+        <div>
+          <p>Now playing: {currentTrack.name} by {currentTrack.artists.join(', ')}</p>
+          <audio ref={audioRef} controls />
+        </div>
+      ) : (
+        <p>No track playing</p>
+      )}
     </div>
   );
 };
