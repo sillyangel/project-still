@@ -5,7 +5,7 @@ export interface Album {
   artist: string;
   cover: string;
 }
-
+// /music/{artist}/{album}/{`${tracklist.index} + 1` + ${tracklist.name} + ".mp3"}
 const allAlbums: Album[] = [
   {
     id: "1",

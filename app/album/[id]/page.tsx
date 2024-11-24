@@ -3,10 +3,13 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'next/navigation';
 import Image from 'next/image';
 import { allAlbums } from '@/app/data/albums';
-import { Play } from 'lucide-react';
+import { Play, Heart } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
-import { PlusIcon } from "@radix-ui/react-icons"
+import { PlusIcon } from "@radix-ui/react-icons";
+import { db, auth } from '@/app/firebase/config';
+import { doc, setDoc, getDoc } from 'firebase/firestore';
+
 interface Track {
   name: string;
   artists: string[];
@@ -27,8 +30,8 @@ export default function AlbumPage() {
   const [album, setAlbum] = useState<Album | null>(null);
   const [tracklist, setTracklist] = useState<Track[]>([]);
   const [loading, setLoading] = useState(true);
-
-  
+  const [isFollowing, setIsFollowing] = useState(false);
+  const user = auth.currentUser;
 
   useEffect(() => {
     const fetchAlbum = async () => {
@@ -49,6 +52,15 @@ export default function AlbumPage() {
         } catch (error) {
           console.error('Failed to fetch tracklist:', error);
         }
+
+        if (user) {
+          const userRef = doc(db, 'users', user.uid);
+          const userDoc = await getDoc(userRef);
+          if (userDoc.exists()) {
+            const userData = userDoc.data();
+            setIsFollowing(userData.follows && userData.follows[album.id] === true);
+          }
+        }
       } else {
         console.log('Album not found');
       }
@@ -56,7 +68,28 @@ export default function AlbumPage() {
     };
 
     fetchAlbum();
-  }, [id]);
+  }, [id, user]);
+
+  const handleFollow = async () => {
+    if (user && album) {
+      const userRef = doc(db, 'users', user.uid);
+      if (isFollowing) {
+        await setDoc(userRef, {
+          follows: {
+            [album.id]: false
+          }
+        }, { merge: true });
+        setIsFollowing(false);
+      } else {
+        await setDoc(userRef, {
+          follows: {
+            [album.id]: true
+          }
+        }, { merge: true });
+        setIsFollowing(true);
+      }
+    }
+  };
 
   if (loading) {
     return <p>Loading...</p>;
@@ -65,34 +98,44 @@ export default function AlbumPage() {
   if (!album) {
     return <p>Album not found</p>;
   }
+
   const handlePlayClick = () => {
     alert(`Playing album: ${album.name} by ${album.artist}`);
   };
+
   const normalizedArtistName = album.artist.toLowerCase().replace(/[\s,]+/g, '');
+
   return (
     <div className="h-full px-4 py-6 lg:px-8">
-    <div className="space-y-4">
-      <div className="flex items-start gap-6">
-        <Image 
-          src={album.cover} 
-          alt={album.name} 
-          width={300} 
-          height={300}
-          className="rounded-md"
-        />
-        <div className="space-y-2">
-          <h1 className="text-3xl font-semibold tracking-tight">{album.name}</h1>
-          <Link href={`/artist/${normalizedArtistName}`}><p className="text-xl text-blue-500 mt-0 mb-4 underline">{album.artist}</p></Link>
+      <div className="space-y-4">
+        <div className="flex items-start gap-6">
+          <Image 
+            src={album.cover} 
+            alt={album.name} 
+            width={300} 
+            height={300}
+            className="rounded-md"
+          />
+          <div className="space-y-2">
+            <div className="flex items-center space-x-4">
+              <h1 className="text-3xl font-semibold tracking-tight">{album.name}</h1>
+              <Button onClick={handleFollow} variant="ghost">
+                <Heart className={isFollowing ? 'text-red-500' : 'text-gray-500'} fill={isFollowing ? '#EF4444' : ""}/>
+              </Button>
+            </div>
+            <Link href={`/artist/${normalizedArtistName}`}>
+              <p className="text-xl text-blue-500 mt-0 mb-4 underline">{album.artist}</p>
+            </Link>
             <Button onClick={handlePlayClick} className="mt-56">
               <Play />
             </Button>
+          </div>
         </div>
-      </div>
-      <div className="space-y-2">
-        <h2 className="text-xl font-semibold">Tracklist</h2>
-        <div className="border-b border-gray-400 py-0 flex justify-between items-center"></div>
-        {tracklist.map((track, index) => (
-            <div key={index} className="py-2 flex justify-between items-center hover:bg-hover rounded-lg" onClick={() => alert(`Selected Track, ${index +1} ${track.name}`)}>
+        <div className="space-y-2">
+          <h2 className="text-xl font-semibold">Tracklist</h2>
+          <div className="border-b border-gray-400 py-0 flex justify-between items-center"></div>
+          {tracklist.map((track, index) => (
+            <div key={index} className="py-2 flex justify-between items-center hover:bg-hover rounded-lg" onClick={() => alert(`Selected Track, ${index + 1} ${track.name}`)}>
               <div className="flex items-center">
                 <div className="mr-2 w-6 text-right">{index + 1}</div> {/* Fixed width for track numbers */}
                 <div>
@@ -114,9 +157,9 @@ export default function AlbumPage() {
                 <p className="text-sm">{track.length}</p>
               </div>
             </div>
-        ))}
+          ))}
+        </div>
       </div>
-    </div>
     </div>
   );
 }
