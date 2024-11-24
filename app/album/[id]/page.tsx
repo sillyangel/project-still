@@ -9,6 +9,7 @@ import Link from 'next/link';
 import { PlusIcon } from "@radix-ui/react-icons";
 import { db, auth } from '@/app/firebase/config';
 import { doc, setDoc, getDoc } from 'firebase/firestore';
+import { AudioPlayer } from '@/app/components/AudioPlayer';
 
 interface Track {
   name: string;
