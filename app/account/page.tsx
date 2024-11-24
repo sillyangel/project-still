@@ -155,10 +155,7 @@ export default function MusicPage() {
           </div>
           <Separator className="my-4" />
           <div className="relative">
-              <div className="flex space-x-4 pb-4">
-                <h2>Delete Account</h2>
                 <Button onClick={DeleteUserAccount} variant="destructive">Delete Account</Button>
-              </div>
           </div>
         </TabsContent>
       </Tabs>
