@@ -13,7 +13,7 @@ export const AudioPlayer: React.FC = () => {
   }, [currentTrack]);
 
   return (
-    <div className="fixed bottom-0 w-full bg-gray-800 text-white p-4">
+    <div className="fixed bottom-0 w-full bg-hover text-white p-4 8  rounded-2xl mb-1">
       {currentTrack ? (
         <div>
           <p>Now playing: {currentTrack.name} by {currentTrack.artists.join(', ')}</p>

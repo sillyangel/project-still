@@ -102,17 +102,25 @@ export default function AlbumPage() {
     return <p>Album not found</p>;
   }
 
-  const handlePlayClick = () => {
-    playTrack({
-      name: 'bruh',
-      artists: ['Unknown Artist'],
-      url: '/buh.mp3',
-    })
+  interface PlayTrack {
+    name: string;
+    artists: string[];
+    url: string;
+  }
+
+  const handlePlayClick = (track: string, artist: string, index: number): void => {
+    const url = `/songs/${album?.artist}/${album?.name}/${index}. ${track}.mp3`;
+    playTrack({ 
+      name: track,
+      artists: [artist],
+      url: url,
+    } as PlayTrack);
   };
 
   const normalizedArtistName = album.artist.toLowerCase().replace(/[\s,]+/g, '');
 
   return (
+    <>
     <div className="h-full px-4 py-6 lg:px-8">
       <div className="space-y-4">
         <div className="flex items-start gap-6">
@@ -133,7 +141,7 @@ export default function AlbumPage() {
             <Link href={`/artist/${normalizedArtistName}`}>
               <p className="text-xl text-blue-500 mt-0 mb-4 underline">{album.artist}</p>
             </Link>
-            <Button onClick={handlePlayClick} className="mt-56">
+            <Button className="mt-56">
               <Play />
             </Button>
           </div>
@@ -142,7 +150,7 @@ export default function AlbumPage() {
           <h2 className="text-xl font-semibold">Tracklist</h2>
           <div className="border-b border-gray-400 py-0 flex justify-between items-center"></div>
           {tracklist.map((track, index) => (
-            <div key={index} className="py-2 flex justify-between items-center hover:bg-hover rounded-lg" onClick={() => alert(`Selected Track, ${index + 1} ${track.name}`)}>
+            <div key={index} className="py-2 flex justify-between items-center hover:bg-hover rounded-lg" onClick={() => handlePlayClick(track.name, track.artists.join(', '), index + 1)}>
               <div className="flex items-center">
                 <div className="mr-2 w-6 text-right">{index + 1}</div> {/* Fixed width for track numbers */}
                 <div>
@@ -168,5 +176,7 @@ export default function AlbumPage() {
         </div>
       </div>
     </div>
+    <br/>
+    </>
   );
 }
