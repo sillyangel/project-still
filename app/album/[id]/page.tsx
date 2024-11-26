@@ -106,6 +106,7 @@ export default function AlbumPage() {
     name: string;
     artists: string[];
     url: string;
+    image: string;
   }
 
   const handlePlayClick = (track: string, artist: string, index: number): void => {
@@ -114,6 +115,7 @@ export default function AlbumPage() {
       name: track,
       artists: [artist],
       url: url,
+      image: album.cover,
     } as PlayTrack);
   };
 

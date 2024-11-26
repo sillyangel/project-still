@@ -4,6 +4,7 @@ interface Track {
   name: string;
   url: string;
   artists: string[];
+  image: string; // Add image property
 }
 
 interface AudioPlayerContextProps {
@@ -15,7 +16,6 @@ const AudioPlayerContext = createContext<AudioPlayerContextProps | undefined>(un
 
 export const AudioPlayerProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [currentTrack, setCurrentTrack] = useState<Track | null>(null);
-
   const playTrack = (track: Track) => {
     setCurrentTrack(track);
   };
