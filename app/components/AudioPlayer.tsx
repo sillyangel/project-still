@@ -1,13 +1,20 @@
 import React, { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import { useAudioPlayer } from '@/app/components/AudioPlayerContext';
-import { FaPlay, FaPause } from "react-icons/fa6";
+import { FaPlay, FaPause, FaVolumeHigh } from "react-icons/fa6";
 
 export const AudioPlayer: React.FC = () => {
   const { currentTrack } = useAudioPlayer();
   const audioRef = useRef<HTMLAudioElement>(null);
   const [progress, setProgress] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
+  const [showVolumeSlider, setShowVolumeSlider] = useState(false);
+  const [volume, setVolume] = useState(1);
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
 
   useEffect(() => {
     if (currentTrack && audioRef.current) {
@@ -55,6 +62,18 @@ export const AudioPlayer: React.FC = () => {
     }
   };
 
+  const handleVolumeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const newVolume = parseFloat(e.target.value);
+    setVolume(newVolume);
+    if (audioRef.current) {
+      audioRef.current.volume = newVolume;
+    }
+  };
+
+  if (!isClient) {
+    return null;
+  }
+
   return (
     <div className="fixed bottom-0 w-9/12 bg-hover text-white p-4 rounded-2xl mb-2 mx-2">
       {currentTrack ? (
@@ -72,6 +91,24 @@ export const AudioPlayer: React.FC = () => {
           <button onClick={togglePlayPause}>
             {isPlaying ? <FaPause /> : <FaPlay />}
           </button>
+          <div className="relative ml-4">
+            <button onClick={() => setShowVolumeSlider(!showVolumeSlider)}>
+              <FaVolumeHigh />
+            </button>
+            {showVolumeSlider && (
+              <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 bg-white p-2 rounded-lg shadow-lg">
+                <input
+                  type="range"
+                  min="0"
+                  max="1"
+                  step="0.01"
+                  value={volume}
+                  onChange={handleVolumeChange}
+                  className="w-2 h-32 transform rotate-[-90deg] origin-bottom"
+                />
+              </div>
+            )}
+          </div>
         </div>
       ) : (
         <p>No track playing</p>
