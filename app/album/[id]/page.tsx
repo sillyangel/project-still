@@ -2,7 +2,7 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'next/navigation';
 import Image from 'next/image';
-import { allAlbums } from '@/app/data/albums';
+import { allAlbums, databases } from '@/app/data/albums';
 import { Play, Heart } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
@@ -25,6 +25,7 @@ interface Album {
   artist: string;
   cover: string;
   tracklist: string;
+  database: number;
 }
 
 export default function AlbumPage() {
@@ -107,15 +108,22 @@ export default function AlbumPage() {
     artists: string[];
     url: string;
     image: string;
+    database: number;
   }
 
   const handlePlayClick = (track: string, artist: string, index: number): void => {
-    const url = `/songs/${album?.artist}/${album?.name}/${index}. ${track}.mp3`;
-    playTrack({ 
+    if (!album) return;
+
+  const baseUrl = databases.find(db => db.id === album.database)?.url;
+  if (!baseUrl) return;
+
+  const url = `${baseUrl}${album.artist}/${album.name}/${index}. ${track}.mp3`;
+  playTrack({ 
       name: track,
       artists: [artist],
       url: url,
       image: album.cover,
+      database: album.database
     } as PlayTrack);
   };
 
