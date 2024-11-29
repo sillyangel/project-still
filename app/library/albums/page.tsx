@@ -17,6 +17,7 @@ interface Album {
   tracklist: string;
   artist: string;
   cover: string;
+  database: number;
 }
 
 export default function Albumpage() {
