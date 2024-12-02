@@ -8,6 +8,8 @@ import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { Heart } from 'lucide-react';
 import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area';
+import { db, auth } from '@/app/firebase/config';
+import { doc, setDoc, getDoc } from 'firebase/firestore';
 
 interface Artist {
   name: string;
@@ -17,14 +19,15 @@ interface Artist {
 export default function ArtistPage() {
   const { artist } = useParams();
   const normalizedArtist = artist ? (Array.isArray(artist) ? artist[0].toLowerCase().replace(/[\s,]+/g, '') : artist.toLowerCase().replace(/[\s,]+/g, '')) : '';
-  
+  const [isFollowing, setIsFollowing] = useState(false);
   const [artistAlbums, setArtistAlbums] = useState<Album[]>([]);
   const [loading, setLoading] = useState(true);
   const [artistName, setArtistName] = useState('');
   const [artistProfile, setArtistProfile] = useState<Artist | null>(null);
-
-  useEffect(() => {
-    const fetchArtistData = () => {
+  const user = auth.currentUser;
+  
+    useEffect(() => {
+    const fetchArtistData = async () => {
       setLoading(true);
       const albums = allAlbums.filter((album) => 
         album.artist.toLowerCase().replace(/[\s,]+/g, '') === normalizedArtist
@@ -33,17 +36,47 @@ export default function ArtistPage() {
       if (albums.length > 0) {
         setArtistName(albums[0].artist);
       }
-
+  
       const artistData = allArtists.find((artist) => 
         artist.name.toLowerCase().replace(/[\s,]+/g, '') === normalizedArtist
       );
       setArtistProfile(artistData || null);
-
+  
+      if (user) {
+        const userRef = doc(db, 'users', user.uid);
+        const userDoc = await getDoc(userRef);
+        if (userDoc.exists()) {
+          const userData = userDoc.data();
+          setIsFollowing(userData.follows && userData.follows[artistName] === true);
+        }
+      }
+  
       setLoading(false);
     };
-
+  
     fetchArtistData();
-  }, [normalizedArtist]);
+  }, [normalizedArtist, user, artistName]);
+
+  const handleFollow = async () => {
+    if (user && artistProfile) {
+      const userRef = doc(db, 'users', user.uid);
+      if (isFollowing) {
+        await setDoc(userRef, {
+          follows: {
+            [artistName]: false
+          }
+        }, { merge: true });
+        setIsFollowing(false);
+      } else {
+        await setDoc(userRef, {
+          follows: {
+            [artistName]: true
+          }
+        }, { merge: true });
+        setIsFollowing(true);
+      }
+    }
+  };
 
   if (loading) {
     return <p>Loading...</p>;
@@ -76,10 +109,10 @@ export default function ArtistPage() {
             <h1 className="text-2xl font-semibold tracking-tight text-white">{artistName}</h1>
           </div>
           <div className="ml-auto">
-            <Button >
-              <Heart />
-              Follow
-            </Button>
+          <Button onClick={handleFollow}>
+            <Heart />
+            {isFollowing ? 'Unfollow' : 'Follow'}
+          </Button>
           </div>
         </div>
       </div>

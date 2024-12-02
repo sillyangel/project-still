@@ -47,7 +47,7 @@ export default function MusicPage() {
       <>
         <div className="h-full flex items-center justify-center transform scale-125">
           <div className="w-full max-w-md p-3 rounded-lg shadow-lg">
-            <Tabs defaultValue="music" className="space-y-6">
+            <Tabs defaultValue="music" className="space-y-4">
               <div className="space-y-1 text-left">
                 <h2 className="text-2xl font-semibold tracking-tight">
                   Login
