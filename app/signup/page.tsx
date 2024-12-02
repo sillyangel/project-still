@@ -8,6 +8,7 @@ import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from "@/components/ui/input";
+import Link from 'next/link';
 
 export default function MusicPage() {
   const [email, setEmail] = useState('');
@@ -33,11 +34,16 @@ export default function MusicPage() {
       <>
         <div className="h-full flex items-center justify-center transform scale-125">
           <div className="w-full max-w-md p-3 rounded-lg shadow-lg">
-            <Tabs defaultValue="music" className="space-y-6">
+            <Tabs defaultValue="music" className="space-y-4">
               <div className="space-y-1 text-left">
                 <h2 className="text-2xl font-semibold tracking-tight">
                   Sign Up
                 </h2>
+                <div className="flex items-center space-x-2">
+                    <Link href='/login' className='text-blue-500'>Login</Link>
+                    <p className="text-gray-500 text-sm">or</p>
+                    <Link href='/resetpassword' className='text-blue-500'>Reset Password</Link>
+                </div>
               </div>
               <Separator className="my-4" />
               <div className="relative">
@@ -61,6 +67,14 @@ export default function MusicPage() {
                 >
                   Sign Up
                 </Button>
+              </div>
+              <div id="bottom">
+                <p className="text-sm text-gray-600">
+                By signing up, you agree to the 
+                <a href="/termsofservice" className="text-blue-500 hover:underline"> Terms of Service </a> 
+                and 
+                <a href="/privacypolicy" className="text-blue-500 hover:underline"> Privacy Policy</a>.
+              </p>
               </div>
             </Tabs>
           </div>
