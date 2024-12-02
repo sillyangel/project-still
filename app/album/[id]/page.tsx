@@ -17,6 +17,13 @@ interface Track {
   length: string;
   explicit: boolean;
 }
+interface PlayTrack {
+  name: string;
+  artists: string[];
+  url: string;
+  image: string;
+  database: number;
+}
 // trackurl is /album/artists/albums/[index]. + name + ".mp3"/
 
 interface Album {
@@ -103,13 +110,7 @@ export default function AlbumPage() {
     return <p>Album not found</p>;
   }
 
-  interface PlayTrack {
-    name: string;
-    artists: string[];
-    url: string;
-    image: string;
-    database: number;
-  }
+  
 
   const handlePlayClick = (track: string, artist: string, index: number): void => {
     if (!album) return;
@@ -178,8 +179,8 @@ export default function AlbumPage() {
                 </div>
               </div>
               <div className="flex items-center space-x-2">
-                <PlusIcon className='mr-4'/>
-                <p className="text-sm">{track.length}</p>
+              <p className="text-sm mr-4">{track.length}</p>
+              <PlusIcon/>
               </div>
             </div>
           ))}
