@@ -30,6 +30,8 @@ interface ProfileData {
     displayname: string;
     email: string;
     bio?: string;
+    pictureurl?: string;
+    id: string;
 }
 
 const createUserProfile = async (userId: string, profileData: ProfileData) => {

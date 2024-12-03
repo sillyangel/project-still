@@ -26,11 +26,12 @@ export default function MusicPage() {
       setEmail('');
       setPassword('');
       // create user profile
-      const profileData= {
-        displayname: displayname,
-        email: email,
-      };
       if (res && res.user) {
+        const profileData = {
+          displayname: displayname,
+          email: email,
+          id: res.user.uid
+        };
         createUserProfile(res.user.uid, profileData);
       }
       if (auth.currentUser) {
