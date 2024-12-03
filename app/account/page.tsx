@@ -20,12 +20,13 @@ import { Input } from "@/components/ui/input"
 
 
 export default function MusicPage() {
-    const FormSchema = z.object({
+
+      //forms schema's
+      const FormSchema = z.object({
         username: z.string().min(2, {
           message: "Username must be at least 2 characters.",
         }),
-      })
-      
+      })    
       const PassFormSchema = z.object({
         password: z.string().min(6, {
           message: "Password must be at least 6 characters.",
@@ -36,14 +37,19 @@ export default function MusicPage() {
           message: "Bio must be at least 0 characters.",
         }),
       });
+      const ImageSchema = z.object({
+        url: z.string().min(0, {
+          message: "URL must be at least 0 characters.",
+        }),
+      });
 
+      // forms themselves
       const passform = useForm<z.infer<typeof PassFormSchema>>({
         resolver: zodResolver(PassFormSchema),
         defaultValues: {
           password: "",
         },
       });
-
       const form = useForm<z.infer<typeof FormSchema>>({
           resolver: zodResolver(FormSchema),
           defaultValues: {
@@ -56,6 +62,14 @@ export default function MusicPage() {
           bio: ""
         },
       });
+      const Imageform = useForm<z.infer<typeof ImageSchema>>({
+        resolver: zodResolver(ImageSchema),
+        defaultValues: {
+          url: ""
+        },
+      });
+
+      // Sumbit Functions
       function onSubmit(data: z.infer<typeof FormSchema>) {
         if (auth.currentUser) {
           updateProfile(auth.currentUser, { displayName: data.username })
@@ -99,6 +113,19 @@ export default function MusicPage() {
           });
         }
       }
+      function ImageChange(data: z.infer<typeof ImageSchema>) {
+          if (auth.currentUser) {
+              updateUserProfile(auth.currentUser.uid, { pictureurl: data.url })
+                  .then(() => {
+                      alert("Updated Profile Image");
+                  })
+                  .catch((error) => {
+                      alert("An error happened when updating profile image: " + error.message);
+                  });
+          } else {
+              alert("No user is currently signed in.");
+          }
+      }
       function DeleteUserAccount() {
         if (auth.currentUser) {
           deleteUser(auth.currentUser)
@@ -112,6 +139,8 @@ export default function MusicPage() {
             alert("No user is currently signed in.");
           }
       }
+
+
   return (
     <div className="h-full px-4 py-6 lg:px-8">
     <>
@@ -169,26 +198,49 @@ export default function MusicPage() {
                   </form>
                 </Form>
               </div>
+              <div className="flex space-x-4 pb-4">
+                <Form {...bioform}>
+                    <form onSubmit={bioform.handleSubmit(bioChange)} className="w-2/3 space-y-3">
+                      <FormField
+                        control={bioform.control}
+                        name="bio"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel>Change bio</FormLabel>
+                            <FormControl>
+                              <Input placeholder="i like music" {...field} />
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+                      <Button type="submit">Submit</Button>
+                    </form>
+              </Form>
+              </div>
+              <div className="flex space-x-4 pb-4">
+              <Form {...Imageform}>
+                    <form onSubmit={Imageform.handleSubmit(ImageChange)} className="w-2/3 space-y-3">
+                      <FormField
+                        control={Imageform.control}
+                        name="url"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel>Profile Image</FormLabel>
+                            <FormControl>
+                              <Input placeholder="https://google.com/favicon.ico" {...field} />
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+                      <Button type="submit">Submit</Button>
+                    </form>
+              </Form>
+              </div>
           </div>
           <Separator className="my-4" />
-            <Form {...bioform}>
-                  <form onSubmit={bioform.handleSubmit(bioChange)} className="w-2/3 space-y-3">
-                    <FormField
-                      control={bioform.control}
-                      name="bio"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Change bio</FormLabel>
-                          <FormControl>
-                            <Input placeholder="i like music" {...field} />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                    <Button type="submit">Submit</Button>
-                  </form>
-            </Form>
+            
           <div className="flex items-center justify-between">
             <div className="space-y-1">
               <p className="text-2xl font-semibold tracking-tight">
