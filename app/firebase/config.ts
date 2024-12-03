@@ -11,10 +11,10 @@ const firebaseConfig = {
     appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
 };
 
-const app = !getApps().length ? initializeApp(firebaseConfig) : getApp()
+const app = !getApps().length ? initializeApp(firebaseConfig) : getApp();
 
-const auth = getAuth(app)
-const db = getFirestore(app)
+const auth = getAuth(app);
+const db = getFirestore(app);
 
 const handleresetpassword = (email: string) => {
     sendPasswordResetEmail(auth, email)
@@ -26,62 +26,51 @@ const handleresetpassword = (email: string) => {
     });
 };
 
-//  Example Usage
-// const userId = "user123";
-// const profileData = {
-//     name: "John Doe",
-//     email: "john.doe@example.com",
-//     bio: "Software Developer"
-// };
+interface ProfileData {
+    displayname: string;
+    email: string;
+    bio?: string;
+}
 
-// createUserProfile(userId, profileData);
-const createUserProfile = async (userId: string, profileData: { [key: string]: any }) => {
+const createUserProfile = async (userId: string, profileData: ProfileData) => {
     try {
         await setDoc(doc(db, "users", userId), profileData);
         alert("User profile created successfully.");
-    } catch (error) {
-        alert("Error creating user profile: " + (error as any).message);
+    } catch (error: unknown) {
+        if (error instanceof Error) {
+            alert("Error creating user profile: " + error.message);
+        }
     }
 };
 
-// how to use updateUserProfile
-// const userId = "user123";
-// const updatedProfileData = {
-//     bio: "Updated bio"
-// };
-
-// updateUserProfile(userId, updatedProfileData);
-const updateUserProfile = async (userId: string, profileData: { [key: string]: any }) => {
+const updateUserProfile = async (userId: string, profileData: Partial<ProfileData>) => {
     try {
         await updateDoc(doc(db, "users", userId), profileData);
         alert("User profile updated successfully.");
-    } catch (error) {
-        alert("Error updating user profile: " + (error as any).message);
+    } catch (error: unknown) {
+        if (error instanceof Error) {
+            alert("Error updating user profile: " + error.message);
+        }
     }
 };
 
-// Example usage
-// const userId = "user123";
-
-// getUserProfile(userId).then(profileData => {
-//     if (profileData) {
-//         console.log("User Profile:", profileData);
-//     }
-// });
-const getUserProfile = async (userId: string) => {
+const getUserProfile = async (userId: string): Promise<ProfileData | null> => {
     try {
         const docRef = doc(db, "users", userId);
         const docSnap = await getDoc(docRef);
         if (docSnap.exists()) {
-            return docSnap.data();
+            return docSnap.data() as ProfileData;
         } else {
             alert("No such user profile!");
             return null;
         }
-    } catch (error) {
-        alert("Error getting user profile: " + (error as any).message);
+    } catch (error: unknown) {
+        if (error instanceof Error) {
+            alert("Error getting user profile: " + error.message);
+        }
         return null;
     }
 };
 
 export { app, auth, handleresetpassword, db, createUserProfile, updateUserProfile, getUserProfile };
+export type { ProfileData };

@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
-import { getUserProfile } from '../firebase/config';
+import { getUserProfile, ProfileData } from '../firebase/config';
 
 const UserProfile = () => {
     const router = useRouter();
     const { id } = router.query;
-    const [profile, setProfile] = useState<{ [key: string]: any } | null>(null);
+    const [profile, setProfile] = useState<ProfileData | null>(null);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
@@ -27,7 +27,7 @@ const UserProfile = () => {
 
     return (
         <div>
-            <h1>{profile.name}</h1>
+            <h1>{profile.displayname}</h1>
             <p>Email: {profile.email}</p>
             <p>Bio: {profile.bio}</p>
             {/* Add more fields as needed */}

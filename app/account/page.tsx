@@ -65,7 +65,7 @@ export default function MusicPage() {
             .catch((error) => {
               alert("An error happened when updating profile: " + error.message);
             });
-          updateUserProfile(auth.currentUser.uid, { name: data.username })
+          updateUserProfile(auth.currentUser.uid, { displayname: data.username })
           .then(() => {
           })
           .catch((error) => {
