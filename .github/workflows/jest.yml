@@ -4,9 +4,15 @@ on:
   push:
     branches:
       - main
+    paths:
+      - 'apps/data/albums.ts'
+      - 'apps/data/artists.ts'
   pull_request:
     branches:
       - main
+    paths:
+      - 'apps/data/albums.ts'
+      - 'apps/data/artists.ts'
 
 jobs:
   test:

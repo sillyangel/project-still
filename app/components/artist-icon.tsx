@@ -95,7 +95,7 @@ export function ArtistIcon({
         </ContextMenuContent>
       </ContextMenu>
       <div className="space-y-1 text-sm">
-        <h3 className="font-medium leading-none">{artist.name}</h3>
+        <p className="font-medium leading-none">{artist.name}</p>
         <p className="text-xs text-muted-foreground">Artist</p>
       </div>
     </div>

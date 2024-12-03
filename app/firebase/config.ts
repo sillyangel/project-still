@@ -1,5 +1,6 @@
 import { initializeApp, getApps, getApp } from "firebase/app";
-import { getAuth, sendPasswordResetEmail } from 'firebase/auth'
+import { getAuth, sendPasswordResetEmail } from 'firebase/auth';
+import { getFirestore, doc, setDoc, getDoc, updateDoc } from 'firebase/firestore';
 
 const firebaseConfig = {
     apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
@@ -10,9 +11,10 @@ const firebaseConfig = {
     appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
 };
 
-const app = !getApps().length ? initializeApp(firebaseConfig) : getApp()
+const app = !getApps().length ? initializeApp(firebaseConfig) : getApp();
 
-const auth = getAuth(app)
+const auth = getAuth(app);
+const db = getFirestore(app);
 
 const handleresetpassword = (email: string) => {
     sendPasswordResetEmail(auth, email)
@@ -22,7 +24,55 @@ const handleresetpassword = (email: string) => {
     .catch((error) => {
         alert("Error sending password reset email: " + error.message);
     });
+};
+
+interface ProfileData {
+    displayname: string;
+    email: string;
+    bio?: string;
+    pictureurl?: string;
+    id: string;
 }
 
+const createUserProfile = async (userId: string, profileData: ProfileData) => {
+    try {
+        await setDoc(doc(db, "users", userId), profileData);
+        alert("User profile created successfully.");
+    } catch (error: unknown) {
+        if (error instanceof Error) {
+            alert("Error creating user profile: " + error.message);
+        }
+    }
+};
 
-export {app, auth, handleresetpassword}
+const updateUserProfile = async (userId: string, profileData: Partial<ProfileData>) => {
+    try {
+        await updateDoc(doc(db, "users", userId), profileData);
+        alert("User profile updated successfully.");
+    } catch (error: unknown) {
+        if (error instanceof Error) {
+            alert("Error updating user profile: " + error.message);
+        }
+    }
+};
+
+const getUserProfile = async (userId: string): Promise<ProfileData | null> => {
+    try {
+        const docRef = doc(db, "users", userId);
+        const docSnap = await getDoc(docRef);
+        if (docSnap.exists()) {
+            return docSnap.data() as ProfileData;
+        } else {
+            alert("No such user profile!");
+            return null;
+        }
+    } catch (error: unknown) {
+        if (error instanceof Error) {
+            alert("Error getting user profile: " + error.message);
+        }
+        return null;
+    }
+};
+
+export { app, auth, handleresetpassword, db, createUserProfile, updateUserProfile, getUserProfile };
+export type { ProfileData };

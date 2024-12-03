@@ -1,16 +1,17 @@
 'use client';
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-import { SpeedInsights } from "@vercel/speed-insights/next"
-import React from 'react';
+import { SpeedInsights } from "@vercel/speed-insights/next";
+import React, { useState } from 'react';
 import { usePathname } from 'next/navigation';
 import Head from 'next/head';
 import { Menu } from "@/app/components/menu";
 import { Sidebar } from "@/app/components/sidebar";
-import { Analytics } from "@vercel/analytics/react"
+import { Analytics } from "@vercel/analytics/react";
 import { playlists } from "@/app/data/playlists";
 import localFont from "next/font/local";
 import "./globals.css";
+import { AudioPlayerProvider } from "./components/AudioPlayerContext";
+import { AudioPlayer } from "./components/AudioPlayer";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -27,8 +28,13 @@ interface LayoutProps {
   children: React.ReactNode;
 }
 
-export function Layout({ children }: LayoutProps) {
+export default function Layout({ children }: LayoutProps) {
   const pathname = usePathname();
+  const [isSidebarVisible, setIsSidebarVisible] = useState(true);
+
+  const toggleSidebar = () => {
+    setIsSidebarVisible(!isSidebarVisible);
+  };
 
   let title = 'Offbrand Spotify';
 
@@ -48,29 +54,29 @@ export function Layout({ children }: LayoutProps) {
         <title>{title}</title>
       </Head>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiase dark`}>
-        <SpeedInsights />
-        <Analytics />
-        {/* <div className="md:hidden">
-          <p>Please view on desktop</p>
-        </div> */}
-        <div className="hidden md:block">
-          <div className="sticky top-0 z-10 bg-background">
-            <Menu />
-          </div>
-          <div className="border-t">
-            <div className="bg-background">
-              <div className="grid lg:grid-cols-5">
-                <Sidebar playlists={playlists} className="hidden lg:block sticky top-0 h-screen" />
-                <div className="col-span-3 lg:col-span-4 lg:border-l">
-                  {children}
+        <AudioPlayerProvider>
+          <SpeedInsights />
+          <Analytics />
+          <div className="hidden md:block">
+            <div className="sticky top-0 z-10 bg-background">
+              <Menu toggleSidebar={toggleSidebar} isSidebarVisible={isSidebarVisible} />
+            </div>
+            <div className="border-t">
+              <div className="bg-background">
+                <div className={isSidebarVisible ? "grid lg:grid-cols-5" : ""}>
+                  {isSidebarVisible && (
+                    <Sidebar playlists={playlists} className="hidden lg:block sticky top-0 h-screen" />
+                  )}
+                  <div className={`col-span-3 lg:col-span-4 ${isSidebarVisible ? 'lg:border-l' : ''}`}>
+                    {children}
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
+          <AudioPlayer />
+        </AudioPlayerProvider>
       </body>
     </html>
   );
 }
-
-export default Layout;
