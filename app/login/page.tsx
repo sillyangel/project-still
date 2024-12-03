@@ -78,7 +78,7 @@ export default function MusicPage() {
                   onClick={handleSignIn}
                   className="w-full"
                 >
-                  Sign In
+                  Log in
                 </Button>
               </div>
             </Tabs>
