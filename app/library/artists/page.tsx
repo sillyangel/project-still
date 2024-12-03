@@ -52,9 +52,9 @@ export default function ArtistPage() {
         <TabsContent value="music" className="border-none p-0 outline-none">
           <div className="flex items-center justify-between">
             <div className="space-y-1">
-              <h2 className="text-2xl font-semibold tracking-tight">
+              <p className="text-2xl font-semibold tracking-tight">
                 Following Artists
-              </h2>
+              </p>
               <p className="text-sm text-muted-foreground">
                 ur favs and following artists
               </p>

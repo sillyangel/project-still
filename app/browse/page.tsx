@@ -17,9 +17,9 @@ export default function MusicPage() {
         <TabsContent value="music" className="border-none p-0 outline-none flex flex-col flex-grow">
         <div className="flex items-center justify-between">
             <div className="space-y-1">
-              <h2 className="text-2xl font-semibold tracking-tight">
+              <p className="text-2xl font-semibold tracking-tight">
                 Artists
-              </h2>
+              </p>
               <p className="text-sm text-muted-foreground">
                 the people who make the music
               </p>
@@ -46,9 +46,9 @@ export default function MusicPage() {
           </div>
           <div className="flex items-center justify-between">
             <div className="space-y-1">
-              <h2 className="text-2xl font-semibold tracking-tight">
+              <p className="text-2xl font-semibold tracking-tight">
                 Browse
-              </h2>
+              </p>
               <p className="text-sm text-muted-foreground">
                 Browse the full collection of music available.
               </p>

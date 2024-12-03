@@ -57,9 +57,9 @@ export default function Albumpage() {
         <TabsContent value="music" className="border-none p-0 outline-none">
           <div className="flex items-center justify-between">
             <div className="space-y-1">
-              <h2 className="text-2xl font-semibold tracking-tight">
+              <p className="text-2xl font-semibold tracking-tight">
                 Albums 
-              </h2>
+              </p>
               <p className="text-sm text-muted-foreground">
                 albums added to your library
               </p>

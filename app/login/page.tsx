@@ -49,9 +49,9 @@ export default function MusicPage() {
           <div className="w-full max-w-md p-3 rounded-lg shadow-lg">
             <Tabs defaultValue="music" className="space-y-4">
               <div className="space-y-1 text-left">
-                <h2 className="text-2xl font-semibold tracking-tight">
+                <p className="text-2xl font-semibold tracking-tight">
                   Login
-                </h2>
+                </p>
                 <div className="flex items-center space-x-2">
                     <Link href='/signup' className='text-blue-500'>Signup</Link>
                     <p className="text-gray-500 text-sm">or</p>

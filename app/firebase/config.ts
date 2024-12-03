@@ -1,6 +1,6 @@
 import { initializeApp, getApps, getApp } from "firebase/app";
-import { getAuth, sendPasswordResetEmail } from 'firebase/auth'
-import { getFirestore } from 'firebase/firestore'
+import { getAuth, sendPasswordResetEmail } from 'firebase/auth';
+import { getFirestore, doc, setDoc, getDoc, updateDoc } from 'firebase/firestore';
 
 const firebaseConfig = {
     apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
@@ -24,7 +24,64 @@ const handleresetpassword = (email: string) => {
     .catch((error) => {
         alert("Error sending password reset email: " + error.message);
     });
-}
+};
 
+//  Example Usage
+// const userId = "user123";
+// const profileData = {
+//     name: "John Doe",
+//     email: "john.doe@example.com",
+//     bio: "Software Developer"
+// };
 
-export {app, auth, handleresetpassword, db}
+// createUserProfile(userId, profileData);
+const createUserProfile = async (userId: string, profileData: { [key: string]: any }) => {
+    try {
+        await setDoc(doc(db, "users", userId), profileData);
+        alert("User profile created successfully.");
+    } catch (error) {
+        alert("Error creating user profile: " + (error as any).message);
+    }
+};
+
+// how to use updateUserProfile
+// const userId = "user123";
+// const updatedProfileData = {
+//     bio: "Updated bio"
+// };
+
+// updateUserProfile(userId, updatedProfileData);
+const updateUserProfile = async (userId: string, profileData: { [key: string]: any }) => {
+    try {
+        await updateDoc(doc(db, "users", userId), profileData);
+        alert("User profile updated successfully.");
+    } catch (error) {
+        alert("Error updating user profile: " + (error as any).message);
+    }
+};
+
+// Example usage
+// const userId = "user123";
+
+// getUserProfile(userId).then(profileData => {
+//     if (profileData) {
+//         console.log("User Profile:", profileData);
+//     }
+// });
+const getUserProfile = async (userId: string) => {
+    try {
+        const docRef = doc(db, "users", userId);
+        const docSnap = await getDoc(docRef);
+        if (docSnap.exists()) {
+            return docSnap.data();
+        } else {
+            alert("No such user profile!");
+            return null;
+        }
+    } catch (error) {
+        alert("Error getting user profile: " + (error as any).message);
+        return null;
+    }
+};
+
+export { app, auth, handleresetpassword, db, createUserProfile, updateUserProfile, getUserProfile };

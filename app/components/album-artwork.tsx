@@ -98,7 +98,7 @@ export function AlbumArtwork({
         </ContextMenuContent>
       </ContextMenu>
       <div className="space-y-1 text-sm" >
-        <h3 className="font-medium leading-none" onClick={handleClick}>{album.name}</h3>
+        <p className="font-medium leading-none" onClick={handleClick}>{album.name}</p>
         <p className="text-xs text-muted-foreground underline"><Link href={`/artist/${normalizedArtistName}`}>{album.artist}</Link></p>
       </div>
     </div>

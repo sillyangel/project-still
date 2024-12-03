@@ -33,9 +33,9 @@ export function Sidebar({ className, playlists }: SidebarProps) {
     <div className={cn("pb-12", className)}>
       <div className="space-y-4 py-4">
         <div className="px-3 py-2">
-          <h2 className="mb-2 px-4 text-lg font-semibold tracking-tight">
+          <p className="mb-2 px-4 text-lg font-semibold tracking-tight">
             Discover
-          </h2>
+          </p>
           <div className="space-y-1">
             <Link href="/">
               <Button variant={isRoot ? "secondary" : "ghost"} className="w-full justify-start">
@@ -79,9 +79,9 @@ export function Sidebar({ className, playlists }: SidebarProps) {
         </div>
         <div className={!user ? "hidden" : ""}>
           <div className="px-3 py-2">
-            <h2 className="mb-2 px-4 text-lg font-semibold tracking-tight">
+            <p className="mb-2 px-4 text-lg font-semibold tracking-tight">
               Library
-            </h2>
+            </p>
             <div className="space-y-1">
               <Button variant="ghost" className="w-full justify-start">
                 <svg
@@ -175,9 +175,9 @@ export function Sidebar({ className, playlists }: SidebarProps) {
             </div>
           </div>
           <div className="py-2">
-            <h2 className="relative px-7 text-lg font-semibold tracking-tight">
+            <p className="relative px-7 text-lg font-semibold tracking-tight">
               Playlists
-            </h2>
+            </p>
             <ScrollArea className="h-[300px] px-1">
               <div className="space-y-1 p-2">
                 {playlists?.map((playlist, i) => (

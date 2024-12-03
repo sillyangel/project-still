@@ -106,7 +106,7 @@ export default function ArtistPage() {
                 className="relative rounded-full border-4 border-white shadow-lg"
               />
             </div>
-            <h1 className="text-2xl font-semibold tracking-tight text-white">{artistName}</h1>
+            <p className="text-2xl font-semibold tracking-tight text-white">{artistName}</p>
           </div>
           <div className="ml-auto">
           <Button onClick={handleFollow}>
@@ -119,9 +119,9 @@ export default function ArtistPage() {
     )}
     <div className="h-full px-4 lg:px-8">
       <div className="space-y-1">
-              <h2 className="text-2xl font-semibold tracking-tight">
+              <p className="text-2xl font-semibold tracking-tight">
                 Discography
-              </h2>
+              </p>
             </div>
       <ScrollArea>
         <div className="flex space-x-4 pb-4 pt-3">

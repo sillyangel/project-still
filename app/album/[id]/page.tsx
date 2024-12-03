@@ -144,7 +144,7 @@ export default function AlbumPage() {
           />
           <div className="space-y-2">
             <div className="flex items-center space-x-4">
-              <h1 className="text-3xl font-semibold tracking-tight">{album.name}</h1>
+              <p className="text-3xl font-semibold tracking-tight">{album.name}</p>
               <Button onClick={handleFollow} variant="ghost">
                 <Heart className={isFollowing ? 'text-red-500' : 'text-gray-500'} fill={isFollowing ? '#EF4444' : ""}/>
               </Button>
@@ -158,7 +158,7 @@ export default function AlbumPage() {
           </div>
         </div>
         <div className="space-y-2">
-          <h2 className="text-xl font-semibold">Tracklist</h2>
+          <p className="text-xl font-semibold">Tracklist</p>
           <div className="border-b border-gray-400 py-0 flex justify-between items-center"></div>
           {tracklist.map((track, index) => (
             <div key={index} className="py-2 flex justify-between items-center hover:bg-hover rounded-lg" onClick={() => handlePlayClick(track.name, track.artists.join(', '), index + 1)}>

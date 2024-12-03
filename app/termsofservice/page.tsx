@@ -36,7 +36,7 @@ export default function termsofservice() {
                             <li>Share or distribute copyrighted music outside the platform.</li>
                         </ul>
                         <h2>7. Limitation of Liability</h2>
-                        offbrand spotify is provided on an "as-is" basis. We make no guarantees about the availability, accuracy, or functionality of the service. We are not liable for any issues or damages arising from the use of our platform.
+                        offbrand spotify is provided on an &quot;as-is&quot; basis. We make no guarantees about the availability, accuracy, or functionality of the service. We are not liable for any issues or damages arising from the use of our platform.
                         <h2>8. Modifications to the Service</h2>
                         We reserve the right to modify or discontinue any part of the service without notice.
                         <h2 >9. Governing Law</h2>
