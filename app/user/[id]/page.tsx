@@ -32,12 +32,12 @@ const UserProfile = () => {
                 setProfile(profileData);
                 setLoading(false);
             }
-            if (user) {
+            if (user && profile?.id) {
                 const userRef = doc(db, 'users', user.uid);
                 const userDoc = await getDoc(userRef);
                 if (userDoc.exists()) {
                     const userData = userDoc.data();
-                    setIsFollowingUser(userData.follows && profile?.id && userData.follows[profile.id] === true);
+                    setIsFollowingUser(userData.follows && userData.follows[profile.id] === true);
 
                     const follows = userData.follows || {};
                     const followedArtistNames = Object.keys(follows).filter(artist => follows[artist]);
@@ -47,7 +47,7 @@ const UserProfile = () => {
             }
         };
         fetchData();
-    }, [id, user]);
+    }, [id, user, profile?.id]);
 
     const handleFollowUser = async () => {
         if (user && profile) {

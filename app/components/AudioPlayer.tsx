@@ -11,52 +11,51 @@ export const AudioPlayer: React.FC = () => {
   const [showVolumeSlider, setShowVolumeSlider] = useState(false);
   const [volume, setVolume] = useState(1);
   const [isClient, setIsClient] = useState(false);
-
+  const audioCurrent = audioRef.current;
+  
   useEffect(() => {
     setIsClient(true);
-  }, []);
 
-  useEffect(() => {
-    if (currentTrack && audioRef.current) {
-      audioRef.current.src = currentTrack.url;
-      audioRef.current.play();
+    const audioCurrent = audioRef.current;
+    
+    if (currentTrack && audioCurrent) {
+      audioCurrent.src = currentTrack.url;
+      audioCurrent.play();
       setIsPlaying(true);
     }
+
+    const updateProgress = () => {
+      if (audioCurrent) {
+        setProgress((audioCurrent.currentTime / audioCurrent.duration) * 100);
+      }
+    };
+
+    if (audioCurrent) {
+      audioCurrent.addEventListener('timeupdate', updateProgress);
+    }
+    
+    return () => {
+      if (audioCurrent) {
+        audioCurrent.removeEventListener('timeupdate', updateProgress);
+      }
+    };
   }, [currentTrack]);
 
-  useEffect(() => {
-    const updateProgress = () => {
-      if (audioRef.current) {
-        setProgress((audioRef.current.currentTime / audioRef.current.duration) * 100);
-      }
-    };
-
-    if (audioRef.current) {
-      audioRef.current.addEventListener('timeupdate', updateProgress);
-    }
-
-    return () => {
-      if (audioRef.current) {
-        audioRef.current.removeEventListener('timeupdate', updateProgress);
-      }
-    };
-  }, []);
-
   const handleProgressClick = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-    if (audioRef.current) {
+    if (audioCurrent) {
       const rect = e.currentTarget.getBoundingClientRect();
       const clickX = e.clientX - rect.left;
-      const newTime = (clickX / rect.width) * audioRef.current.duration;
-      audioRef.current.currentTime = newTime;
+      const newTime = (clickX / rect.width) * audioCurrent.duration;
+      audioCurrent.currentTime = newTime;
     }
   };
 
   const togglePlayPause = () => {
-    if (audioRef.current) {
+    if (audioCurrent) {
       if (isPlaying) {
-        audioRef.current.pause();
+        audioCurrent.pause();
       } else {
-        audioRef.current.play();
+        audioCurrent.play();
       }
       setIsPlaying(!isPlaying);
     }
@@ -65,8 +64,8 @@ export const AudioPlayer: React.FC = () => {
   const handleVolumeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newVolume = parseFloat(e.target.value);
     setVolume(newVolume);
-    if (audioRef.current) {
-      audioRef.current.volume = newVolume;
+    if (audioCurrent) {
+      audioCurrent.volume = newVolume;
     }
   };
 
