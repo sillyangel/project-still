@@ -1,9 +1,9 @@
 'use client';
 
+ 
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import React, { useState } from 'react';
 import { usePathname } from 'next/navigation';
-import Head from 'next/head';
 import { Menu } from "@/app/components/menu";
 import { Sidebar } from "@/app/components/sidebar";
 import { Analytics } from "@vercel/analytics/react";
@@ -12,6 +12,7 @@ import localFont from "next/font/local";
 import "./globals.css";
 import { AudioPlayerProvider } from "./components/AudioPlayerContext";
 import { AudioPlayer } from "./components/AudioPlayer";
+import { metadata, viewport } from './metadata'; // Import metadata and viewport
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -27,7 +28,7 @@ const geistMono = localFont({
 interface LayoutProps {
   children: React.ReactNode;
 }
-
+ 
 export default function Layout({ children }: LayoutProps) {
   const pathname = usePathname();
   const [isSidebarVisible, setIsSidebarVisible] = useState(true);
@@ -50,9 +51,6 @@ export default function Layout({ children }: LayoutProps) {
 
   return (
     <html lang="en">
-      <Head>
-        <title>{title}</title>
-      </Head>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiase dark`}>
         <AudioPlayerProvider>
           <SpeedInsights />

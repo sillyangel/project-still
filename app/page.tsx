@@ -68,7 +68,9 @@ export default function MusicPage() {
           </div>
         </TabsContent>
       </Tabs>
-    </>
+      <br>
+      </br>
+      </>
     </div>
   );
 }
