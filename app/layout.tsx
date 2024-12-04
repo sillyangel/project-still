@@ -1,18 +1,37 @@
-'use client';
-
- 
 import { SpeedInsights } from "@vercel/speed-insights/next";
-import React, { useState } from 'react';
-import { usePathname } from 'next/navigation';
-import { Menu } from "@/app/components/menu";
-import { Sidebar } from "@/app/components/sidebar";
-import { Analytics } from "@vercel/analytics/react";
-import { playlists } from "@/app/data/playlists";
+import React from 'react';
+import { Analytics }  from "@vercel/analytics/react";
 import localFont from "next/font/local";
 import "./globals.css";
 import { AudioPlayerProvider } from "./components/AudioPlayerContext";
-import { AudioPlayer } from "./components/AudioPlayer";
-import { metadata, viewport } from './metadata'; // Import metadata and viewport
+import { Metadata } from "next";
+import type { Viewport } from 'next';
+import Ihateserverside from './components/ihateserverside';
+
+export const viewport: Viewport = {
+  themeColor: 'black',
+};
+
+export const metadata: Metadata = {
+  title: {
+    template: 'offbrand spotify | %s',
+    default: 'offbrand spotify',
+  },
+  description: 'a very awesome music streaming service',
+  robots: {
+    index: true,
+    follow: true,
+    nocache: true,
+    googleBot: {
+      index: true,
+      follow: false,
+      noimageindex: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
+};
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -28,26 +47,9 @@ const geistMono = localFont({
 interface LayoutProps {
   children: React.ReactNode;
 }
- 
+
 export default function Layout({ children }: LayoutProps) {
-  const pathname = usePathname();
-  const [isSidebarVisible, setIsSidebarVisible] = useState(true);
-
-  const toggleSidebar = () => {
-    setIsSidebarVisible(!isSidebarVisible);
-  };
-
-  let title = 'Offbrand Spotify';
-
-  if (pathname === '/browse') {
-    title += ' | Browse';
-  } else if (pathname === '/') {
-    title += ' | Home';
-  } else if (pathname.startsWith('/album')) {
-    title += ' | Album';
-  } else if (pathname.startsWith('/artist')) {
-    title += ' | Artist';
-  }
+  
 
   return (
     <html lang="en">
@@ -55,24 +57,9 @@ export default function Layout({ children }: LayoutProps) {
         <AudioPlayerProvider>
           <SpeedInsights />
           <Analytics />
-          <div className="hidden md:block">
-            <div className="sticky top-0 z-10 bg-background">
-              <Menu toggleSidebar={toggleSidebar} isSidebarVisible={isSidebarVisible} />
-            </div>
-            <div className="border-t">
-              <div className="bg-background">
-                <div className={isSidebarVisible ? "grid lg:grid-cols-5" : ""}>
-                  {isSidebarVisible && (
-                    <Sidebar playlists={playlists} className="hidden lg:block sticky top-0 h-screen" />
-                  )}
-                  <div className={`col-span-3 lg:col-span-4 ${isSidebarVisible ? 'lg:border-l' : ''}`}>
-                    {children}
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <AudioPlayer />
+          <Ihateserverside>
+            {children}
+          </Ihateserverside>
         </AudioPlayerProvider>
       </body>
     </html>
