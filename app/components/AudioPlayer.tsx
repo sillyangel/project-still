@@ -2,6 +2,8 @@ import React, { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import { useAudioPlayer } from '@/app/components/AudioPlayerContext';
 import { FaPlay, FaPause, FaVolumeHigh } from "react-icons/fa6";
+import ColorThief from '@neutrixs/colorthief';
+
 
 export const AudioPlayer: React.FC = () => {
   const { currentTrack } = useAudioPlayer();
@@ -11,6 +13,7 @@ export const AudioPlayer: React.FC = () => {
   const [showVolumeSlider, setShowVolumeSlider] = useState(false);
   const [volume, setVolume] = useState(1);
   const [isClient, setIsClient] = useState(false);
+  const [dominantColor, setDominantColor] = useState<string>('#ff0000'); // Default to red
   const audioCurrent = audioRef.current;
   
   useEffect(() => {
@@ -33,13 +36,26 @@ export const AudioPlayer: React.FC = () => {
     if (audioCurrent) {
       audioCurrent.addEventListener('timeupdate', updateProgress);
     }
-    
+    if (currentTrack) {
+      const img = document.createElement('img') as HTMLImageElement;
+      img.crossOrigin = 'Anonymous';
+      img.src = currentTrack.image;
+      img.onload = () => {
+        const colorThief = new ColorThief();
+        const result = colorThief.getColor(img);
+        if (result) {
+          setDominantColor(`rgb(${result[0]}, ${result[1]}, ${result[2]})`);
+        }
+      };
+    }
     return () => {
       if (audioCurrent) {
         audioCurrent.removeEventListener('timeupdate', updateProgress);
       }
     };
   }, [currentTrack]);
+
+   
 
   const handleProgressClick = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     if (audioCurrent) {
@@ -82,8 +98,8 @@ export const AudioPlayer: React.FC = () => {
             <p>{currentTrack.name} by {currentTrack.artists.join(', ')}</p>
             <div className="w-full h-2 bg-gray-300 rounded-full cursor-pointer mt-2" onClick={handleProgressClick}>
               <div
-                className="h-full bg-blue-500 rounded-full"
-                style={{ width: `${progress}%` }}
+                className="h-full rounded-full"
+                style={{ width: `${progress}%`, backgroundColor: dominantColor }}
               />
             </div>
           </div>

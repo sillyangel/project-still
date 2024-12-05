@@ -9,7 +9,7 @@ export interface Album {
 
 const databases = [
   { id: 0, url: "https://playmusichtml.web.app/play/" },
-  { id: 1, url: "https://playmusicstorage.web.app/" },
+  { id: 1, url: "https://tuahdb.web.app/" },
   { id: 2, url: "https://playstorage2.web.app/" },
   { id: 3, url: "https://playstorage3.web.app/" },
   { id: 4, url: "https://playstorage3-e9531.web.app/" }
