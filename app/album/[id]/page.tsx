@@ -110,6 +110,8 @@ export default function AlbumPage() {
     return <p>Album not found</p>;
   }
 
+  const normalizedArtistName = album.artist.toLowerCase().replace(/[\s,]+/g, '');
+  const normalizedAlbumName = album.name.toLowerCase().replace(/[\s,]+/g, '');
   
 
   const handlePlayClick = (track: string, artist: string, index: number): void => {
@@ -118,7 +120,8 @@ export default function AlbumPage() {
   const baseUrl = databases.find(db => db.id === album.database)?.url;
   if (!baseUrl) return;
 
-  const url = `${baseUrl}${album.artist}/${album.name}/${index}. ${track}.mp3`;
+  const url = `${baseUrl}${normalizedArtistName}/${normalizedAlbumName}/${index}. ${track}.mp3`;
+
   playTrack({ 
       name: track,
       artists: [artist],
@@ -126,9 +129,9 @@ export default function AlbumPage() {
       image: album.cover,
       database: album.database
     } as PlayTrack);
+  
   };
 
-  const normalizedArtistName = album.artist.toLowerCase().replace(/[\s,]+/g, '');
 
   return (
     <>
