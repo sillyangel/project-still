@@ -4,8 +4,18 @@ export interface Album {
   tracklist: string;
   artist: string;
   cover: string;
+  database: number;
 }
 
+const databases = [
+  { id: 0, url: "https://playmusichtml.web.app/play/" },
+  { id: 1, url: "https://tuahdb.web.app/" },
+  { id: 2, url: "https://playstorage2.web.app/" },
+  { id: 3, url: "https://playstorage3.web.app/" },
+  { id: 4, url: "https://playstorage3-e9531.web.app/" }
+];
+
+// /music/{artist}/{album}/{`${tracklist.index} + 1` + ${tracklist.name} + ".mp3"}
 const allAlbums: Album[] = [
   {
     id: "1",
@@ -13,6 +23,7 @@ const allAlbums: Album[] = [
     name: "Blonde",
     artist: "Frank Ocean",
     cover: "https://offbrandspotifydb.web.app/AlbumArtwork/FrankOcean/BLONDE.jpg",
+    database: 1
   },
   {
     id: "2",
@@ -20,6 +31,7 @@ const allAlbums: Album[] = [
     name: "Channel Orange",
     artist: "Frank Ocean",
     cover: "https://offbrandspotifydb.web.app/AlbumArtwork/FrankOcean/CHANNELORANGE.jpg",
+    database: 1
   },
   {
     id: "3",
@@ -27,6 +39,7 @@ const allAlbums: Album[] = [
     name: "When We All Fall Asleep, Where Do We Go?",
     artist: "Billie Eilish",
     cover: "https://offbrandspotifydb.web.app/AlbumArtwork/BillieEilish/WWAFAWDWG.jpg",
+    database: 2,
   },
   {
     id: "4",
@@ -34,6 +47,7 @@ const allAlbums: Album[] = [
     name: "Hit Me Hard and Soft",
     artist: "Billie Eilish",
     cover: "https://offbrandspotifydb.web.app/AlbumArtwork/BillieEilish/HITMEHARDANDSOFT.jpg",
+    database: 2, 
   },
   {
     id: "5",
@@ -41,6 +55,7 @@ const allAlbums: Album[] = [
     name: "Happier Than Ever",
     artist: "Billie Eilish",
     cover: "https://offbrandspotifydb.web.app/AlbumArtwork/BillieEilish/HAPPIERTHANEVER.jpg",
+    database: 1
   },
   {
     id: "6",
@@ -48,13 +63,15 @@ const allAlbums: Album[] = [
     name: "808s & Heartbreak",
     artist: "Kanye West",
     cover: "https://offbrandspotifydb.web.app/AlbumArtwork/KanyeWest/808SHEARTBREAK.jpg",
+    database: 2
   },
   {
     id: "7",
     tracklist: "https://offbrandspotifydb.web.app/tracklist/kanyewest/dondadeluxe.json",
     name: "Donda (Deluxe)",
     artist: "Kanye West",
-    cover: "https://offbrandspotifydb.web.app/AlbumArtwork/KanyeWest/DONDA.jpg"
+    cover: "https://offbrandspotifydb.web.app/AlbumArtwork/KanyeWest/DONDA.jpg",
+    database: 1
   },
   {
     id: "8",
@@ -63,13 +80,15 @@ const allAlbums: Album[] = [
     artist: "Kanye West",
     cover: 
       "https://offbrandspotifydb.web.app/AlbumArtwork/KanyeWest/GRADUATION.jpg",
-  },
+      database: 2
+    },
   {
     id: "9",
     tracklist: "https://offbrandspotifydb.web.app/tracklist/kanyewest/jesusisking.json",
     name: "Jesus is King",
     artist: "Kanye West",
     cover: "https://offbrandspotifydb.web.app/AlbumArtwork/KanyeWest/JESUSISKING.jpg",
+    database: 1
   },
   {
     id: "10",
@@ -77,6 +96,7 @@ const allAlbums: Album[] = [
     name: "Kids See Ghosts",
     artist: "Kanye West",
     cover: "https://offbrandspotifydb.web.app/AlbumArtwork/KanyeWest/KIDSSEEGHOSTS.jpg",
+    database: 2
   },
   {
     id: "11",
@@ -84,6 +104,7 @@ const allAlbums: Album[] = [
     name: "Late Registration",
     artist: "Kanye West",
     cover: "https://offbrandspotifydb.web.app/AlbumArtwork/KanyeWest/LATEREGISTRATION.jpg",
+    database: 2
   },
   {
     id: "12",
@@ -91,6 +112,7 @@ const allAlbums: Album[] = [
     name: "My Beautiful Dark Twisted Fantasy",
     artist: "Kanye West",
     cover: "https://offbrandspotifydb.web.app/AlbumArtwork/KanyeWest/MYBEAUTIFULDARKTWISTEDFANTASY.jpg",
+    database: 1
   },
   {
     id: "13",
@@ -98,6 +120,7 @@ const allAlbums: Album[] = [
     name: "The College Dropout",
     artist: "Kanye West",
     cover: "https://offbrandspotifydb.web.app/AlbumArtwork/KanyeWest/THECOLLEGEDROPOUT.jpg",
+    database: 2
   },
   {
     id: "14",
@@ -105,6 +128,7 @@ const allAlbums: Album[] = [
     name: "The Life of Pablo",
     artist: "Kanye West",
     cover: "https://offbrandspotifydb.web.app/AlbumArtwork/KanyeWest/THELIFEOFPABLO.jpg",
+    database: 2
   },
   {
     id: "15",
@@ -112,6 +136,7 @@ const allAlbums: Album[] = [
     name: "Watch The Throne (Deluxe)",
     artist: "Kanye West",
     cover: "https://offbrandspotifydb.web.app/AlbumArtwork/KanyeWest/WATCHTHETHRONE.jpg",
+    database: 2
   },
   {
     id: "16",
@@ -119,6 +144,7 @@ const allAlbums: Album[] = [
     name: "Ye",
     artist: "Kanye West",
     cover: "https://offbrandspotifydb.web.app/AlbumArtwork/KanyeWest/YE.jpg",
+    database: 1 
   },
   {
     id: "17",
@@ -126,6 +152,7 @@ const allAlbums: Album[] = [
     name: "Yeezus",
     artist: "Kanye West",
     cover: "https://offbrandspotifydb.web.app/AlbumArtwork/KanyeWest/YEEZUS.jpg",
+    database: 1
   },
   {
     id: "18",
@@ -133,6 +160,7 @@ const allAlbums: Album[] = [
     name: "Atavista",
     artist: "Childish Gambino",
     cover: "https://offbrandspotifydb.web.app/AlbumArtwork/ChildishGambino/ATAVISTA.jpg",
+    database: 4
   },
   {
     id: "19",
@@ -140,6 +168,7 @@ const allAlbums: Album[] = [
     name: "Awaken, My Love!",
     artist: "Childish Gambino",
     cover: "https://offbrandspotifydb.web.app/AlbumArtwork/ChildishGambino/AWAKENMYLOVE.jpg",
+    database: 4
   },
   {
     id: "20",
@@ -147,6 +176,7 @@ const allAlbums: Album[] = [
     name: "Bando Stone, and the New World",
     artist: "Childish Gambino",
     cover: "https://offbrandspotifydb.web.app/AlbumArtwork/ChildishGambino/BANDOSTONEANDTHENEWWORLD.jpg",
+    database: 4
   },
   {
     id: "21",
@@ -154,6 +184,7 @@ const allAlbums: Album[] = [
     name: "Because The Internet",
     artist: "Childish Gambino",
     cover: "https://offbrandspotifydb.web.app/AlbumArtwork/ChildishGambino/BECAUSETHEINTERNET.jpg",
+    database: 4
   },
   {
     id: "22",
@@ -161,6 +192,7 @@ const allAlbums: Album[] = [
     name: "Camp",
     artist: "Childish Gambino",
     cover: "https://offbrandspotifydb.web.app/AlbumArtwork/ChildishGambino/CAMP.jpg",
+    database: 4
   },
   {
     id: "23",
@@ -168,6 +200,7 @@ const allAlbums: Album[] = [
     name: "Heaven or Hell",
     artist: "Don Toliver",
     cover: "https://offbrandspotifydb.web.app/AlbumArtwork/DonToliver/HEAVENORHELL.jpg",
+    database: 4
   },
   {
     id: "24",
@@ -175,6 +208,7 @@ const allAlbums: Album[] = [
     name: "Life of a Don",
     artist: "Don Toliver",
     cover: "https://offbrandspotifydb.web.app/AlbumArtwork/DonToliver/LIFEOFADON.jpg",
+    database: 4
   }, 
   {
     id: "25",
@@ -182,6 +216,7 @@ const allAlbums: Album[] = [
     name: "Hardstone Psycho",
     artist: "Don Toliver",
     cover: "https://offbrandspotifydb.web.app/AlbumArtwork/DonToliver/HARDSTONEPSYCHO.jpg",
+    database: 4
   },
   {
     id: "26",
@@ -189,6 +224,7 @@ const allAlbums: Album[] = [
     name: "Love Sick (Deluxe)",
     artist: "Don Toliver",
     cover: "https://offbrandspotifydb.web.app/AlbumArtwork/DonToliver/LOVESICK.jpg",
+    database: 4
   },
   {
     id: "27",
@@ -196,6 +232,7 @@ const allAlbums: Album[] = [
     name: "Wolf",
     artist: "Tyler, The Creator",
     cover: "https://offbrandspotifydb.web.app/AlbumArtwork/TylerTheCreator/WOLF.jpg",
+    database: 1
   },
   {
     id: "28",
@@ -203,6 +240,7 @@ const allAlbums: Album[] = [
     name: "Flower Boy",
     artist: "Tyler, The Creator",
     cover: "https://offbrandspotifydb.web.app/AlbumArtwork/TylerTheCreator/FLOWERBOY.jpg",
+    database: 1
   },
   {
     id: "29",
@@ -210,6 +248,7 @@ const allAlbums: Album[] = [
     name: "Igor",
     artist: "Tyler, The Creator",
     cover: "https://offbrandspotifydb.web.app/AlbumArtwork/TylerTheCreator/IGOR.jpg",
+    database: 1
   },
   {
     id: "30",
@@ -217,12 +256,14 @@ const allAlbums: Album[] = [
     name: "Cherry Bomb",
     artist: "Tyler, The Creator",
     cover: "https://offbrandspotifydb.web.app/AlbumArtwork/TylerTheCreator/CHERRYBOMB.jpg",
+    database: 1
   },
   {
     id: "31",
     tracklist: "https://offbrandspotifydb.web.app/tracklist/tylerthecreator/goblin.json",
     name: "Goblin",
     artist: "Tyler, The Creator",
+    database: 1,
     cover: "https://offbrandspotifydb.web.app/AlbumArtwork/TylerTheCreator/GOBLIN.jpg",
   },
   {
@@ -231,6 +272,7 @@ const allAlbums: Album[] = [
     name: "Call Me If You Get Lost",
     artist: "Tyler, The Creator",
     cover: "https://offbrandspotifydb.web.app/AlbumArtwork/TylerTheCreator/CALLMEIFYOUGETLOST.jpg",
+    database: 3
   },
   {
     id: "33",
@@ -238,6 +280,7 @@ const allAlbums: Album[] = [
     name: "Call Me If You Get Lost: The Estate Sale",
     artist: "Tyler, The Creator",
     cover: "https://offbrandspotifydb.web.app/AlbumArtwork/TylerTheCreator/CALLMEIFYOUGETLOSTESTATESELL.jpg",
+    database: 3
   },
   {
     id: "34",
@@ -245,6 +288,7 @@ const allAlbums: Album[] = [
     name: "Chromakopia",
     artist: "Tyler, The Creator",
     cover: "https://offbrandspotifydb.web.app/AlbumArtwork/TylerTheCreator/CHROMAKOPIA.jpg",
+    database: 4
   },
   {
     id: "35",
@@ -252,6 +296,7 @@ const allAlbums: Album[] = [
     name: "Apollo XXI",
     artist: "Steve Lacy",
     cover: "https://offbrandspotifydb.web.app/AlbumArtwork/SteveLacy/APOLLOXXI.jpg",
+    database: 6
   },
   {
     id: "36",
@@ -259,6 +304,7 @@ const allAlbums: Album[] = [
     name: "Gemini Rights",
     artist: "Steve Lacy",
     cover: "https://offbrandspotifydb.web.app/AlbumArtwork/SteveLacy/GEMINIRIGHTS.jpg",
+    database: 6
   },
   {
     id: "37",
@@ -266,6 +312,7 @@ const allAlbums: Album[] = [
     name: "Steve Lacy's Demo",
     artist: "Steve Lacy",
     cover: "https://offbrandspotifydb.web.app/AlbumArtwork/SteveLacy/STEVELACYDEMO.jpg",
+    database: 6
   },
   {
     id: "38",
@@ -273,6 +320,7 @@ const allAlbums: Album[] = [
     name: "The Lo-Fis",
     artist: "Steve Lacy",
     cover: "https://offbrandspotifydb.web.app/AlbumArtwork/SteveLacy/LOFIS.jpg",
+    database: 6
   },
   {
     id: "39",
@@ -280,6 +328,7 @@ const allAlbums: Album[] = [
     name: "Days Before Rodeo",
     artist: "Travis Scott",
     cover: "https://offbrandspotifydb.web.app/AlbumArtwork/TravisScott/DAYSBEFORERODEO.jpg",
+    database: 5
   },
   {
     id: "40",
@@ -287,6 +336,7 @@ const allAlbums: Album[] = [
     name: "Rodeo",
     artist: "Travis Scott",
     cover: "https://offbrandspotifydb.web.app/AlbumArtwork/TravisScott/RODEO.jpg",
+    database: 5
   },
   {
     id: "41",
@@ -294,6 +344,7 @@ const allAlbums: Album[] = [
     name: "Birds in the Trap Sing McKnight",
     artist: "Travis Scott",
     cover: "https://offbrandspotifydb.web.app/AlbumArtwork/TravisScott/BIRDS INTHETRAPSINGMCKNIGHT.jpg",
+    database: 5
   },
   {
     id: "42",
@@ -301,6 +352,7 @@ const allAlbums: Album[] = [
     name: "Huncho Jack, Jack Huncho",
     artist: "Travis Scott",
     cover: "https://offbrandspotifydb.web.app/AlbumArtwork/TravisScott/HUNCHOJACKJACKHUNCHO.jpg",
+    database: 5
   },
   {
     id: "43",
@@ -308,6 +360,7 @@ const allAlbums: Album[] = [
     name: "Astroworld",
     artist: "Travis Scott",
     cover: "https://offbrandspotifydb.web.app/AlbumArtwork/TravisScott/ASTROWORLD.jpg",
+    database: 5
   },
   {
     id: "44",
@@ -315,6 +368,7 @@ const allAlbums: Album[] = [
     name: "Jackboys",
     artist: "Travis Scott",
     cover: "https://offbrandspotifydb.web.app/AlbumArtwork/TravisScott/JACKBOYS.jpg",
+    database: 5
   },
   {
     id: "45",
@@ -322,6 +376,7 @@ const allAlbums: Album[] = [
     name: "Utopia",
     artist: "Travis Scott",
     cover: "https://offbrandspotifydb.web.app/AlbumArtwork/TravisScott/UTOPIA.jpg",
+    database: 5
   }
 ];
 
@@ -334,4 +389,4 @@ const listenNowAlbums: Album[] = getRandomAlbums(allAlbums, 5);
 const remainingAlbums = allAlbums.filter(album => !listenNowAlbums.includes(album));
 const madeForYouAlbums: Album[] = getRandomAlbums(remainingAlbums, 50);
 
-export { listenNowAlbums, madeForYouAlbums, allAlbums };
+export { listenNowAlbums, madeForYouAlbums, allAlbums, databases };

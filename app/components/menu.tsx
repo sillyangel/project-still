@@ -1,6 +1,5 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 'use client';
-
+import { useCallback } from "react";
 import { useRouter } from 'next/navigation';
 import {
     Menubar,
@@ -10,8 +9,6 @@ import {
     MenubarItem,
     MenubarMenu,
     MenubarSeparator,
-    MenubarRadioGroup,
-    MenubarRadioItem,
     MenubarShortcut,
     MenubarSub,
     MenubarSubContent,
@@ -23,10 +20,16 @@ import { auth } from "@/app/firebase/config"
 import { onAuthStateChanged } from "firebase/auth"
 import { signOut } from "firebase/auth";
 
-export function Menu() {
+interface MenuProps {
+  toggleSidebar: () => void;
+  isSidebarVisible: boolean;
+}
+
+export function Menu({ toggleSidebar, isSidebarVisible }: MenuProps) {
     const [isFullScreen, setIsFullScreen] = useState(false)
     const [displayName, setDisplayName] = useState("not signed in")
     const [userEmail, setUserEmail] = useState("not signed in")
+    const router = useRouter();
 
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -40,33 +43,55 @@ export function Menu() {
 
         return () => unsubscribe()
     }, [])
-    const router = useRouter();
 
-    const handleFullScreen = () => {
+    const handleFullScreen = useCallback(() => {
       if (!isFullScreen) {
         document.documentElement.requestFullscreen()
       } else {
         document.exitFullscreen()
       }
       setIsFullScreen(!isFullScreen)
-    }
+    }, [isFullScreen])
+
+    useEffect(() => {
+        const handleKeyDown = (event: KeyboardEvent) => {
+            if ((event.metaKey || event.ctrlKey) && event.key === ',') {
+                event.preventDefault();
+                router.push('/settings');
+            }
+            if ((event.metaKey || event.ctrlKey) && event.key === 's') {
+                event.preventDefault();
+                toggleSidebar();
+            }
+            if ((event.metaKey || event.ctrlKey) && event.key === 'f') {
+              event.preventDefault();
+              handleFullScreen();
+            }
+        };
+      
+        window.addEventListener('keydown', handleKeyDown);
+
+        return () => {
+            window.removeEventListener('keydown', handleKeyDown);
+        };
+    }, [router, toggleSidebar, handleFullScreen]);
 
     return (
       <Menubar className="rounded-none border-b border-none px-2 lg:px-4">
         <MenubarMenu>
           <MenubarTrigger className="font-bold">offbrand spotify</MenubarTrigger>
           <MenubarContent>
-            <MenubarItem>About Music</MenubarItem>
+            <MenubarItem onClick={() => router.push('/about')}>About Music</MenubarItem>
             <MenubarSeparator />
-            <MenubarItem>
-              Preferences... <MenubarShortcut>⌘,</MenubarShortcut>
+            <MenubarItem onClick={() => router.push('/settings')}>
+              Preferences <MenubarShortcut>⌘,</MenubarShortcut>
             </MenubarItem>
             <MenubarSeparator />
             <MenubarItem>
-              Hide Music... <MenubarShortcut>⌘H</MenubarShortcut>
+              Hide Music <MenubarShortcut>⌘H</MenubarShortcut>
             </MenubarItem>
             <MenubarItem>
-              Hide Others... <MenubarShortcut>⇧⌘H</MenubarShortcut>
+              Hide Others <MenubarShortcut>⇧⌘H</MenubarShortcut>
             </MenubarItem>
             <MenubarShortcut />
             <MenubarItem>
@@ -87,14 +112,14 @@ export function Menu() {
                   Playlist from Selection <MenubarShortcut>⇧⌘N</MenubarShortcut>
                 </MenubarItem>
                 <MenubarItem>
-                  Smart Playlist... <MenubarShortcut>⌥⌘N</MenubarShortcut>
+                  Smart Playlist <MenubarShortcut>⌥⌘N</MenubarShortcut>
                 </MenubarItem>
                 <MenubarItem>Playlist Folder</MenubarItem>
                 <MenubarItem disabled>Genius Playlist</MenubarItem>
               </MenubarSubContent>
             </MenubarSub>
             <MenubarItem>
-              Open Stream URL... <MenubarShortcut>⌘U</MenubarShortcut>
+              Open Stream URL <MenubarShortcut>⌘U</MenubarShortcut>
             </MenubarItem>
             <MenubarItem>
               Close Window <MenubarShortcut>⌘W</MenubarShortcut>
@@ -106,11 +131,11 @@ export function Menu() {
                 <MenubarItem>Update Cloud Library</MenubarItem>
                 <MenubarItem>Update Genius</MenubarItem>
                 <MenubarSeparator />
-                <MenubarItem>Organize Library...</MenubarItem>
-                <MenubarItem>Export Library...</MenubarItem>
+                <MenubarItem>Organize Library</MenubarItem>
+                <MenubarItem>Export Library</MenubarItem>
                 <MenubarSeparator />
-                <MenubarItem>Import Playlist...</MenubarItem>
-                <MenubarItem disabled>Export Playlist...</MenubarItem>
+                <MenubarItem>Import Playlist</MenubarItem>
+                <MenubarItem disabled>Export Playlist</MenubarItem>
                 <MenubarItem>Show Duplicate Items</MenubarItem>
                 <MenubarSeparator />
                 <MenubarItem>Get Album Artwork</MenubarItem>
@@ -118,18 +143,18 @@ export function Menu() {
               </MenubarSubContent>
             </MenubarSub>
             <MenubarItem>
-              Import... <MenubarShortcut>⌘O</MenubarShortcut>
+              Import <MenubarShortcut>⌘O</MenubarShortcut>
             </MenubarItem>
-            <MenubarItem disabled>Burn Playlist to Disc...</MenubarItem>
+            <MenubarItem disabled>Burn Playlist to Disc</MenubarItem>
             <MenubarSeparator />
             <MenubarItem>
               Show in Finder <MenubarShortcut>⇧⌘R</MenubarShortcut>{" "}
             </MenubarItem>
             <MenubarItem>Convert</MenubarItem>
             <MenubarSeparator />
-            <MenubarItem>Page Setup...</MenubarItem>
+            <MenubarItem>Page Setup</MenubarItem>
             <MenubarItem disabled>
-              Print... <MenubarShortcut>⌘P</MenubarShortcut>
+              Print <MenubarShortcut>⌘P</MenubarShortcut>
             </MenubarItem>
           </MenubarContent>
         </MenubarMenu>
@@ -161,7 +186,7 @@ export function Menu() {
             </MenubarItem>
             <MenubarSeparator />
             <MenubarItem>
-              Smart Dictation...{" "}
+              Smart Dictation{" "}
               <MenubarShortcut>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -208,7 +233,10 @@ export function Menu() {
               Show Status Bar
             </MenubarItem>
             <MenubarSeparator />
-            <MenubarItem inset>Hide Sidebar</MenubarItem>
+            <MenubarItem inset onClick={toggleSidebar}>
+              {isSidebarVisible ? "Hide Sidebar" : "Show Sidebar"}
+              <MenubarShortcut>⌘S</MenubarShortcut>
+            </MenubarItem>
             <MenubarItem inset onClick={handleFullScreen}>
             {isFullScreen ? "Exit Full Screen" : "Enter Full Screen"}
           </MenubarItem>

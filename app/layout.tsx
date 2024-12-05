@@ -1,16 +1,37 @@
-'use client';
-
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-import { SpeedInsights } from "@vercel/speed-insights/next"
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import React from 'react';
-import { usePathname } from 'next/navigation';
-import Head from 'next/head';
-import { Menu } from "@/app/components/menu";
-import { Sidebar } from "@/app/components/sidebar";
-import { Analytics } from "@vercel/analytics/react"
-import { playlists } from "@/app/data/playlists";
+import { Analytics }  from "@vercel/analytics/react";
 import localFont from "next/font/local";
 import "./globals.css";
+import { AudioPlayerProvider } from "./components/AudioPlayerContext";
+import { Metadata } from "next";
+import type { Viewport } from 'next';
+import Ihateserverside from './components/ihateserverside';
+
+export const viewport: Viewport = {
+  themeColor: 'black',
+};
+
+export const metadata: Metadata = {
+  title: {
+    template: 'offbrand spotify | %s',
+    default: 'offbrand spotify',
+  },
+  description: 'a very awesome music streaming service',
+  robots: {
+    index: true,
+    follow: true,
+    nocache: true,
+    googleBot: {
+      index: true,
+      follow: false,
+      noimageindex: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
+};
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -27,50 +48,20 @@ interface LayoutProps {
   children: React.ReactNode;
 }
 
-export function Layout({ children }: LayoutProps) {
-  const pathname = usePathname();
-
-  let title = 'Offbrand Spotify';
-
-  if (pathname === '/browse') {
-    title += ' | Browse';
-  } else if (pathname === '/') {
-    title += ' | Home';
-  } else if (pathname.startsWith('/album')) {
-    title += ' | Album';
-  } else if (pathname.startsWith('/artist')) {
-    title += ' | Artist';
-  }
+export default function Layout({ children }: LayoutProps) {
+  
 
   return (
     <html lang="en">
-      <Head>
-        <title>{title}</title>
-      </Head>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiase dark`}>
-        <SpeedInsights />
-        <Analytics />
-        {/* <div className="md:hidden">
-          <p>Please view on desktop</p>
-        </div> */}
-        <div className="hidden md:block">
-          <div className="sticky top-0 z-10 bg-background">
-            <Menu />
-          </div>
-          <div className="border-t">
-            <div className="bg-background">
-              <div className="grid lg:grid-cols-5">
-                <Sidebar playlists={playlists} className="hidden lg:block sticky top-0 h-screen" />
-                <div className="col-span-3 lg:col-span-4 lg:border-l">
-                  {children}
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+        <AudioPlayerProvider>
+          <SpeedInsights />
+          <Analytics />
+          <Ihateserverside>
+            {children}
+          </Ihateserverside>
+        </AudioPlayerProvider>
       </body>
     </html>
   );
 }
-
-export default Layout;

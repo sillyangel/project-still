@@ -14,9 +14,9 @@ export default function MusicPage() {
         <TabsContent value="music" className="border-none p-0 outline-none">
           <div className="flex items-center justify-between">
             <div className="space-y-1">
-              <h2 className="text-2xl font-semibold tracking-tight">
+              <p className="text-2xl font-semibold tracking-tight">
                 Listen Now
-              </h2>
+              </p>
               <p className="text-sm text-muted-foreground">
                 Top picks for you. Updated daily.
               </p>
@@ -41,9 +41,9 @@ export default function MusicPage() {
             </ScrollArea>
           </div>
           <div className="mt-6 space-y-1">
-            <h2 className="text-2xl font-semibold tracking-tight">
+            <p className="text-2xl font-semibold tracking-tight">
               Made for You
-            </h2>
+            </p>
             <p className="text-sm text-muted-foreground">
               Your personal playlists. Updated daily.
             </p>
@@ -68,7 +68,9 @@ export default function MusicPage() {
           </div>
         </TabsContent>
       </Tabs>
-    </>
+      <br>
+      </br>
+      </>
     </div>
   );
 }
