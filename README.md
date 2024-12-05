@@ -3,10 +3,10 @@
 
 > project based on [shadcn/ui](https://github.com/shadcn-ui/ui)'s music template
 
-This is a new redesign of my music player project built on [nextjs](https://nextjs.org/) and [shadcn/ui](https://ui.shadcn.com/) and as of now it is a bit functional, with album, and the artists page working, along with Firebase auth and its database (to save in library).`
+This is a new redesign of my music player project built on [nextjs](https://nextjs.org/) and [shadcn/ui](https://ui.shadcn.com/) and as of now it is a bit functional, with album, and the artists page working, along with Firebase auth and its database (to save in library).
 
 ### Preview
-![preview   ](image.png)
+![preview](https://github.com/sillyangel/project-still/blob/main/image.png?raw=true)
 
 ## Getting Started
 
