@@ -1,7 +1,7 @@
 'use client';
 
 import React, { createContext, useContext, useState } from 'react';
-
+import { Album } from '../data/albums';
 interface Track {
   name: string;
   url: string;
@@ -16,6 +16,7 @@ interface AudioPlayerContextProps {
   addToQueue: (track: Track) => void;
   playNextTrack: () => void;
   clearQueue: () => void;
+  addAlbumToQueue: (album: Album) => void;
 }
 
 const AudioPlayerContext = createContext<AudioPlayerContextProps | undefined>(undefined);
@@ -39,13 +40,21 @@ export const AudioPlayerProvider: React.FC<{ children: React.ReactNode }> = ({ c
       setCurrentTrack(nextTrack);
     }
   };
+  const addAlbumToQueue = async (album: Album) => {
+    const response = await fetch(album.tracklist);
+    const tracklist = await response.json();
+    tracklist.forEach((track: Track) => {
+      track.image = album.cover;
+      addToQueue(track);
+    });
+  };
 
   const clearQueue = () => {
     setQueue([]);
   };
 
   return (
-    <AudioPlayerContext.Provider value={{ currentTrack, playTrack, queue, addToQueue, playNextTrack, clearQueue }}>
+    <AudioPlayerContext.Provider value={{ currentTrack, playTrack, queue, addToQueue, playNextTrack, clearQueue, addAlbumToQueue }}>
       {children}
     </AudioPlayerContext.Provider>
   );
