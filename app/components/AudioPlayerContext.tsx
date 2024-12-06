@@ -5,6 +5,7 @@ import { Album } from '../data/albums';
 interface Track {
   name: string;
   url: string;
+  explicit: boolean;
   artists: string[];
   image: string; // Add image property
 }
@@ -17,6 +18,7 @@ interface AudioPlayerContextProps {
   playNextTrack: () => void;
   clearQueue: () => void;
   addAlbumToQueue: (album: Album) => void;
+  removeTrackFromQueue: (index: number) => void;
 }
 
 const AudioPlayerContext = createContext<AudioPlayerContextProps | undefined>(undefined);
@@ -28,7 +30,9 @@ export const AudioPlayerProvider: React.FC<{ children: React.ReactNode }> = ({ c
   const playTrack = (track: Track) => {
     setCurrentTrack(track);
   };
-
+  const removeTrackFromQueue = (index: number) => {
+    setQueue((prevQueue) => prevQueue.filter((_, i) => i !== index));
+  }
   const addToQueue = (track: Track) => {
     setQueue((prevQueue) => [...prevQueue, track]);
   };
@@ -45,6 +49,7 @@ export const AudioPlayerProvider: React.FC<{ children: React.ReactNode }> = ({ c
     const tracklist = await response.json();
     tracklist.forEach((track: Track) => {
       track.image = album.cover;
+      track.explicit = album.explicit ?? false;
       addToQueue(track);
     });
   };
@@ -54,7 +59,7 @@ export const AudioPlayerProvider: React.FC<{ children: React.ReactNode }> = ({ c
   };
 
   return (
-    <AudioPlayerContext.Provider value={{ currentTrack, playTrack, queue, addToQueue, playNextTrack, clearQueue, addAlbumToQueue }}>
+    <AudioPlayerContext.Provider value={{ currentTrack, playTrack, queue, addToQueue, playNextTrack, clearQueue, addAlbumToQueue, removeTrackFromQueue}}>
       {children}
     </AudioPlayerContext.Provider>
   );
