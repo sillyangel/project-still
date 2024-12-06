@@ -19,6 +19,7 @@ import {
 import { Album } from "../data/albums"
 import { playlists } from "../data/playlists"
 import Link from "next/link";
+import { useAudioPlayer } from "@/app/components/AudioPlayerContext"; // P3feb
 
 interface AlbumArtworkProps extends React.HTMLAttributes<HTMLDivElement> {
   album: Album
@@ -36,6 +37,7 @@ export function AlbumArtwork({
   ...props
 }: AlbumArtworkProps) {
   const router = useRouter();
+  const { addToQueue } = useAudioPlayer(); // P3feb
 
   const handleClick = () => {
     router.push(`/album/${album.id}`);
@@ -95,6 +97,8 @@ export function AlbumArtwork({
           <ContextMenuSeparator />
           <ContextMenuItem>Like</ContextMenuItem>
           <ContextMenuItem>Share</ContextMenuItem>
+          <ContextMenuSeparator /> {/* P107d */}
+          <ContextMenuItem onClick={() => addToQueue(album)}>Add Album to Queue</ContextMenuItem> {/* P107d */}
         </ContextMenuContent>
       </ContextMenu>
       <div className="space-y-1 text-sm" >

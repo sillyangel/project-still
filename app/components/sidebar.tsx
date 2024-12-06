@@ -20,6 +20,7 @@ export function Sidebar({ className, playlists }: SidebarProps) {
   const isBrowse = usePathname() === "/browse";
   const isAlbums = usePathname() === "/library/albums";
   const isArtists = usePathname() === "/library/artists";
+  const isQueue = usePathname() === "/queue";
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
@@ -73,6 +74,23 @@ export function Sidebar({ className, playlists }: SidebarProps) {
                   <rect width="7" height="7" x="3" y="14" rx="1" />
                 </svg>
                 Browse
+              </Button>
+            </Link>
+            <Link href="/queue">
+              <Button variant={isQueue ? "secondary" : "ghost"} className="w-full justify-start">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  className="mr-2 h-4 w-4"
+                >
+                  <path d="M3 6h18M3 12h18M3 18h18" />
+                </svg>
+                Queue
               </Button>
             </Link>
           </div>
