@@ -2,6 +2,7 @@
 
 import React, { createContext, useContext, useState } from 'react';
 import { Album, databases } from '../data/albums';
+import { Artist } from '../data/artists';
 interface Track {
   name: string;
   url: string;
@@ -19,6 +20,7 @@ interface AudioPlayerContextProps {
   clearQueue: () => void;
   addAlbumToQueue: (album: Album) => void;
   removeTrackFromQueue: (index: number) => void;
+  addArtistToQueue: (artist: Artist) => void;
 }
 
 const AudioPlayerContext = createContext<AudioPlayerContextProps | undefined>(undefined);
@@ -44,6 +46,14 @@ export const AudioPlayerProvider: React.FC<{ children: React.ReactNode }> = ({ c
       setCurrentTrack(nextTrack);
     }
   };
+  const addArtistToQueue = async (artist: Artist) => {
+    const baseUrl = databases[0].url;
+    const response = await fetch(`${baseUrl}${artist.name.toLowerCase().replace(/[\s,]+/g, '')}/tracks`);
+    const tracks = await response.json();
+    tracks.forEach((track: Track) => {
+      addToQueue(track);
+    });
+  }
   const addAlbumToQueue = async (album: Album) => {
     const response = await fetch(album.tracklist);
     const tracklist = await response.json();
@@ -63,7 +73,7 @@ export const AudioPlayerProvider: React.FC<{ children: React.ReactNode }> = ({ c
   };
 
   return (
-    <AudioPlayerContext.Provider value={{ currentTrack, playTrack, queue, addToQueue, playNextTrack, clearQueue, addAlbumToQueue, removeTrackFromQueue}}>
+    <AudioPlayerContext.Provider value={{ currentTrack, playTrack, queue, addToQueue, playNextTrack, clearQueue, addAlbumToQueue, removeTrackFromQueue, addArtistToQueue}}>
       {children}
     </AudioPlayerContext.Provider>
   );

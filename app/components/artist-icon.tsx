@@ -36,7 +36,7 @@ export function ArtistIcon({
   ...props
 }: ArtistIconProps) {
   const router = useRouter();
-  const { addToQueue } = useAudioPlayer();
+  const { addArtistToQueue } = useAudioPlayer();
   const namenormalized = artist.name.toLowerCase().replace(/[\s,]+/g, '');
   const handleClick = () => {
     router.push(`/artist/${namenormalized}`);
@@ -95,7 +95,7 @@ export function ArtistIcon({
           <ContextMenuItem>Like</ContextMenuItem>
           <ContextMenuItem>Share</ContextMenuItem>
           <ContextMenuSeparator />
-          <ContextMenuItem onClick={() => addToQueue(artist)}>Add Artist's Tracks to Queue</ContextMenuItem>
+          <ContextMenuItem onClick={() => addArtistToQueue(artist)}>Add Artist&apos;s Tracks to Queue</ContextMenuItem>
         </ContextMenuContent>
       </ContextMenu>
       <div className="space-y-1 text-sm">
