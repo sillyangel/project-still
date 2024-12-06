@@ -53,6 +53,10 @@ export const AudioPlayerProvider: React.FC<{ children: React.ReactNode }> = ({ c
 };
 
 export const useAudioPlayer = () => {
+  if (typeof window === 'undefined') {
+    throw new Error('useAudioPlayer must be used on the client side');
+  }
+
   const context = useContext(AudioPlayerContext);
   if (!context) {
     throw new Error('useAudioPlayer must be used within an AudioPlayerProvider');
