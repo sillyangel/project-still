@@ -24,6 +24,7 @@ interface PlayTrack {
   image: string;
   database: number;
   explicit: boolean;
+  length: string;
 }
 // trackurl is /album/artists/albums/[index]. + name + ".mp3"/
 
@@ -129,7 +130,8 @@ export default function AlbumPage() {
       url: url,
       image: album.cover,
       database: album.database,
-      explicit: false
+      explicit: false,
+      length: "0:00"
     } as PlayTrack);
   
   };

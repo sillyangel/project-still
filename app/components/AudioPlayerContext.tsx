@@ -1,13 +1,14 @@
 'use client';
 
-import React, { createContext, useContext, useState } from 'react';
-import { Album, databases } from '../data/albums';
+import React, { createContext, useContext, useState, useEffect } from 'react';
+import { Album, databases, allAlbums } from '../data/albums';
 import { Artist } from '../data/artists';
 interface Track {
   name: string;
   url: string;
   explicit: boolean;
   artists: string[];
+  length: string;
   image: string; // Add image property
 }
 
@@ -29,12 +30,25 @@ export const AudioPlayerProvider: React.FC<{ children: React.ReactNode }> = ({ c
   const [currentTrack, setCurrentTrack] = useState<Track | null>(null);
   const [queue, setQueue] = useState<Track[]>([]);
 
+  useEffect(() => {
+    const savedQueue = localStorage.getItem('audioQueue');
+    if (savedQueue) {
+      setQueue(JSON.parse(savedQueue));
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem('audioQueue', JSON.stringify(queue));
+  }, [queue]);
+
   const playTrack = (track: Track) => {
     setCurrentTrack(track);
   };
+
   const removeTrackFromQueue = (index: number) => {
     setQueue((prevQueue) => prevQueue.filter((_, i) => i !== index));
-  }
+  };
+
   const addToQueue = (track: Track) => {
     setQueue((prevQueue) => [...prevQueue, track]);
   };
@@ -46,24 +60,28 @@ export const AudioPlayerProvider: React.FC<{ children: React.ReactNode }> = ({ c
       setCurrentTrack(nextTrack);
     }
   };
+
   const addArtistToQueue = async (artist: Artist) => {
-    const baseUrl = databases[0].url;
-    const response = await fetch(`${baseUrl}${artist.name.toLowerCase().replace(/[\s,]+/g, '')}/tracks`);
-    const tracks = await response.json();
-    tracks.forEach((track: Track) => {
-      addToQueue(track);
-    });
-  }
+    const artistAlbums = allAlbums.filter(album => album.artist === artist.name);
+    for (const album of artistAlbums) {
+      await addAlbumToQueue(album);
+    }
+  };
+
   const addAlbumToQueue = async (album: Album) => {
     const response = await fetch(album.tracklist);
     const tracklist = await response.json();
     const baseUrl = databases.find(db => db.id === album.database)?.url;
+
     if (!baseUrl) return;
-  
+
     tracklist.forEach((track: Track, index: number) => {
+      console.log("baseURL", baseUrl);
+      console.log(`URL ${baseUrl}${album.artist.toLowerCase().replace(/[\s,]+/g, '')}/${album.name.toLowerCase().replace(/[\s,]+/g, '')}/${index + 1}.%20${track.name}.mp3`);
       track.image = album.cover;
       track.explicit = album.explicit ?? false;
-      track.url = `${baseUrl}${album.artist.toLowerCase().replace(/[\s,]+/g, '')}/${album.name.toLowerCase().replace(/[\s,]+/g, '')}/${index + 1} ${track.name}.mp3`;
+      track.url = `${baseUrl}${album.artist.toLowerCase().replace(/[\s,]+/g, '')}/${album.name.toLowerCase().replace(/[\s,]+/g, '')}/${index + 1}.%20${track.name}.mp3`;
+      track.length = album.length ?? '0:00';
       addToQueue(track);
     });
   };
@@ -73,7 +91,7 @@ export const AudioPlayerProvider: React.FC<{ children: React.ReactNode }> = ({ c
   };
 
   return (
-    <AudioPlayerContext.Provider value={{ currentTrack, playTrack, queue, addToQueue, playNextTrack, clearQueue, addAlbumToQueue, removeTrackFromQueue, addArtistToQueue}}>
+    <AudioPlayerContext.Provider value={{ currentTrack, playTrack, queue, addToQueue, playNextTrack, clearQueue, addAlbumToQueue, removeTrackFromQueue, addArtistToQueue }}>
       {children}
     </AudioPlayerContext.Provider>
   );
