@@ -3,6 +3,7 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { Album, databases, allAlbums } from '../data/albums';
 import { Artist } from '../data/artists';
+
 interface Track {
   name: string;
   url: string;
@@ -72,15 +73,12 @@ export const AudioPlayerProvider: React.FC<{ children: React.ReactNode }> = ({ c
     const response = await fetch(album.tracklist);
     const tracklist = await response.json();
     const baseUrl = databases.find(db => db.id === album.database)?.url;
-
     if (!baseUrl) return;
 
     tracklist.forEach((track: Track, index: number) => {
-      console.log("baseURL", baseUrl);
-      console.log(`URL ${baseUrl}${album.artist.toLowerCase().replace(/[\s,]+/g, '')}/${album.name.toLowerCase().replace(/[\s,]+/g, '')}/${index + 1}.%20${track.name}.mp3`);
       track.image = album.cover;
       track.explicit = album.explicit ?? false;
-      track.url = `${baseUrl}${album.artist.toLowerCase().replace(/[\s,]+/g, '')}/${album.name.toLowerCase().replace(/[\s,]+/g, '')}/${index + 1}.%20${track.name}.mp3`;
+      track.url = `${baseUrl}${album.artist.toLowerCase().replace(/[\s,]+/g, '')}/${album.name.toLowerCase().replace(/[\s,]+/g, '')}/${index + 1} ${track.name}.mp3`;
       track.length = album.length ?? '0:00';
       addToQueue(track);
     });
