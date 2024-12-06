@@ -1,7 +1,7 @@
 'use client';
 
 import React, { createContext, useContext, useState } from 'react';
-import { Album } from '../data/albums';
+import { Album, databases } from '../data/albums';
 interface Track {
   name: string;
   url: string;
@@ -47,9 +47,13 @@ export const AudioPlayerProvider: React.FC<{ children: React.ReactNode }> = ({ c
   const addAlbumToQueue = async (album: Album) => {
     const response = await fetch(album.tracklist);
     const tracklist = await response.json();
-    tracklist.forEach((track: Track) => {
+    const baseUrl = databases.find(db => db.id === album.database)?.url;
+    if (!baseUrl) return;
+  
+    tracklist.forEach((track: Track, index: number) => {
       track.image = album.cover;
       track.explicit = album.explicit ?? false;
+      track.url = `${baseUrl}${album.artist.toLowerCase().replace(/[\s,]+/g, '')}/${album.name.toLowerCase().replace(/[\s,]+/g, '')}/${index + 1} ${track.name}.mp3`;
       addToQueue(track);
     });
   };
