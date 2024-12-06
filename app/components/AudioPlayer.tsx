@@ -6,7 +6,7 @@ import ColorThief from '@neutrixs/colorthief';
 
 
 export const AudioPlayer: React.FC = () => {
-  const { currentTrack } = useAudioPlayer();
+  const { currentTrack, getNextTrack, playTrack } = useAudioPlayer();
   const audioRef = useRef<HTMLAudioElement>(null);
   const [progress, setProgress] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
@@ -33,9 +33,18 @@ export const AudioPlayer: React.FC = () => {
       }
     };
 
+    const handleTrackEnd = () => {
+      const nextTrack = getNextTrack();
+      if (nextTrack) {
+        playTrack(nextTrack);
+      }
+    };
+
     if (audioCurrent) {
       audioCurrent.addEventListener('timeupdate', updateProgress);
+      audioCurrent.addEventListener('ended', handleTrackEnd);
     }
+
     if (currentTrack) {
       const img = document.createElement('img') as HTMLImageElement;
       img.crossOrigin = 'Anonymous';
@@ -51,6 +60,7 @@ export const AudioPlayer: React.FC = () => {
     return () => {
       if (audioCurrent) {
         audioCurrent.removeEventListener('timeupdate', updateProgress);
+        audioCurrent.removeEventListener('ended', handleTrackEnd);
       }
     };
   }, [currentTrack]);
