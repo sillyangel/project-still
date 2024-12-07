@@ -136,7 +136,7 @@ export function Sidebar({ className, playlists }: SidebarProps) {
                   </svg>
                   Songs
                 </Button>
-                {/* <Button variant="ghost" className="w-full justify-start mb-2">
+                <Button variant="ghost" className="w-full justify-start mb-2">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 24 24"
@@ -151,7 +151,7 @@ export function Sidebar({ className, playlists }: SidebarProps) {
                     <circle cx="12" cy="7" r="4" />
                   </svg>
                   Made for You
-                </Button> */}
+                </Button>
                 <Link href="/library/artists">
                   <Button variant={isArtists ? "secondary" : "ghost"} className="w-full justify-start mb-2">
                     <svg
