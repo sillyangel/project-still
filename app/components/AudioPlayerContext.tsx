@@ -23,6 +23,7 @@ interface AudioPlayerContextProps {
   addAlbumToQueue: (album: Album) => void;
   removeTrackFromQueue: (index: number) => void;
   addArtistToQueue: (artist: Artist) => void;
+  playPreviousTrack: () => void;
 }
 
 const AudioPlayerContext = createContext<AudioPlayerContextProps | undefined>(undefined);
@@ -30,6 +31,7 @@ const AudioPlayerContext = createContext<AudioPlayerContextProps | undefined>(un
 export const AudioPlayerProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [currentTrack, setCurrentTrack] = useState<Track | null>(null);
   const [queue, setQueue] = useState<Track[]>([]);
+  const [playedTracks, setPlayedTracks] = useState<Track[]>([]);
 
   useEffect(() => {
     const savedQueue = localStorage.getItem('audioQueue');
@@ -57,8 +59,14 @@ export const AudioPlayerProvider: React.FC<{ children: React.ReactNode }> = ({ c
   const playNextTrack = () => {
     if (queue.length > 0) {
       const nextTrack = queue[0];
-      setQueue((prevQueue) => prevQueue.slice(1));
       setCurrentTrack(nextTrack);
+    }
+  };
+  const playPreviousTrack = () => {
+    if (playedTracks.length > 0) {
+      const previousTrack = playedTracks[playedTracks.length - 1];
+      setPlayedTracks((prevPlayedTracks) => prevPlayedTracks.slice(0, -1));
+      setCurrentTrack(previousTrack);
     }
   };
 
@@ -89,7 +97,7 @@ export const AudioPlayerProvider: React.FC<{ children: React.ReactNode }> = ({ c
   };
 
   return (
-    <AudioPlayerContext.Provider value={{ currentTrack, playTrack, queue, addToQueue, playNextTrack, clearQueue, addAlbumToQueue, removeTrackFromQueue, addArtistToQueue }}>
+    <AudioPlayerContext.Provider value={{ currentTrack, playTrack, queue, addToQueue, playNextTrack, clearQueue, addAlbumToQueue, removeTrackFromQueue, addArtistToQueue, playPreviousTrack }}>
       {children}
     </AudioPlayerContext.Provider>
   );

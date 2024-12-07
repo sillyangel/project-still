@@ -1,11 +1,11 @@
 import React, { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import { useAudioPlayer } from '@/app/components/AudioPlayerContext';
-import { FaPlay, FaPause, FaVolumeHigh } from "react-icons/fa6";
+import { FaPlay, FaPause, FaVolumeHigh, FaForward, FaBackward } from "react-icons/fa6";
 import ColorThief from '@neutrixs/colorthief';
 
 export const AudioPlayer: React.FC = () => {
-  const { currentTrack, addToQueue, playNextTrack, clearQueue } = useAudioPlayer();
+  const { currentTrack, playPreviousTrack, addToQueue, playNextTrack, clearQueue } = useAudioPlayer();
   const audioRef = useRef<HTMLAudioElement>(null);
   const [progress, setProgress] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
@@ -84,6 +84,7 @@ export const AudioPlayer: React.FC = () => {
     }
   };
 
+  
   if (!isClient) {
     return null;
   }
@@ -102,8 +103,14 @@ export const AudioPlayer: React.FC = () => {
               />
             </div>
           </div>
-          <button onClick={togglePlayPause}>
+          <button onClick={playPreviousTrack}>
+            <FaBackward />
+          </button>
+          <button className='mx-4' onClick={togglePlayPause}>
             {isPlaying ? <FaPause /> : <FaPlay />}
+          </button>
+          <button className='mx-4' onClick={playNextTrack}>
+            <FaForward />
           </button>
           <div className="relative ml-4">
             <button onClick={() => setShowVolumeSlider(!showVolumeSlider)}>
