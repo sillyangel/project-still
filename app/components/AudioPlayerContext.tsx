@@ -77,6 +77,7 @@ export const AudioPlayerProvider: React.FC<{ children: React.ReactNode }> = ({ c
     }
   };
 
+
   const addAlbumToQueue = async (album: Album) => {
     const response = await fetch(album.tracklist);
     const tracklist = await response.json();
