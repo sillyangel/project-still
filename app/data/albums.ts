@@ -5,6 +5,8 @@ export interface Album {
   artist: string;
   cover: string;
   database: number;
+  explicit?: boolean;
+  length?: string;
 }
 
 const databases = [

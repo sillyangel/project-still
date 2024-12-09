@@ -1,12 +1,11 @@
 import React, { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import { useAudioPlayer } from '@/app/components/AudioPlayerContext';
-import { FaPlay, FaPause, FaVolumeHigh } from "react-icons/fa6";
+import { FaPlay, FaPause, FaVolumeHigh, FaForward, FaBackward } from "react-icons/fa6";
 import ColorThief from '@neutrixs/colorthief';
 
-
 export const AudioPlayer: React.FC = () => {
-  const { currentTrack } = useAudioPlayer();
+  const { currentTrack, playPreviousTrack, addToQueue, playNextTrack, clearQueue } = useAudioPlayer();
   const audioRef = useRef<HTMLAudioElement>(null);
   const [progress, setProgress] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
@@ -35,6 +34,7 @@ export const AudioPlayer: React.FC = () => {
 
     if (audioCurrent) {
       audioCurrent.addEventListener('timeupdate', updateProgress);
+      audioCurrent.addEventListener('ended', playNextTrack);
     }
     if (currentTrack) {
       const img = document.createElement('img') as HTMLImageElement;
@@ -51,11 +51,10 @@ export const AudioPlayer: React.FC = () => {
     return () => {
       if (audioCurrent) {
         audioCurrent.removeEventListener('timeupdate', updateProgress);
+        audioCurrent.removeEventListener('ended', playNextTrack);
       }
     };
-  }, [currentTrack]);
-
-   
+  }, [currentTrack, playNextTrack]);
 
   const handleProgressClick = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     if (audioCurrent) {
@@ -85,6 +84,7 @@ export const AudioPlayer: React.FC = () => {
     }
   };
 
+  
   if (!isClient) {
     return null;
   }
@@ -103,8 +103,14 @@ export const AudioPlayer: React.FC = () => {
               />
             </div>
           </div>
-          <button onClick={togglePlayPause}>
+          <button onClick={playPreviousTrack}>
+            <FaBackward />
+          </button>
+          <button className='mx-4' onClick={togglePlayPause}>
             {isPlaying ? <FaPause /> : <FaPlay />}
+          </button>
+          <button className='mx-4' onClick={playNextTrack}>
+            <FaForward />
           </button>
           <div className="relative ml-4">
             <button onClick={() => setShowVolumeSlider(!showVolumeSlider)}>
@@ -124,6 +130,12 @@ export const AudioPlayer: React.FC = () => {
               </div>
             )}
           </div>
+          <button onClick={() => addToQueue(currentTrack)} className="ml-4">
+            Add to Queue
+          </button>
+          <button onClick={clearQueue} className="ml-4">
+            Clear Queue
+          </button>
         </div>
       ) : (
         <p>No track playing</p>

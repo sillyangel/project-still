@@ -18,6 +18,7 @@ import {
 
 import { Artist } from "../data/artists"
 import { playlists } from "../data/playlists"
+import { useAudioPlayer } from "@/app/components/AudioPlayerContext";
 
 interface ArtistIconProps extends React.HTMLAttributes<HTMLDivElement> {
   artist: Artist
@@ -35,6 +36,7 @@ export function ArtistIcon({
   ...props
 }: ArtistIconProps) {
   const router = useRouter();
+  const { addArtistToQueue } = useAudioPlayer();
   const namenormalized = artist.name.toLowerCase().replace(/[\s,]+/g, '');
   const handleClick = () => {
     router.push(`/artist/${namenormalized}`);
@@ -92,6 +94,8 @@ export function ArtistIcon({
           <ContextMenuSeparator />
           <ContextMenuItem>Like</ContextMenuItem>
           <ContextMenuItem>Share</ContextMenuItem>
+          <ContextMenuSeparator />
+          <ContextMenuItem onClick={() => addArtistToQueue(artist)}>Add Artist&apos;s Tracks to Queue</ContextMenuItem>
         </ContextMenuContent>
       </ContextMenu>
       <div className="space-y-1 text-sm">
