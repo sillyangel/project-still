@@ -7,6 +7,7 @@ import { AudioPlayerProvider } from "./components/AudioPlayerContext";
 import { Metadata } from "next";
 import type { Viewport } from 'next';
 import Ihateserverside from './components/ihateserverside';
+import FeedbackPopup from './components/feedbackpopup';
 
 export const viewport: Viewport = {
   themeColor: 'black',
@@ -60,6 +61,7 @@ export default function Layout({ children }: LayoutProps) {
           <Ihateserverside>
             {children}
           </Ihateserverside>
+          <FeedbackPopup />
         </AudioPlayerProvider>
       </body>
     </html>
