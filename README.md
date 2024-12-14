@@ -1,5 +1,6 @@
-# playmusic redesign
-> Project Still is le codename
+![splash](https://github.com/sillyangel/project-still/blob/main/4xnored.png?raw=true)
+# offbrand spotify (project still)
+> still water
 
 > project based on [shadcn/ui](https://github.com/shadcn-ui/ui)'s music template
 
