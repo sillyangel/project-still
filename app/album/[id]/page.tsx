@@ -25,6 +25,7 @@ interface PlayTrack {
   database: number;
   explicit: boolean;
   length: string;
+  album: string;
 }
 // trackurl is /album/artists/albums/[index]. + name + ".mp3"/
 
@@ -44,7 +45,7 @@ export default function AlbumPage() {
   const [loading, setLoading] = useState(true);
   const [isFollowing, setIsFollowing] = useState(false);
   const user = auth.currentUser;
-  const { playTrack } = useAudioPlayer();
+  const { playTrack, addAlbumToQueue } = useAudioPlayer();
 
   useEffect(() => {
     const fetchAlbum = async () => {
@@ -131,7 +132,8 @@ export default function AlbumPage() {
       image: album.cover,
       database: album.database,
       explicit: false,
-      length: "0:00"
+      length: '0:00',
+      album: album.name
     } as PlayTrack);
   
   };
@@ -159,7 +161,7 @@ export default function AlbumPage() {
             <Link href={`/artist/${normalizedArtistName}`}>
               <p className="text-xl text-blue-500 mt-0 mb-4 underline">{album.artist}</p>
             </Link>
-            <Button className="mt-56">
+            <Button className="mt-56" onClick={() => addAlbumToQueue(album)}>
               <Play />
             </Button>
           </div>

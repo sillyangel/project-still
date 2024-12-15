@@ -3,6 +3,7 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { Album, databases, allAlbums } from '../data/albums';
 import { Artist } from '../data/artists';
+import { auth } from '../firebase/config';
 
 interface Track {
   name: string;
@@ -11,6 +12,7 @@ interface Track {
   artists: string[];
   length: string;
   image: string; // Add image property
+  album: string;
 }
 
 interface AudioPlayerContextProps {
@@ -32,6 +34,7 @@ export const AudioPlayerProvider: React.FC<{ children: React.ReactNode }> = ({ c
   const [currentTrack, setCurrentTrack] = useState<Track | null>(null);
   const [queue, setQueue] = useState<Track[]>([]);
   const [playedTracks, setPlayedTracks] = useState<Track[]>([]);
+  const userID = auth.currentUser?.uid;
 
   useEffect(() => {
     const savedQueue = localStorage.getItem('audioQueue');
@@ -56,11 +59,17 @@ export const AudioPlayerProvider: React.FC<{ children: React.ReactNode }> = ({ c
     setQueue((prevQueue) => [...prevQueue, track]);
   };
 
-  const playNextTrack = () => {
-    if (queue.length > 0) {
+  const playNextTrack = async() => {
+     // real code
+     if (queue.length > 0) {
       const nextTrack = queue[0];
       setCurrentTrack(nextTrack);
     }
+
+    // get request to api
+    const response = await fetch(`https://api.offbrand.sillyangel.xyz/api/song?song=${currentTrack?.name}&artists=${currentTrack?.artists.join(', ')}&album=${currentTrack?.album}&userID=${userID}`); 
+    const data = await response.json();
+    console.log(data);
   };
   const playPreviousTrack = () => {
     if (playedTracks.length > 0) {
@@ -87,7 +96,7 @@ export const AudioPlayerProvider: React.FC<{ children: React.ReactNode }> = ({ c
     tracklist.forEach((track: Track, index: number) => {
       track.image = album.cover;
       track.explicit = album.explicit ?? false;
-      track.url = `${baseUrl}${album.artist.toLowerCase().replace(/[\s,]+/g, '')}/${album.name.toLowerCase().replace(/[\s,]+/g, '')}/${index + 1} ${track.name}.mp3`;
+      track.url = `${baseUrl}${album.artist.toLowerCase().replace(/[\s,]+/g, '')}/${album.name.toLowerCase().replace(/[\s,]+/g, '')}/${index + 1}. ${track.name}.mp3`;
       track.length = album.length ?? '0:00';
       addToQueue(track);
     });

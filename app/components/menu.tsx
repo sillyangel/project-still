@@ -23,9 +23,11 @@ import { signOut } from "firebase/auth";
 interface MenuProps {
   toggleSidebar: () => void;
   isSidebarVisible: boolean;
+  toggleStatusBar: () => void;
+  isStatusBarVisible: boolean;
 }
 
-export function Menu({ toggleSidebar, isSidebarVisible }: MenuProps) {
+export function Menu({ toggleSidebar, isSidebarVisible, toggleStatusBar, isStatusBarVisible }: MenuProps) {
     const [isFullScreen, setIsFullScreen] = useState(false)
     const [displayName, setDisplayName] = useState("not signed in")
     const [userEmail, setUserEmail] = useState("not signed in")
@@ -229,8 +231,8 @@ export function Menu({ toggleSidebar, isSidebarVisible }: MenuProps) {
             <MenubarCheckboxItem disabled>Show Playing Next</MenubarCheckboxItem>
             <MenubarCheckboxItem disabled>Show Lyrics</MenubarCheckboxItem>
             <MenubarSeparator />
-            <MenubarItem inset disabled>
-              Show Status Bar
+            <MenubarItem inset onClick={toggleStatusBar}>
+              {isStatusBarVisible ? "Hide Status Bar" : "Show Status Bar"}
             </MenubarItem>
             <MenubarSeparator />
             <MenubarItem inset onClick={toggleSidebar}>
@@ -250,7 +252,7 @@ export function Menu({ toggleSidebar, isSidebarVisible }: MenuProps) {
             ) : (
               <>
                   <MenubarLabel>{displayName}</MenubarLabel>
-                  <MenubarItem >{userEmail}</MenubarItem>
+                  <MenubarItem onClick={async () => router.push(`/user/${auth.currentUser?.uid}`)}>{userEmail}</MenubarItem>
                 <MenubarSeparator />
               </>
             )}

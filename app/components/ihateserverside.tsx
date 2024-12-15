@@ -13,13 +13,17 @@ interface IhateserversideProps {
 const Ihateserverside: React.FC<IhateserversideProps> = ({ children }) => {
   
   const [isSidebarVisible, setIsSidebarVisible] = useState(true);
+  const [isStatusBarVisible, setIsStatusBarVisible] = useState(true);
   const toggleSidebar = () => {
     setIsSidebarVisible(!isSidebarVisible);
   };
+  const toggleStatusBar = () => {
+    setIsStatusBarVisible(!isStatusBarVisible)
+  }
   return (
     <div className="hidden md:block">
       <div className="sticky top-0 z-10 bg-background">
-        <Menu toggleSidebar={toggleSidebar} isSidebarVisible={isSidebarVisible} />
+        <Menu toggleSidebar={toggleSidebar} isSidebarVisible={isSidebarVisible} toggleStatusBar={toggleStatusBar} isStatusBarVisible={isStatusBarVisible}/>
       </div>
       <div className="border-t">
         <div className="bg-background">
@@ -33,7 +37,11 @@ const Ihateserverside: React.FC<IhateserversideProps> = ({ children }) => {
           </div>
         </div>
       </div>
+      <div className={isStatusBarVisible ? "": "hidden"}>
+      {isStatusBarVisible && (
       <AudioPlayer />
+    )}
+    </div>
     </div>
   );
 };

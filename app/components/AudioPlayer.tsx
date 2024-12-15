@@ -1,8 +1,10 @@
+'use client';
 import React, { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import { useAudioPlayer } from '@/app/components/AudioPlayerContext';
 import { FaPlay, FaPause, FaVolumeHigh, FaForward, FaBackward } from "react-icons/fa6";
 import ColorThief from '@neutrixs/colorthief';
+import { auth } from '@/app/firebase/config';
 
 export const AudioPlayer: React.FC = () => {
   const { currentTrack, playPreviousTrack, addToQueue, playNextTrack, clearQueue } = useAudioPlayer();
@@ -10,6 +12,7 @@ export const AudioPlayer: React.FC = () => {
   const [progress, setProgress] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
   const [showVolumeSlider, setShowVolumeSlider] = useState(false);
+  const userID = auth.currentUser?.uid;
   const [volume, setVolume] = useState(1);
   const [isClient, setIsClient] = useState(false);
   const [dominantColor, setDominantColor] = useState<string>('#ff0000'); // Default to red
@@ -31,7 +34,6 @@ export const AudioPlayer: React.FC = () => {
         setProgress((audioCurrent.currentTime / audioCurrent.duration) * 100);
       }
     };
-
     if (audioCurrent) {
       audioCurrent.addEventListener('timeupdate', updateProgress);
       audioCurrent.addEventListener('ended', playNextTrack);
@@ -55,7 +57,7 @@ export const AudioPlayer: React.FC = () => {
       }
     };
   }, [currentTrack, playNextTrack]);
-
+  
   const handleProgressClick = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     if (audioCurrent) {
       const rect = e.currentTarget.getBoundingClientRect();
@@ -75,7 +77,7 @@ export const AudioPlayer: React.FC = () => {
       setIsPlaying(!isPlaying);
     }
   };
-
+  console.log(userID);
   const handleVolumeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newVolume = parseFloat(e.target.value);
     setVolume(newVolume);

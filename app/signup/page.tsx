@@ -14,18 +14,34 @@ export default function MusicPage() {
   const [email, setEmail] = useState('');
   const [displayname, setdisplayname] = useState('');
   const [password, setPassword] = useState('');
+  const [referralcode, setcode] = useState('');
   const [createUserWithEmailAndPassword] = useCreateUserWithEmailAndPassword(auth);
   const router = useRouter();
 
   const handleSignIn = async () => {
+    if (!email || !password) {
+      alert('Email and password are required');
+      return;
+    }
+  
     try {
-      // sign up user function
+      // Referral code logic
+      if (referralcode) {
+        const referralResponse = await fetch(`https://api.sillyangel.xyz/api/referral-codes/use?code=${referralcode}&email=${email}`);
+        const referralData = await referralResponse.json();
+        if (!referralResponse.ok) {
+          //eg error {"error":"Referral code not found."}
+          alert(referralData.error);
+          return;
+        }
+      }
+      // Sign up user function
       const res = await createUserWithEmailAndPassword(email, password);
       console.log({ res });
       sessionStorage.setItem('user', 'true');
       setEmail('');
       setPassword('');
-      // create user profile
+  
       if (res && res.user) {
         const profileData = {
           displayname: displayname,
@@ -33,14 +49,16 @@ export default function MusicPage() {
           id: res.user.uid
         };
         createUserProfile(res.user.uid, profileData);
+        router.push('/');
       }
+  
       if (auth.currentUser) {
         updateProfile(auth.currentUser, { displayName: displayname })
           .catch((error) => {
             alert("An error happened when updating profile: " + error.message);
           });
       }
-      //finished
+  
       router.push('/');
     } catch (e) {
       console.error(e);
@@ -84,6 +102,13 @@ export default function MusicPage() {
                   placeholder="Password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
+                  className="w-full p-3 mb-4 text-white placeholder-gray-500"
+                />
+                <Input
+                  type="text"
+                  placeholder="Referral Code"
+                  value={referralcode}
+                  onChange={(e) => setcode(e.target.value)}
                   className="w-full p-3 mb-4 text-white placeholder-gray-500"
                 />
                 <Button

@@ -240,7 +240,8 @@ export default function MusicPage() {
               </div>
           </div>
           <Separator className="my-4" />
-            
+          
+          <Separator className="my-4" />
           <div className="flex items-center justify-between">
             <div className="space-y-1">
               <p className="text-2xl font-semibold tracking-tight">

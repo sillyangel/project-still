@@ -21,7 +21,9 @@ export function Sidebar({ className, playlists }: SidebarProps) {
   const isAlbums = usePathname() === "/library/albums";
   const isArtists = usePathname() === "/library/artists";
   const isQueue = usePathname() === "/queue";
-
+  const isHistory = usePathname() === "/history";
+  const isSongs = usePathname() === "/library/songs";
+  
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
       setUser(user);
@@ -101,7 +103,7 @@ export function Sidebar({ className, playlists }: SidebarProps) {
                 Library
               </p>
               <div className="space-y-1">
-                <Button variant="ghost" className="w-full justify-start mb-2">
+                <Button variant="ghost" className="w-full justify-start mb-1">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 24 24"
@@ -120,50 +122,18 @@ export function Sidebar({ className, playlists }: SidebarProps) {
                   </svg>
                   Playlists
                 </Button>
-                <Button variant="ghost" className="w-full justify-start mb-2">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    className="mr-2 h-4 w-4"
-                  >
+                <Link href="/library/songs">
+                <Button variant={isSongs ? "secondary" : "ghost"} className="w-full justify-start mb-2">
+                  <svg className="mr-2 h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                     <circle cx="8" cy="18" r="4" />
                     <path d="M12 18V2l7 4" />
                   </svg>
                   Songs
                 </Button>
-                <Button variant="ghost" className="w-full justify-start mb-2">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    className="mr-2 h-4 w-4"
-                  >
-                    <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" />
-                    <circle cx="12" cy="7" r="4" />
-                  </svg>
-                  Made for You
-                </Button>
+                </Link>
                 <Link href="/library/artists">
-                  <Button variant={isArtists ? "secondary" : "ghost"} className="w-full justify-start mb-2">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      className="mr-2 h-4 w-4"
-                    >
+                <Button variant={isArtists ? "secondary" : "ghost"} className="w-full justify-start mb-2">
+                <svg className="mr-2 h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" >
                       <path d="m12 8-9.04 9.06a2.82 2.82 0 1 0 3.98 3.98L16 12" />
                       <circle cx="17" cy="7" r="5" />
                     </svg>
@@ -188,6 +158,24 @@ export function Sidebar({ className, playlists }: SidebarProps) {
                       <path d="M4 4v16" />
                     </svg>
                     Albums
+                  </Button>
+                </Link>
+                <Link href="/history">
+                  <Button variant={isHistory ? "secondary" : "ghost"} className="w-full justify-start mb-2">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      className="mr-2 h-4 w-4"
+                    >
+                      <path d="M12 2C6.48 2 2 6.48 2 12c0 5.52 4.48 10 10 10 5.52 0 10-4.48 10-10 0-5.52-4.48-10-10-10Z" />
+                      <path d="M12 8v4l4 2" />
+                    </svg>
+                    History
                   </Button>
                 </Link>
               </div>
