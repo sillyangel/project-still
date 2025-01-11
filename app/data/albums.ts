@@ -196,38 +196,38 @@ const allAlbums: Album[] = [
     cover: "https://offbrandspotifydb.web.app/AlbumArtwork/ChildishGambino/CAMP.jpg",
     database: 4
   },
-  {
-    id: "23",
-    tracklist: "https://offbrandspotifydb.web.app/tracklist/dontoliver/heavenorhell.json",
-    name: "Heaven or Hell",
-    artist: "Don Toliver",
-    cover: "https://offbrandspotifydb.web.app/AlbumArtwork/DonToliver/HEAVENORHELL.jpg",
-    database: 4
-  },
-  {
-    id: "24",
-    tracklist: "https://offbrandspotifydb.web.app/tracklist/dontoliver/lifeofadon.json",
-    name: "Life of a Don",
-    artist: "Don Toliver",
-    cover: "https://offbrandspotifydb.web.app/AlbumArtwork/DonToliver/LIFEOFADON.jpg",
-    database: 4
-  }, 
-  {
-    id: "25",
-    tracklist: "https://offbrandspotifydb.web.app/tracklist/dontoliver/hardstonepsycho.json",
-    name: "Hardstone Psycho",
-    artist: "Don Toliver",
-    cover: "https://offbrandspotifydb.web.app/AlbumArtwork/DonToliver/HARDSTONEPSYCHO.jpg",
-    database: 4
-  },
-  {
-    id: "26",
-    tracklist: "https://offbrandspotifydb.web.app/tracklist/dontoliver/lovesickdeluxe.json",
-    name: "Love Sick (Deluxe)",
-    artist: "Don Toliver",
-    cover: "https://offbrandspotifydb.web.app/AlbumArtwork/DonToliver/LOVESICK.jpg",
-    database: 4
-  },
+  // {
+  //   id: "23",
+  //   tracklist: "https://offbrandspotifydb.web.app/tracklist/dontoliver/heavenorhell.json",
+  //   name: "Heaven or Hell",
+  //   artist: "Don Toliver",
+  //   cover: "https://offbrandspotifydb.web.app/AlbumArtwork/DonToliver/HEAVENORHELL.jpg",
+  //   database: 4
+  // },
+  // {
+  //   id: "24",
+  //   tracklist: "https://offbrandspotifydb.web.app/tracklist/dontoliver/lifeofadon.json",
+  //   name: "Life of a Don",
+  //   artist: "Don Toliver",
+  //   cover: "https://offbrandspotifydb.web.app/AlbumArtwork/DonToliver/LIFEOFADON.jpg",
+  //   database: 4
+  // }, 
+  // {
+  //   id: "25",
+  //   tracklist: "https://offbrandspotifydb.web.app/tracklist/dontoliver/hardstonepsycho.json",
+  //   name: "Hardstone Psycho",
+  //   artist: "Don Toliver",
+  //   cover: "https://offbrandspotifydb.web.app/AlbumArtwork/DonToliver/HARDSTONEPSYCHO.jpg",
+  //   database: 4
+  // },
+  // {
+  //   id: "26",
+  //   tracklist: "https://offbrandspotifydb.web.app/tracklist/dontoliver/lovesickdeluxe.json",
+  //   name: "Love Sick (Deluxe)",
+  //   artist: "Don Toliver",
+  //   cover: "https://offbrandspotifydb.web.app/AlbumArtwork/DonToliver/LOVESICK.jpg",
+  //   database: 4
+  // },
   {
     id: "27",
     tracklist: "https://offbrandspotifydb.web.app/tracklist/tylerthecreator/wolf.json",

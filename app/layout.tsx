@@ -53,7 +53,7 @@ export default function Layout({ children }: LayoutProps) {
 
   return (
     <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiase dark`}>
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiase dark bg-background`}>
         <AudioPlayerProvider>
           <SpeedInsights />
           <Analytics />

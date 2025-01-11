@@ -5,7 +5,6 @@ import { Menu } from "@/app/components/menu";
 import { Sidebar } from "@/app/components/sidebar";
 import { playlists } from "@/app/data/playlists";
 import { AudioPlayer } from "./AudioPlayer";
-import Footer from "./footer";
 import { Toaster } from "@/components/ui/toaster"
 
 interface IhateserversideProps {
@@ -23,7 +22,7 @@ const Ihateserverside: React.FC<IhateserversideProps> = ({ children }) => {
     }
   };
   return (
-    <div className="hidden md:flex flex-col min-h-screen bg-background">
+    <div className="hidden md:block">
       {/* Top Menu */}
       <div className="sticky top-0 z-10 bg-background border-b">
         <Menu
@@ -35,14 +34,16 @@ const Ihateserverside: React.FC<IhateserversideProps> = ({ children }) => {
       </div>
 
       {/* Main Content Area */}
-      <div className={`${isSidebarVisible ? "grid lg:grid-cols-5" : ""}`}>
+      <div className={`h-screen ${isSidebarVisible ? "grid lg:grid-cols-5" : ""}`}>
+      {isSidebarVisible && (
           <Sidebar
             playlists={playlists}
-            className="hidden lg:block border-r"
+            className={`hidden lg:block `}
+            onTransitionEnd={handleTransitionEnd}
           />
-          <div className={`col-span-3 lg:col-span-4`}>
+      )}
+          <div className={`border-l col-span-3 lg:col-span-4`}>
               <div>{children}</div>
-          <Footer />
         </div>
       </div>
 
