@@ -298,7 +298,7 @@ export function Menu({ toggleSidebar, isSidebarVisible, toggleStatusBar, isStatu
               </div>
               <Separator />
               <p>
-                a music player that doesn't (yet) play music
+                a music player that doesn&apos;t (yet) play music
               </p>
                 <div className="flex space-x-4">
                 <a href="https://github.com/sillyangel/project-still" target="_blank" rel="noreferrer">
