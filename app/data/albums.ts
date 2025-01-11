@@ -14,7 +14,8 @@ const databases = [
   { id: 1, url: "https://tuahdb.web.app/" },
   { id: 2, url: "https://playstorage2.web.app/" },
   { id: 3, url: "https://playstorage3.web.app/" },
-  { id: 4, url: "https://playstorage3-e9531.web.app/" }
+  { id: 4, url: "https://playstorage3-e9531.web.app/" },
+  { id: 5, url: "https://sillyangel.hackclub.app/"}
 ];
 
 // /music/{artist}/{album}/{`${tracklist.index} + 1` + ${tracklist.name} + ".mp3"}
@@ -65,7 +66,7 @@ const allAlbums: Album[] = [
     name: "808s & Heartbreak",
     artist: "Kanye West",
     cover: "https://offbrandspotifydb.web.app/AlbumArtwork/KanyeWest/808SHEARTBREAK.jpg",
-    database: 2
+    database: 5
   },
   {
     id: "7",
@@ -73,16 +74,15 @@ const allAlbums: Album[] = [
     name: "Donda (Deluxe)",
     artist: "Kanye West",
     cover: "https://offbrandspotifydb.web.app/AlbumArtwork/KanyeWest/DONDA.jpg",
-    database: 1
+    database: 5
   },
   {
     id: "8",
     tracklist: "https://offbrandspotifydb.web.app/tracklist/kanyewest/graduation.json",
     name: "Graduation",
     artist: "Kanye West",
-    cover: 
-      "https://offbrandspotifydb.web.app/AlbumArtwork/KanyeWest/GRADUATION.jpg",
-      database: 2
+    cover: "https://offbrandspotifydb.web.app/AlbumArtwork/KanyeWest/GRADUATION.jpg",
+    database: 5
     },
   {
     id: "9",
@@ -90,7 +90,7 @@ const allAlbums: Album[] = [
     name: "Jesus is King",
     artist: "Kanye West",
     cover: "https://offbrandspotifydb.web.app/AlbumArtwork/KanyeWest/JESUSISKING.jpg",
-    database: 1
+    database: 5
   },
   {
     id: "10",
@@ -98,7 +98,7 @@ const allAlbums: Album[] = [
     name: "Kids See Ghosts",
     artist: "Kanye West",
     cover: "https://offbrandspotifydb.web.app/AlbumArtwork/KanyeWest/KIDSSEEGHOSTS.jpg",
-    database: 2
+    database: 5
   },
   {
     id: "11",
@@ -106,7 +106,7 @@ const allAlbums: Album[] = [
     name: "Late Registration",
     artist: "Kanye West",
     cover: "https://offbrandspotifydb.web.app/AlbumArtwork/KanyeWest/LATEREGISTRATION.jpg",
-    database: 2
+    database: 5
   },
   {
     id: "12",
@@ -114,7 +114,7 @@ const allAlbums: Album[] = [
     name: "My Beautiful Dark Twisted Fantasy",
     artist: "Kanye West",
     cover: "https://offbrandspotifydb.web.app/AlbumArtwork/KanyeWest/MYBEAUTIFULDARKTWISTEDFANTASY.jpg",
-    database: 1
+    database: 5
   },
   {
     id: "13",
@@ -122,7 +122,7 @@ const allAlbums: Album[] = [
     name: "The College Dropout",
     artist: "Kanye West",
     cover: "https://offbrandspotifydb.web.app/AlbumArtwork/KanyeWest/THECOLLEGEDROPOUT.jpg",
-    database: 2
+    database: 5
   },
   {
     id: "14",
@@ -130,7 +130,7 @@ const allAlbums: Album[] = [
     name: "The Life of Pablo",
     artist: "Kanye West",
     cover: "https://offbrandspotifydb.web.app/AlbumArtwork/KanyeWest/THELIFEOFPABLO.jpg",
-    database: 2
+    database: 5
   },
   {
     id: "15",
@@ -138,7 +138,7 @@ const allAlbums: Album[] = [
     name: "Watch The Throne (Deluxe)",
     artist: "Kanye West",
     cover: "https://offbrandspotifydb.web.app/AlbumArtwork/KanyeWest/WATCHTHETHRONE.jpg",
-    database: 2
+    database: 5
   },
   {
     id: "16",
@@ -146,7 +146,7 @@ const allAlbums: Album[] = [
     name: "Ye",
     artist: "Kanye West",
     cover: "https://offbrandspotifydb.web.app/AlbumArtwork/KanyeWest/YE.jpg",
-    database: 1 
+    database: 5 
   },
   {
     id: "17",
@@ -154,7 +154,7 @@ const allAlbums: Album[] = [
     name: "Yeezus",
     artist: "Kanye West",
     cover: "https://offbrandspotifydb.web.app/AlbumArtwork/KanyeWest/YEEZUS.jpg",
-    database: 1
+    database: 5
   },
   {
     id: "18",
@@ -234,7 +234,7 @@ const allAlbums: Album[] = [
     name: "Wolf",
     artist: "Tyler, The Creator",
     cover: "https://offbrandspotifydb.web.app/AlbumArtwork/TylerTheCreator/WOLF.jpg",
-    database: 1
+    database: 5
   },
   {
     id: "28",
@@ -242,7 +242,7 @@ const allAlbums: Album[] = [
     name: "Flower Boy",
     artist: "Tyler, The Creator",
     cover: "https://offbrandspotifydb.web.app/AlbumArtwork/TylerTheCreator/FLOWERBOY.jpg",
-    database: 1
+    database: 5
   },
   {
     id: "29",
@@ -250,7 +250,7 @@ const allAlbums: Album[] = [
     name: "Igor",
     artist: "Tyler, The Creator",
     cover: "https://offbrandspotifydb.web.app/AlbumArtwork/TylerTheCreator/IGOR.jpg",
-    database: 1
+    database: 5
   },
   {
     id: "30",
@@ -258,14 +258,14 @@ const allAlbums: Album[] = [
     name: "Cherry Bomb",
     artist: "Tyler, The Creator",
     cover: "https://offbrandspotifydb.web.app/AlbumArtwork/TylerTheCreator/CHERRYBOMB.jpg",
-    database: 1
+    database: 5
   },
   {
     id: "31",
     tracklist: "https://offbrandspotifydb.web.app/tracklist/tylerthecreator/goblin.json",
     name: "Goblin",
     artist: "Tyler, The Creator",
-    database: 1,
+    database: 5,
     cover: "https://offbrandspotifydb.web.app/AlbumArtwork/TylerTheCreator/GOBLIN.jpg",
   },
   {
@@ -274,7 +274,7 @@ const allAlbums: Album[] = [
     name: "Call Me If You Get Lost",
     artist: "Tyler, The Creator",
     cover: "https://offbrandspotifydb.web.app/AlbumArtwork/TylerTheCreator/CALLMEIFYOUGETLOST.jpg",
-    database: 3
+    database: 5
   },
   {
     id: "33",
@@ -282,7 +282,7 @@ const allAlbums: Album[] = [
     name: "Call Me If You Get Lost: The Estate Sale",
     artist: "Tyler, The Creator",
     cover: "https://offbrandspotifydb.web.app/AlbumArtwork/TylerTheCreator/CALLMEIFYOUGETLOSTESTATESELL.jpg",
-    database: 3
+    database: 5
   },
   {
     id: "34",
@@ -290,7 +290,7 @@ const allAlbums: Album[] = [
     name: "Chromakopia",
     artist: "Tyler, The Creator",
     cover: "https://offbrandspotifydb.web.app/AlbumArtwork/TylerTheCreator/CHROMAKOPIA.jpg",
-    database: 4
+    database: 5
   },
   {
     id: "35",
