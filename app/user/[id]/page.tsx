@@ -11,6 +11,7 @@ import { doc, setDoc, getDoc } from 'firebase/firestore';
 import { allArtists } from '@/app/data/artists';
 import { ArtistIcon } from '@/app/components/artist-icon';
 import { Separator } from '@/components/ui/separator';
+import Loading  from '@/app/components/loading';
 
 interface Artist {
   name: string;
@@ -71,7 +72,7 @@ const UserProfile = () => {
     };
 
     if (loading) {
-        return <div>Loading...</div>;
+        return <Loading />;
     }
 
     if (!profile) {
@@ -111,6 +112,8 @@ const UserProfile = () => {
                 </div>
             )}
             <div className="h-full px-4 lg:px-8">
+                <h1 className="text-2xl font-semibold tracking-tight">Bio</h1>
+                <Separator className="mt-0 mb-0" />
                 <div className="flex space-x-4 pb-4 pt-3">
                     <p className="text-xl">{profile.bio}</p>
                 </div>

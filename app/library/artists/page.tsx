@@ -10,6 +10,7 @@ import { db, auth } from '@/app/firebase/config';
 import { doc, getDoc } from 'firebase/firestore';
 import { useParams } from 'next/navigation';
 import { allArtists } from '@/app/data/artists';
+import Loading  from '@/app/components/loading';
 
 interface Artist {
   name: string;
@@ -43,7 +44,7 @@ export default function ArtistPage() {
   }, [user]);
 
   if (loading) {
-    return <p>Loading...</p>;
+    return <Loading />;
   }
 
   return (

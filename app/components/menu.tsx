@@ -1,6 +1,7 @@
-'use client';
 import { useCallback } from "react";
 import { useRouter } from 'next/navigation';
+import Image from "next/image";
+import { Github, Mail } from "lucide-react"
 import {
     Menubar,
     MenubarCheckboxItem,
@@ -19,6 +20,19 @@ import { useState, useEffect } from "react"
 import { auth } from "@/app/firebase/config"
 import { onAuthStateChanged } from "firebase/auth"
 import { signOut } from "firebase/auth";
+import { Button } from "@/components/ui/button"
+import { Separator } from '@/components/ui/separator';
+import {
+    Dialog,
+    DialogContent,
+    DialogDescription,
+    DialogFooter,
+    DialogHeader,
+    DialogTitle,
+    DialogTrigger,
+  } from "@/components/ui/dialog"
+import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
 
 interface MenuProps {
   toggleSidebar: () => void;
@@ -32,6 +46,7 @@ export function Menu({ toggleSidebar, isSidebarVisible, toggleStatusBar, isStatu
     const [displayName, setDisplayName] = useState("not signed in")
     const [userEmail, setUserEmail] = useState("not signed in")
     const router = useRouter();
+    const [open, setOpen] = useState(false);
 
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -79,11 +94,12 @@ export function Menu({ toggleSidebar, isSidebarVisible, toggleStatusBar, isStatu
     }, [router, toggleSidebar, handleFullScreen]);
 
     return (
+      <>
       <Menubar className="rounded-none border-b border-none px-2 lg:px-4">
         <MenubarMenu>
           <MenubarTrigger className="font-bold">offbrand spotify</MenubarTrigger>
           <MenubarContent>
-            <MenubarItem onClick={() => router.push('/about')}>About Music</MenubarItem>
+            <MenubarItem onClick={() => setOpen(true)}>About Music</MenubarItem>
             <MenubarSeparator />
             <MenubarItem onClick={() => router.push('/settings')}>
               Preferences <MenubarShortcut>⌘,</MenubarShortcut>
@@ -101,6 +117,7 @@ export function Menu({ toggleSidebar, isSidebarVisible, toggleStatusBar, isStatu
             </MenubarItem>
           </MenubarContent>
         </MenubarMenu>
+        <div className="border-r-4 w-0"><p className="invisible">j</p></div>
         <MenubarMenu>
           <MenubarTrigger className="relative">File</MenubarTrigger>
           <MenubarContent>
@@ -265,5 +282,35 @@ export function Menu({ toggleSidebar, isSidebarVisible, toggleStatusBar, isStatu
           </MenubarContent>
         </MenubarMenu>
       </Menubar>
+
+      <Dialog open={open} onOpenChange={setOpen}>
+          <DialogContent className="sm:max-w-[425px]">
+            <DialogHeader>
+            </DialogHeader>
+            <div className="grid gap-4 py-4">
+              <div>
+                <Image
+                  src="/splash.png"
+                  alt="music"
+                  width={400}
+                  height={400}
+                  />
+              </div>
+              <Separator />
+              <p>
+                a music player that doesn't (yet) play music
+              </p>
+                <div className="flex space-x-4">
+                <a href="https://github.com/sillyangel/project-still" target="_blank" rel="noreferrer">
+                  <Github />
+                </a>
+                <a href="mailto:angel@sillyangel.xyz">
+                  <Mail />
+                </a>
+                </div>
+            </div>
+          </DialogContent>
+        </Dialog>
+        </>
     )
   }

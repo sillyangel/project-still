@@ -10,6 +10,7 @@ import { Heart } from 'lucide-react';
 import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area';
 import { db, auth } from '@/app/firebase/config';
 import { doc, setDoc, getDoc } from 'firebase/firestore';
+import Loading  from '@/app/components/loading';
 
 interface Artist {
   name: string;
@@ -79,7 +80,7 @@ export default function ArtistPage() {
   };
 
   if (loading) {
-    return <p>Loading...</p>;
+    return <Loading />;
   }
 
   if (artistAlbums.length === 0) {

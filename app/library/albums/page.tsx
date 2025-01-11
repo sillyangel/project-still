@@ -10,6 +10,7 @@ import { db, auth } from '@/app/firebase/config';
 import { doc, getDoc } from 'firebase/firestore';
 import { useParams } from 'next/navigation';
 import { allAlbums } from '@/app/data/albums';
+import Loading  from '@/app/components/loading';
 
 interface Album {
   id: string;
@@ -48,7 +49,7 @@ export default function Albumpage() {
   }, [user]);
 
   if (loading) {
-    return <p>Loading...</p>;
+    return <Loading />;
   }
 
   return (

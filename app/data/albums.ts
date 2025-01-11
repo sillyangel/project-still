@@ -382,8 +382,18 @@ const allAlbums: Album[] = [
   }
 ];
 
+function getSeededRandom(seed: number) {
+  return function() {
+    const x = Math.sin(seed++) * 10000;
+    return x - Math.floor(x);
+  };
+}
+
 function getRandomAlbums(albums: Album[], count: number): Album[] {
-  const shuffled = [...albums].sort(() => 0.5 - Math.random());
+  const today = new Date();
+  const seed = today.getFullYear() * 10000 + (today.getMonth() + 1) * 100 + today.getDate();
+  const random = getSeededRandom(seed);
+  const shuffled = [...albums].sort(() => 0.5 - random());
   return shuffled.slice(0, count);
 }
 

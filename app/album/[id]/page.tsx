@@ -10,6 +10,8 @@ import { PlusIcon } from "@radix-ui/react-icons";
 import { db, auth } from '@/app/firebase/config';
 import { doc, setDoc, getDoc } from 'firebase/firestore';
 import { useAudioPlayer } from '@/app/components/AudioPlayerContext'
+import Loading from "@/app/components/loading";
+import { Separator } from '@/components/ui/separator';
 
 interface Track {
   name: string;
@@ -106,7 +108,7 @@ export default function AlbumPage() {
   };
 
   if (loading) {
-    return <p>Loading...</p>;
+    return <Loading />;
   }
 
   if (!album) {
@@ -123,7 +125,9 @@ export default function AlbumPage() {
   const baseUrl = databases.find(db => db.id === album.database)?.url;
   if (!baseUrl) return;
 
-  const url = `${baseUrl}${normalizedArtistName}/${normalizedAlbumName}/${index}. ${track}.mp3`;
+  const normalizedTrack = track.replace(/\s*\(.*?\)\s*|[\/\?]+/g, '').trim();
+
+  const url = `${baseUrl}${normalizedArtistName}/${normalizedAlbumName}/${index}. ${normalizedTrack}.mp3`;
 
   playTrack({ 
       name: track,
@@ -154,23 +158,26 @@ export default function AlbumPage() {
           <div className="space-y-2">
             <div className="flex items-center space-x-4">
               <p className="text-3xl font-semibold tracking-tight">{album.name}</p>
-              <Button onClick={handleFollow} variant="ghost">
-                <Heart className={isFollowing ? 'text-red-500' : 'text-gray-500'} fill={isFollowing ? '#EF4444' : ""}/>
-              </Button>
+          <Button onClick={handleFollow} variant="ghost">
+          <Heart className={isFollowing ? 'text-primary' : 'text-gray-500'} fill={isFollowing ? 'var(--primary)' : ""}/>
+          </Button>
             </div>
             <Link href={`/artist/${normalizedArtistName}`}>
-              <p className="text-xl text-blue-500 mt-0 mb-4 underline">{album.artist}</p>
+              <p className="text-xl text-primary mt-0 mb-4 underline">{album.artist}</p>
             </Link>
-            <Button className="mt-56" onClick={() => addAlbumToQueue(album)}>
+            <Button className="px-5" onClick={() => addAlbumToQueue(album)}>
               <Play />
+              Play Album
             </Button>
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus iure praesentium deserunt culpa impedit, veniam eum, molestiae asperiores, autem quasi repellat. Cumque ea nisi distinctio veritatis soluta qui, ipsum quas.
+            </p>
           </div>
         </div>
         <div className="space-y-2">
-          <p className="text-xl font-semibold">Tracklist</p>
-          <div className="border-b border-gray-400 py-0 flex justify-between items-center"></div>
+          <Separator />
           {tracklist.map((track, index) => (
-            <div key={index} className="py-2 flex justify-between items-center hover:bg-hover rounded-lg" onClick={() => handlePlayClick(track.name, track.artists.join(', '), index + 1)}>
+            <div key={index} className="py-2 flex justify-between items-center hover:bg-hover rounded-lg cursor-pointer" onClick={() => handlePlayClick(track.name, track.artists.join(', '), index + 1)}>
               <div className="flex items-center">
                 <div className="mr-2 w-6 text-right">{index + 1}</div> {/* Fixed width for track numbers */}
                 <div>
@@ -179,17 +186,17 @@ export default function AlbumPage() {
                   </p>
                   <p className="text-sm font-normal flex items-center">
                     {track.explicit && (
-                      <span className="inline-block bg-gray-300 text-gray-700 text-xs font-thin px-1.5 py-0.5 rounded-sm mr-1.5">
+                      <span className="inline-block bg-gray-300 text-gray-700 text-xs font-normal px-1 py-.5 rounded-sm mr-1.5">
                         E
                       </span>
                     )}
-                    {track.artists.join(', ')}
+                    <p className="text-gray-400"> {track.artists.join(', ')} </p>
                   </p>
                 </div>
               </div>
               <div className="flex items-center space-x-2">
               <p className="text-sm mr-4">{track.length}</p>
-              <PlusIcon/>
+              {/* <PlusIcon/> */}
               </div>
             </div>
           ))}

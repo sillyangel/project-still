@@ -5,6 +5,8 @@ import { useAudioPlayer } from '@/app/components/AudioPlayerContext';
 import { FaPlay, FaPause, FaVolumeHigh, FaForward, FaBackward } from "react-icons/fa6";
 import ColorThief from '@neutrixs/colorthief';
 import { auth } from '@/app/firebase/config';
+import { Progress } from '@/components/ui/progress';
+import { useToast } from '@/hooks/use-toast';
 
 export const AudioPlayer: React.FC = () => {
   const { currentTrack, playPreviousTrack, addToQueue, playNextTrack, clearQueue } = useAudioPlayer();
@@ -15,8 +17,8 @@ export const AudioPlayer: React.FC = () => {
   const userID = auth.currentUser?.uid;
   const [volume, setVolume] = useState(1);
   const [isClient, setIsClient] = useState(false);
-  const [dominantColor, setDominantColor] = useState<string>('#ff0000'); // Default to red
   const audioCurrent = audioRef.current;
+  const { toast } = useToast();
   
   useEffect(() => {
     setIsClient(true);
@@ -37,18 +39,6 @@ export const AudioPlayer: React.FC = () => {
     if (audioCurrent) {
       audioCurrent.addEventListener('timeupdate', updateProgress);
       audioCurrent.addEventListener('ended', playNextTrack);
-    }
-    if (currentTrack) {
-      const img = document.createElement('img') as HTMLImageElement;
-      img.crossOrigin = 'Anonymous';
-      img.src = currentTrack.image;
-      img.onload = () => {
-        const colorThief = new ColorThief();
-        const result = colorThief.getColor(img);
-        if (result) {
-          setDominantColor(`rgb(${result[0]}, ${result[1]}, ${result[2]})`);
-        }
-      };
     }
     return () => {
       if (audioCurrent) {
@@ -77,7 +67,6 @@ export const AudioPlayer: React.FC = () => {
       setIsPlaying(!isPlaying);
     }
   };
-  console.log(userID);
   const handleVolumeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newVolume = parseFloat(e.target.value);
     setVolume(newVolume);
@@ -85,58 +74,46 @@ export const AudioPlayer: React.FC = () => {
       audioCurrent.volume = newVolume;
     }
   };
-
+  
+  function formatTime(seconds: number): string {
+    if (isNaN(seconds) || seconds < 0) {
+      return "0:00";
+    }
+    const minutes = Math.floor(seconds / 60);
+    const secs = Math.floor(seconds % 60).toString().padStart(2, "0");
+    return `${minutes}:${secs}`;
+  }
   
   if (!isClient) {
     return null;
   }
 
   return (
-    <div className="fixed bottom-0 w-9/12 bg-hover text-white p-4 rounded-2xl mb-2 mx-2">
+    <div className="bg-background w-full text-white p-4 border-t border-t-1">
       {currentTrack ? (
         <div className="flex items-center">
           <Image src={currentTrack.image} alt={currentTrack.name} width={64} height={64} className="w-16 h-16 mr-4" />
-          <div className="flex-1">
-            <p>{currentTrack.name} by {currentTrack.artists.join(', ')}</p>
-            <div className="w-full h-2 bg-gray-300 rounded-full cursor-pointer mt-2" onClick={handleProgressClick}>
-              <div
-                className="h-full rounded-full"
-                style={{ width: `${progress}%`, backgroundColor: dominantColor }}
-              />
+          <div className="flex-1 w-auto">
+            <p className="mb-0 ">{currentTrack.name}</p>
+            <p className='text-sm mt-0 text-gray-400'>{currentTrack.artists.join(', ')}</p>
+          </div>
+          <div>
+            <div>
+              <button className="mx-4"onClick={playPreviousTrack}><FaBackward /></button>
+              <button className='mx-4' onClick={togglePlayPause}>{isPlaying ? <FaPause /> : <FaPlay />}</button>
+              <button className='mx-4' onClick={playNextTrack}><FaForward /></button>
+            </div>
+            <div>
+            <p>{formatTime(audioCurrent?.currentTime ?? 0)}</p>
+            <Progress value={progress} className="mt-1 cursor-pointer" onClick={handleProgressClick}/>
+            <p>{formatTime(audioCurrent?.duration ?? 0)}</p>
             </div>
           </div>
-          <button onClick={playPreviousTrack}>
-            <FaBackward />
-          </button>
-          <button className='mx-4' onClick={togglePlayPause}>
-            {isPlaying ? <FaPause /> : <FaPlay />}
-          </button>
-          <button className='mx-4' onClick={playNextTrack}>
-            <FaForward />
-          </button>
-          <div className="relative ml-4">
-            <button onClick={() => setShowVolumeSlider(!showVolumeSlider)}>
-              <FaVolumeHigh />
-            </button>
-            {showVolumeSlider && (
-              <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 bg-white p-2 rounded-lg shadow-lg">
-                <input
-                  type="range"
-                  min="0"
-                  max="1"
-                  step="0.01"
-                  value={volume}
-                  onChange={handleVolumeChange}
-                  className="w-2 h-32 transform rotate-[-90deg] origin-bottom"
-                />
-              </div>
-            )}
-          </div>
+          {/* replace these buttons with icons
+           */}
           <button onClick={() => addToQueue(currentTrack)} className="ml-4">
-            Add to Queue
           </button>
           <button onClick={clearQueue} className="ml-4">
-            Clear Queue
           </button>
         </div>
       ) : (
