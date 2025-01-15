@@ -15,7 +15,7 @@ const databases = [
   { id: 2, url: "https://playstorage2.web.app/" },
   { id: 3, url: "https://playstorage3.web.app/" },
   { id: 4, url: "https://playstorage3-e9531.web.app/" },
-  { id: 5, url: "https://sillyangel.hackclub.app/"}
+  { id: 5, url: "https://cdn.sillyangel.dev/"}
 ];
 
 // /music/{artist}/{album}/{`${tracklist.index} + 1` + ${tracklist.name} + ".mp3"}
